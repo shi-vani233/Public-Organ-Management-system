@@ -1,0 +1,95 @@
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+}
+
+.navbar-nav a:after,
+.navbar-nav a:before {
+    transition: all .5s;
+}
+
+.navbar-nav a:hover {
+    color: #555;
+}
+
+.navbar-nav a {
+    position: relative;
+    margin-right: 20px;
+}
+
+.navbar-nav a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: #aaa;
+    height: 1px;
+}
+
+.navbar-nav a:hover:after {
+    width: 100%;
+}
+
+.p-5 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/img1.jfif');
+    height: 450px;
+    width: 100%;
+    background-position: 70%;
+    background-size: cover;
+}
+
+.text-white {
+    font-weight: 200;
+    font-size: 3.2em;
+    padding-top: 0.1em;
+    padding-right: 0.05em;
+    padding-bottom: 0.15em;
+    display: inline-block;
+    line-height: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.mb-3,
+a#b1 {
+    animation-name: focus-in-expand-top;
+    animation-duration: 2.0s;
+    animation-timing-function: ease;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+}
+
+@keyframes focus-in-expand-top {
+    0% {
+        letter-spacing: -.5em;
+        -webkit-transform: translateY(-300px);
+        transform: translateY(-300px);
+        filter: blur(12px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.form-control {
+    margin-bottom: 25px;
+    border-radius: 20px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);
+    outline: none;
+}
+
+#loginbtn {
+    width: 100%;
+    margin: auto;
+    box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);
+}
