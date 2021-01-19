@@ -17,32 +17,41 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top ">
-            <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
-            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top ">
+        <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
         </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav" style="font-size: 20px;">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/Home/Volunteer">Volunteers</a>
+                    <a class="nav-item nav-link" href="/Home/Home">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="/Home/Volunteer">Volunteers</a>
                     <a class="nav-item nav-link" data-toggle="modal" data-target="#exampleModal">Login</a>
                 </div>
             </div>
         </nav>
-        <div class="p-5 text-center bg-image">
+    <br>
+    
+    <!--volunteer card-->
+    <div class="container">
+        <h2 class="mb-3">Volunteers</h2>
+       
 
-            <div class="d-flex justify-content-center align-items-center h-100">
-                <div class="text-white">
-                    <h3 class="mb-3">Give yourself and those in need an elixir of life by pledging your organs.</h3>
-                    <a class="btn btn-outline-light btn-lg" href="#!" id="b1">Take Donor Pledge</a>
-                </div>
-            </div>
+        <div class="card bg-light text-dark biLeft" style="height:70px; margin-left:auto; margin-right:auto; width:800px;" >
+            <div class="card-body" style="font-size:30px; text-align:center; padding-bottom:10px;">Name:*value*   Blood-group: O+ city:*surat* <a class="btn btn-primary">more!</a> </div>
         </div>
-    </header>
+        <br>
+        <div class="card bg-light text-dark biLeft" style="height:70px; margin-left:auto; margin-right:auto; width:800px;" >
+            <div class="card-body" style="font-size:30px; text-align:center; padding-bottom:10px;">Name:*value*   Blood-group: O+ city:*surat* <a class="btn btn-primary">more!</a> </div>
+        </div>
+        <br><div class="card bg-light text-dark biLeft" style="height:70px; margin-left:auto; margin-right:auto; width:800px;" >
+            <div class="card-body" style="font-size:30px; text-align:center; padding-bottom:10px;">Name:*value*   Blood-group: O+ city:*surat* <a class="btn btn-primary">more!</a> </div>
+        </div>
+        
+    </div>
+
+    <!--login modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -91,7 +100,4 @@
 
             </div>
         </div>
-
 </body>
-
-</html>
