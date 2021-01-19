@@ -5,3 +5,4 @@ def Homepage(request):
 
 def Volunteer(request):
     return render(request, 'volunteer.html', context=None)
+# Create your views here.
