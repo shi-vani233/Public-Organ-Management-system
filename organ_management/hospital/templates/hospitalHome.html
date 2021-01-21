@@ -1,9 +1,9 @@
 <html>
 
 <head>
-<title>
-    Save-Lifes
-</title>
+    <title>
+        Save-Lifes
+    </title>
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
@@ -18,7 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav" style="font-size: 20px;">
-                <a class="nav-item nav-link" data-toggle="modal" data-target="#exampleModal" active>Log Out</a>
+                <a class="nav-item nav-link" href="/Hospital/Mainpage" active>Log Out</a>
             </div>
         </div>
     </nav>
@@ -47,208 +47,209 @@
 
         <!-- Search Button -->
         <div class="row">
-        <div class="input-group col-md-4" style="margin-top: 50px; margin-left:350px;">
-            <input class="form-control py-2 border-right-0 border" type="search" placeholder="search for Donors" id="example-search-input" >
-            <span class="input-group-append">
+            <div class="input-group col-md-4" style="margin-top: 50px; margin-left:350px;">
+                <input class="form-control py-2 border-right-0 border" type="search" placeholder="search for Donors" id="example-search-input">
+                <span class="input-group-append">
                 <button class="btn btn-outline-secondary border-left-0 border" type="button">
                     <i class="fa fa-search"></i>
                 </button>
               </span>
+            </div>
         </div>
-    </div>
-        
+
 
         <!-- List of Content -->
         <div class="card" style="width: 50rem; margin-top:50px; margin-left:150px">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" style="background-color: #66c2ff; color:white;"><a href="/Hospital/donorList/" style="color:white;"href="#">Donor List</a></li>
-            <li class="list-group-item" style="background-color: #4db8ff ; color:white;"><a href="/Hospital/potentialDonor/" style="color:white;"href="#"> Potential Donor from other hospitals</a></li>
-            <li class="list-group-item" style="background-color:#66c2ff; color:white;">Patient List</li>
-            <li class="list-group-item" style="background-color: #4db8ff ; color:white;">Donation List</li>
-        </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="background-color: #66c2ff; color:white;"><a href="/Hospital/donorList/" style="color:white;" href="#">Donor List</a></li>
+                <li class="list-group-item" style="background-color: #4db8ff ; color:white;"><a href="/Hospital/potentialDonor/" style="color:white;" href="#"> Potential Donor from other hospitals</a></li>
+                <li class="list-group-item" style="background-color:#66c2ff; color:white;">Patient List</li>
+                <li class="list-group-item" style="background-color: #4db8ff ; color:white;">Donation List</li>
+            </ul>
         </div>
 
-    <!-- Add Donar Modal -->
-    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <!-- Add Donar Modal -->
+        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <!-- Name -->
-                        <div class="form-group">
-                            <input type="text" id="nm" class="form-control" placeholder="Name" style="border-radius: 20px;" />
-                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <!-- Name -->
+                            <div class="form-group">
+                                <input type="text" id="nm" class="form-control" placeholder="Name" style="border-radius: 20px;" />
+                            </div>
 
-                        <!-- Birth Date -->
-                        <div class="form-group"> 
-                            <input class="form-control" id="date" name="date" placeholder="Birthdate : MM/DD/YYY" type="text"  style="border-radius: 20px;"/>
-                        </div>
-                        
-                        <!-- Organ to donate -->
-                        <div class="form-group">
-                            <input type="text" id="organ" class="form-control" placeholder="Which organ would you like to donate?" style="border-radius: 20px;" />
-                        </div>
+                            <!-- Birth Date -->
+                            <div class="form-group">
+                                <input class="form-control" id="date" name="date" placeholder="Birthdate : MM/DD/YYY" type="text" style="border-radius: 20px;" />
+                            </div>
 
-                        <!-- Gender -->
-                        <label for="gender">Gender :</label><br>
-                        <div class="form-check form-check-inline" id="gender">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                            <!-- Organ to donate -->
+                            <div class="form-group">
+                                <input type="text" id="organ" class="form-control" placeholder="Which organ would you like to donate?" style="border-radius: 20px;" />
+                            </div>
+
+                            <!-- Gender -->
+                            <label for="gender">Gender :</label><br>
+                            <div class="form-check form-check-inline" id="gender">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">Female</label>
-                        </div><br><br>
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Female</label>
+                            </div><br><br>
 
-                        <div class="row">
-                            <div class="col-4">
-                                <!-- Height -->
-                                <div class="form-group">
-                                    <input type="text" id="height" class="form-control" placeholder="Height" style="border-radius: 20px;" />
+                            <div class="row">
+                                <div class="col-4">
+                                    <!-- Height -->
+                                    <div class="form-group">
+                                        <input type="text" id="height" class="form-control" placeholder="Height" style="border-radius: 20px;" />
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <!-- Weight -->
+                                    <div class="form-group">
+                                        <input type="text" id="weight" class="form-control" placeholder="weight" style="border-radius: 20px;" />
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <!-- Blood Group -->
+                                    <div class="form-group">
+                                        <input type="text" id="bloodgrp" class="form-control" placeholder="Blood Group" style="border-radius: 20px;" />
+                                    </div>
                                 </div>
                             </div>
-                             <div class="col-4">
-                                <!-- Weight -->
-                                <div class="form-group">
-                                    <input type="text" id="weight" class="form-control" placeholder="weight" style="border-radius: 20px;" />
-                                </div>
-                            </div>
-                             <div class="col-4">
-                                <!-- Blood Group -->
-                                <div class="form-group">
-                                    <input type="text" id="bloodgrp" class="form-control" placeholder="Blood Group" style="border-radius: 20px;" />
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="txt1">Please List if you have any drug Allergies :</label>
-                            <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                        </div>
+                            <div class="form-group">
+                                <label for="txt1">Please List if you have any drug Allergies :</label>
+                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
+                            </div>
 
-                        <!-- Any Dieseas -->
-                        <label for="dieseas">Have you had any ? (Please check all that apply)</label><br>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-check" id="dieseas">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
+                            <!-- Any Dieseas -->
+                            <label for="dieseas">Have you had any ? (Please check all that apply)</label><br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check" id="dieseas">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
                                         Asthma
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                    <label class="form-check-label" for="defaultCheck2">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                        <label class="form-check-label" for="defaultCheck2">
                                         Cancer
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                                    <label class="form-check-label" for="defaultCheck3">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                        <label class="form-check-label" for="defaultCheck3">
                                         Diabetes
                                     </label>
+                                    </div>
                                 </div>
-                            </div>
-                             <div class="col-4">
-                               <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                                    <label class="form-check-label" for="defaultCheck4">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                        <label class="form-check-label" for="defaultCheck4">
                                         Anemia
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
-                                    <label class="form-check-label" for="defaultCheck5">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                        <label class="form-check-label" for="defaultCheck5">
                                         heart Dieseas
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
-                                    <label class="form-check-label" for="defaultCheck6">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                                        <label class="form-check-label" for="defaultCheck6">
                                         High Blood Pressure
                                     </label>
+                                    </div>
                                 </div>
-                            </div>
-                             <div class="col-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
-                                    <label class="form-check-label" for="defaultCheck7">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
+                                        <label class="form-check-label" for="defaultCheck7">
                                         Hipatitis
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
-                                    <label class="form-check-label" for="defaultCheck8">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
+                                        <label class="form-check-label" for="defaultCheck8">
                                         Tuberclosis
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
-                                    <label class="form-check-label" for="defaultCheck9">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
+                                        <label class="form-check-label" for="defaultCheck9">
                                         Epilepsy Seizures
                                     </label>
+                                    </div>
                                 </div>
-                            </div>
-                        </div><br>
+                            </div><br>
 
-                        <!-- Addiction -->
-                        <label for="addict">Have any Addiction?</label><br>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-check" id="addict">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label" for="defaultCheck1">
+                            <!-- Addiction -->
+                            <label for="addict">Have any Addiction?</label><br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check" id="addict">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
                                         Alcohol
                                     </label>
+                                    </div>
                                 </div>
-                            </div>
-                             <div class="col-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                    <label class="form-check-label" for="defaultCheck2">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                        <label class="form-check-label" for="defaultCheck2">
                                         Smoking
                                     </label>
+                                    </div>
                                 </div>
-                            </div>
-                             <div class="col-4">
-                                <div class="form-check" id="addiction">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                                    <label class="form-check-label" for="defaultCheck3">
+                                <div class="col-4">
+                                    <div class="form-check" id="addiction">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                        <label class="form-check-label" for="defaultCheck3">
                                         Caffine
                                     </label>
+                                    </div>
                                 </div>
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="txt1">Please List if you have any other illness :</label>
+                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
                             </div>
-                        </div><br>
 
-                        <div class="form-group">
-                            <label for="txt1">Please List if you have any other illness :</label>
-                            <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                        </div>
+                            <div class="form-group">
+                                <label for="txt1">Please List if you have any operations and dates of each :</label>
+                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="txt1">Please List if you have any operations and dates of each :</label>
-                            <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                        </div>
+                            <div class="form-group">
+                                <label for="txt1">Please List your current medications :</label>
+                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="txt1">Please List your current medications :</label>
-                            <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                        </div>
+                            <!-- Submit button -->
+                            <button type="submit" id="loginbtn" class="btn btn-dark btn-block btn-lg mb-4">Submit</button>
 
-                        <!-- Submit button -->
-                        <button type="submit"  id="loginbtn" class="btn btn-dark btn-block btn-lg mb-4">Submit</button>
-            
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
-
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

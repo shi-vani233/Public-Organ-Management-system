@@ -1,0 +1,150 @@
+<html>
+
+<head>
+    <title>
+        Save-Lifes
+    </title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgb(243, 243, 243);">
+        <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="font-size: 20px;">
+                <a class="nav-item nav-link" href="/Home/Homepage">Home</a>
+                <a class="nav-item nav-link active" href="/Blood_Donation/BloodDonationHome">Blood Donation<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/Hospital/Mainpage">Hospitals</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <div class="text-center align-items-center pt-5">
+            <img class="bounce-in-top" src="{% static 'images/blooddrop.jfif' %}" style="width:150px;">
+            <p class="blockquote font-italic" style=" text-shadow: 1px .7px 3px #c2bebe;">Every 2 seconds, someone in the country is in urgent need of blood. It is crucial for surgeries, emergency patients, accidents and burn victims. Whether you donate whole blood, red cells, platelets or plasma, this lifesaving care starts with
+                you making a generous donation.</p>
+            <div class="py-5 m-5">
+                <h3 class="text-center" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+                    You have the ability to save lives!</h3>
+                <a id="volbtn" class="btn btn-outline-dark btn-lg" href="/Home/Volunteer" style="margin:auto">Volunteers</a>
+            </div>
+        </div>
+    </div>
+    <section id="one" class="wrapper" style="background:rgb(77, 194, 201); 
+    background: linear-gradient(to bottom, #2F80ED, rgb(77, 194, 201)); 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" ">
+        <div class="inner split text-white ">
+            <section style="text-align: center; ">
+                <h1>Blood Donors Eligibility</h1>
+                <p>You should not be suffering from any of this!</p>
+            </section>
+            <section>
+                <ul style="line-height:180%; font-size: 20px; ">
+                    <li> Diabetes</li>
+                    <li>Blood Donation within the last 3 months</li>
+                    <li>Hepatitis B, C</li>
+                    <li>Kidney, Heart or any other major diseases</li>
+                    <li>Under Weight</li>
+                </ul>
+            </section>
+        </div>
+    </section>
+
+    <div class="container ">
+        <h2 class="my-5 text-center display-4 ">Blood Donation Camps</h2>
+        <div class="row ">
+            <div class="col-sm-6 py-3 ">
+                <div class="card " id="#card ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Foundation Day Blood Donation Camp -2021</h5>
+                        <p class="card-text ">Blood Bank, Department of IHBT, C/o.The Civil Hospital, Asarwa, Ahmedabad- 380016</p>
+                        <p class="card-text ">30th january 2021</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 py-3 ">
+                <div class="card ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Indian Red Cross Soceity camp</h5>
+                        <p class="card-text ">Blood Bank, Indian Red Cross Society, Sardar Bhavan, Opp. Municipal Building, Sardar Ganj road, Anand Anand –388 001</p>
+                        <p class="card-text ">29th january 2021</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-6 py-3 ">
+                <div class="card ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Shree Sardar Smarak Hospital Blood Bank camp</h5>
+                        <p class="card-text ">Blood Bank, Shree Sardar Smarak Hospital Blood Bank, Station Road, Sardar Baug, Bardoli, Dist. Surat - 394601</p>
+                        <p class="card-text ">30th january 2021</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 py-3 ">
+                <div class="card ">
+                    <div class="card-body ">
+                        <h5 class="card-title ">Republic day camp</h5>
+                        <p class="card-text ">Blood Bank, Bhailal Amin General Hospital Blood Bank, Alembic Road, Vadodara -390003</p>
+                        <p class="card-text ">26th january 2021</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
+    <footer class="pt-5 pb-2 " style="background-color: rgba(0, 0, 0, 0.1) ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 ">
+                    <div class="logo-part ">
+                        <a class="w-50 logo-footer " style=" font-family: 'Lobster', cursive; font-size: 45px; "> Save-Lifes</a>
+                        <p>7637 Laurel Dr. King Of Prussia, PA 19406 Donated tissues save or dramatically enhance the quality of life for the people who receive them. As an organ and tissue donor, you can enhance the lives of up to 75 people. Corneas, the
+                            middle ear, skin, heart valves, bone, veins, cartilage, tendons, and ligaments can be stored in tissue banks and used to restore sight, cover burns, repair hearts, replace veins, and mend damaged connective tissue and cartilage
+                            in recipients.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center ">
+                    <h3 class="text mb-4 ">Contact Us: <i class="fa fa-envelope " aria-hidden="true "></i>
+                    </h3>
+                    <ul class="list-unstyled ">
+                        <li>
+                            <a href="#! " class="text-dark ">Email1</a>
+                        </li>
+                        <li>
+                            <a href="#! " class="text-dark ">Email2</a>
+                        </li>
+                        <li>
+                            <a href="#! " class="text-dark ">Email3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</body>

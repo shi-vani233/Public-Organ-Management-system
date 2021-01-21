@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    'hospital.apps.HospitalConfig'
+    'blood_donation.apps.BloodDonationConfig',
+    'hospital.apps.HospitalConfig',
 ]
 
 MIDDLEWARE = [
