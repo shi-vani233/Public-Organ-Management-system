@@ -21,4 +21,7 @@ urlpatterns = [
     path('Home/',include('home.urls')),
     path('Blood_Donation/',include('blood_donation.urls')),
     path('Hospital/',include('hospital.urls')),
+
+    path('accounts/', include('allauth.urls')),
+
 ]
