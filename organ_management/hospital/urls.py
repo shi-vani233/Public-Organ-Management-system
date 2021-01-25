@@ -6,6 +6,7 @@ urlpatterns = [
     url('Mainpage/',Mainpage),
     url('Home/',hospitalHome),
     url('donorList/',DonorList),
-     url('potentialDonor/',PotentialDonorList),
+    url('potentialDonor/',PotentialDonorList),
     url('Login/',Login),
+    
 ]
