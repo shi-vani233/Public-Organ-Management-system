@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'widget_tweaks',
 ]
 
 SITE_ID = 1
@@ -146,3 +147,19 @@ MEDIA_URL = '/media/'
 
 #custom user model
 AUTH_USER_MODEL = 'hospital.CustomUser'
+ACCOUNT_SIGNUP_FORM_CLASS = 'hospital.forms.SignupForm'
+
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'organmanagementsystem@gmail.com'
+EMAIL_HOST_PASSWORD = 'Organ@123'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_SSL = False
