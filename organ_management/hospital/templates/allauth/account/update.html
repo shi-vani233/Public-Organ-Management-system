@@ -1,6 +1,11 @@
-{% extends 'account/base_card.html' %} {% load i18n %} {% block title %} {% trans "Delete account" %}{% endblock %} {% block card-header %}
+{% extends 'account/base_card.html' %} {% load i18n %} 
+{% load i18n socialaccount %}
+{% block title %} {% trans "Delete account" %}{% endblock %} {% block card-header %}
 <h3> {% trans "Update account" %}</h3>
 {% endblock %} {% block card-body %}
+
+
+{% get_providers as socialaccount_providers %}
 
 <form method="post" action="{% url 'account_update' request.user.pk %}" enctype="multipart/form-data" class="needs-validation" novalidate>
     {% csrf_token %}
@@ -42,6 +47,11 @@
     <button type="submit" class="btn btn-outline-primary">{% trans "Update" %}</button>
 </form>
 <br>
+
+<div>
+    <p>{% blocktrans with site.name as site_name %}Connect your account with one of your existing third party accounts:{% endblocktrans %}</p>
+    {% include "socialaccount/provider_list.html" with process="connect" %}
+</div>
 
 <div class="text-center py-2">
     <small>
