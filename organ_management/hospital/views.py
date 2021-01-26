@@ -15,6 +15,7 @@ def Login(request):
 def hospitalHome(request):
     return render(request, 'hospitalHome.html', context=None)
 
-
+def profile_view(request):
+    return render(request, 'account/profile.html', context=None)
 
 # Create your views here.

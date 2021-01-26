@@ -63,7 +63,7 @@ ROOT_URLCONF = 'organ_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates'), os.path.join(BASE_DIR,'static')],
+        'DIRS': [os.path.join(BASE_DIR,'templates'), os.path.join(BASE_DIR, 'hospital','templates', 'allauth'), os.path.join(BASE_DIR,'static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +75,9 @@ TEMPLATES = [
         },
     },
 ]
+
+PROJECT_ROOT = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 WSGI_APPLICATION = 'organ_management.wsgi.application'

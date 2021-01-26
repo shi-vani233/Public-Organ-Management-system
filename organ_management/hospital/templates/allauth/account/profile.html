@@ -1,0 +1,26 @@
+{% extends 'account/base_card.html' %}
+
+{% load i18n static %}
+
+{% block title %}{% trans "Profile" %}{% endblock %}
+
+{% block card-header %}
+    <h3>{% trans "Account profile" %}</h3>
+{% endblock %}
+
+{% block card-body %}
+
+    <div class="container">
+       <div class="row">
+            <div class="col border">
+                <small>{% trans "Hospital Name" %}:</small><br>
+                {{ request.user.username|default:'' }}
+            </div>
+            <div class="col border">
+                <small>{% trans "City" %}:</small><br>
+                {{ request.user.city|default:'' }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
