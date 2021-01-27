@@ -39,15 +39,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'blood_donation.apps.BloodDonationConfig',
     'hospital.apps.HospitalConfig',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'widget_tweaks',
 ]
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,7 +56,7 @@ ROOT_URLCONF = 'organ_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates'), os.path.join(BASE_DIR, 'hospital','templates', 'allauth'), os.path.join(BASE_DIR,'static')],
+        'DIRS': [os.path.join(BASE_DIR,'templates'), os.path.join(BASE_DIR,'static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,10 +68,6 @@ TEMPLATES = [
         },
     },
 ]
-
-PROJECT_ROOT = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
-
-
 
 WSGI_APPLICATION = 'organ_management.wsgi.application'
 
@@ -94,14 +82,6 @@ DATABASES = {
     }
 }
 
-#allauth settings
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -139,51 +119,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
-
-STATICFILES_DIRS = [
-
-    os.path.join(BASE_DIR, 'hospital/static/images/'),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-#custom user model
-AUTH_USER_MODEL = 'hospital.CustomUser'
-ACCOUNT_SIGNUP_FORM_CLASS = 'hospital.forms.SignupForm'
-
-
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_USERNAME_REQUIRED = False
-
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'organmanagementsystem@gmail.com'
-EMAIL_HOST_PASSWORD = 'Organ@123'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_USE_SSL = False
-
-SOCIALACCOUNT_AUTO_SIGNUP =False
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    }
-}
