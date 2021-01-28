@@ -1,0 +1,136 @@
+<html>
+
+<head>
+
+    <title>
+        Save-Lifes
+    </title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    <script src="{% static 'javascript/j1.js' %}" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #f1f1f1;">
+        <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="font-size: 20px;">
+                <a class="nav-item nav-link" href="/Home/Homepage">Home</a>
+                <a class="nav-item nav-link" href="/Hospital/loginpage">Login</a>
+                <a class="nav-item nav-link" href="/Hospital/Mainpage">Hospitals</a>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5 scale-in-center" style="width:800px;">
+        <div class="row " style="border: 1px solid rgba(97,164,160,0.63);box-shadow: 4px 9px 15px -3px rgba(79,79,79,0.63);
+        border-radius: 25px;">
+            <div class="col-md-4 py-5 text-center text-white" style=" background-color: rgb(104, 202, 207);
+            border-radius: 25px 0px 0px 25px;">
+                <h2 class="py-5">Hospital, Get your self registered here!</h2>
+
+            </div>
+            <div class="col-md-8 pt-5 text-center">
+                <h4 class="pb-4">Fill all the details</h4>
+                <form action="/Hospital/registerhospital/" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %} {%if msg_error %} {{msg_error}} {% endif %}
+                    <!--Name-->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="text" class="form-control " name="hospital_name" placeholder="Hospital Name" style="border-radius: 20px;" autocomplete="off" required/>
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="email" class="form-control" name="hospital_email" placeholder="Email Address" style="border-radius: 20px;" autocomplete="off" required/>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="password" class="form-control" name="password" placeholder="Password" style="border-radius: 20px;" autocomplete="off" required/>
+                    </div>
+
+                    <!-- Confirm Password input -->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="password" class="form-control" name="repassword" placeholder="confirm password" style="border-radius: 20px;" autocomplete="off" required/>
+                    </div>
+
+                    {%if msg_pass %} {{msg_pass}} {% endif %}
+
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="text" class="form-control" name="hospital_mobile_no" placeholder="Phone Number" style="border-radius: 20px;" autocomplete="off" required>
+                    </div>
+                    {%if msg_phone %} {{msg_phone}} {% endif %}
+                    <!-- Address input -->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <textarea type="text" class="form-control" name="hospital_address" placeholder="Address" rows="3" style="border-radius: 20px;" autocomplete="off" required></textarea>
+                    </div>
+
+                    <!--- City input -->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="text" class="form-control" name="hospital_city" placeholder="City" style="border-radius: 20px;" autocomplete="off" required>
+                    </div>
+
+                    <!--- state -->
+                    {%if msg_zip %} {{msg_zip}} {% endif %}
+                    <!--- pincode -->
+                    <div class="form-group col-md-10" style="margin-inline: auto;">
+                        <input type="text" class="form-control" name="zip_code" placeholder="Zip Code" style="border-radius: 20px;" autocomplete="off" required>
+                    </div>
+
+                    <!-- Submit button -->
+                    <input type="submit" id="volbtn" class="btn btn-outline-dark btn-lg" value="Sign In">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="pt-5 pb-2 mt-5" style="background-color: rgba(0, 0, 0, 0.1)">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <div class="logo-part">
+                        <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
+                        font-size: 45px;"> Save-Lifes</a>
+                        <p>7637 Laurel Dr. King Of Prussia, PA 19406 Donated tissues save or dramatically enhance the quality of life for the people who receive them. As an organ and tissue donor, you can enhance the lives of up to 75 people. Corneas, the
+                            middle ear, skin, heart valves, bone, veins, cartilage, tendons, and ligaments can be stored in tissue banks and used to restore sight, cover burns, repair hearts, replace veins, and mend damaged connective tissue and cartilage
+                            in recipients.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center">
+                    <h3 class="text mb-4">Contact Us: <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-dark">Email1</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Email2</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark">Email3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</body>
+
+</html>

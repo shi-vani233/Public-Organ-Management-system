@@ -12,25 +12,29 @@ from django.core.mail import send_mail
 from hospital.models import Hospital
 
 def Mainpage(request):
-
     hospitals=Hospital.objects.all()
     return render(request, 'main.html', {'hospitals':hospitals})
 
 def DonorList(request):
     return render(request, 'donorList.html', context=None)
 
+def registerpage(request):
+    return render(request, 'register.html', context=None)
+
+def loginpage(request):
+    c = {} 
+    c.update(csrf(request))
+    return render(request, 'login.html', context=None)
+
 def PotentialDonorList(request):
     return render(request, 'potentialDonor.html', context=None)
 
-def Login(request):
-    return render(request, 'login.html', context=None)
-
 def hospitalHome(request):
-
     if request.user.is_authenticated:
         return render(request, 'hospitalHome.html', context=None)
     else:
         return HttpResponseRedirect('/Hospital/Mainpage/')
+
 
 def registerhospital(request):
     hospital_email=request.POST.get('hospital_email','')
@@ -53,6 +57,7 @@ def registerhospital(request):
         msg_zip="pin code must be of length 6"
     else:
         msg_zip=''
+    hospitals=Hospital.objects.all()
     if not (msg_pass or msg_phone or msg_zip):
         try:
             user=User.objects.create_user(username=hospital_email,email=hospital_email)
@@ -62,26 +67,25 @@ def registerhospital(request):
                 hospital_mobile_no=hospital_mobile_no,hospital_address=hospital_address,zip_code=zip_code)
             hosp.save()
             msg="you are successfully registered, Go for Login!"
-            return render(request ,'main.html',{'msg':msg})
+            return render(request ,'main.html',{'msg':msg,'hospitals':hospitals})
         except:
             msg_error="this email already registered"
-            return render(request,'main.html',{'msg_error':msg_error})
+            return render(request,'register.html',{'msg_error':msg_error})
     else:
-        return render(request ,'main.html',{'msg_pass':msg_pass,'msg_phone':msg_phone,'msg_zip':msg_zip})
+        return render(request ,'register.html',{'msg_pass':msg_pass,'msg_phone':msg_phone,'msg_zip':msg_zip})
+
 
 def loginhospital(request):
-
     hospital_email=request.POST.get('hospital_email','')
     password=request.POST.get('password','')
     User=auth.authenticate(username=hospital_email,password=password)
-    
     if User is not None:
         auth.login(request,User)
         return HttpResponseRedirect('/Hospital/Home')
     else:
         msg = "Invalid Username or Password!"
-        print("wrongpass==========")
-        return render(request,'main.html',{'msg_login':msg})
+        return render(request,'login.html',{'msg_login':msg})
+        
 
 def logout(request):
 

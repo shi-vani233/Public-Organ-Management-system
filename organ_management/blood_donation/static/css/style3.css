@@ -48,14 +48,14 @@ a#volbtn:hover {
 }
 
 div.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 7px 6px 8px -1px rgba(163, 163, 163, 0.71);
     border-radius: 20px;
     background-color: rgb(209, 230, 231);
     border: none;
 }
 
 div.card:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 7px 6px 8px -1px rgba(163, 163, 163, 0.71);
     background-color: rgb(77, 194, 201);
     color: white;
 }
