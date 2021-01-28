@@ -1,3 +1,4 @@
+from django.db.models.fields import EmailField
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
@@ -11,7 +12,9 @@ from django.core.mail import send_mail
 from hospital.models import Hospital
 
 def Mainpage(request):
-    return render(request, 'main.html', context=None)
+
+    hospitals=Hospital.objects.all()
+    return render(request, 'main.html', {'hospitals':hospitals})
 
 def DonorList(request):
     return render(request, 'donorList.html', context=None)
@@ -23,7 +26,11 @@ def Login(request):
     return render(request, 'login.html', context=None)
 
 def hospitalHome(request):
-    return render(request, 'hospitalHome.html', context=None)
+
+    if request.user.is_authenticated:
+        return render(request, 'hospitalHome.html', context=None)
+    else:
+        return HttpResponseRedirect('/Hospital/Mainpage/')
 
 def registerhospital(request):
     hospital_email=request.POST.get('hospital_email','')
@@ -48,7 +55,7 @@ def registerhospital(request):
         msg_zip=''
     if not (msg_pass or msg_phone or msg_zip):
         try:
-            user=User.objects.create_user(username=hospital_name,email=hospital_email)
+            user=User.objects.create_user(username=hospital_email,email=hospital_email)
             user.set_password(password)
             user.save()
             hosp=Hospital(hospital_email=hospital_email,hospital_name=hospital_name,hospital_city=hospital_city,
@@ -61,4 +68,24 @@ def registerhospital(request):
             return render(request,'main.html',{'msg_error':msg_error})
     else:
         return render(request ,'main.html',{'msg_pass':msg_pass,'msg_phone':msg_phone,'msg_zip':msg_zip})
+
+def loginhospital(request):
+
+    hospital_email=request.POST.get('hospital_email','')
+    password=request.POST.get('password','')
+    User=auth.authenticate(username=hospital_email,password=password)
+    
+    if User is not None:
+        auth.login(request,User)
+        return HttpResponseRedirect('/Hospital/Home')
+    else:
+        msg = "Invalid Username or Password!"
+        print("wrongpass==========")
+        return render(request,'main.html',{'msg_login':msg})
+
+def logout(request):
+
+    auth.logout(request)
+    return redirect('/Hospital/Mainpage/')
+
 

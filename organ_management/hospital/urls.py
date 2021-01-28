@@ -1,5 +1,5 @@
 from django.urls import path
-from hospital.views import Mainpage,Login,hospitalHome,DonorList,PotentialDonorList,registerhospital
+from hospital.views import Mainpage,Login,hospitalHome,DonorList,PotentialDonorList,registerhospital,loginhospital,logout
 from django.conf.urls import url
 from . import views
 from django.contrib.auth import views as auth_views
@@ -13,4 +13,6 @@ urlpatterns = [
     url('potentialDonor/',PotentialDonorList),
     url('Login/',Login),
     url(r'^registerhospital/',registerhospital),
+    url(r'^loginhospital/',loginhospital),
+    url(r'^logout/',logout),
 ]
