@@ -41,13 +41,17 @@
         border-radius: 25px;">
             <div class="col-md-4 py-5 text-center text-white" style=" background-color: rgb(104, 202, 207);
             border-radius: 25px 0px 0px 25px;">
-                <h2 class="py-5">Hospital, Get your self registered here!</h2>
+                <h2 class="py-5" style="margin-top: 100px;">Hospital, Get your self registered here!</h2>
 
             </div>
             <div class="col-md-8 pt-5 text-center">
                 <h4 class="pb-4">Fill all the details</h4>
                 <form action="/Hospital/registerhospital/" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %} {%if msg_error %} {{msg_error}} {% endif %}
+                    {% csrf_token %} {%if msg_error %}
+                    <div class="alert alert-warning" role="alert">
+                        {{msg_error}}
+                    </div>
+                    {% endif %}
                     <!--Name-->
                     <div class="form-group col-md-10" style="margin-inline: auto;">
                         <input type="text" class="form-control " name="hospital_name" placeholder="Hospital Name" style="border-radius: 20px;" autocomplete="off" required/>
@@ -65,15 +69,19 @@
 
                     <!-- Confirm Password input -->
                     <div class="form-group col-md-10" style="margin-inline: auto;">
-                        <input type="password" class="form-control" name="repassword" placeholder="confirm password" style="border-radius: 20px;" autocomplete="off" required/>
+                        <input type="password" class="form-control" name="repassword" placeholder="confirm password" style="border-radius: 20px;" autocomplete="off" required/> {%if msg_pass %}
+                        <div class="alert alert-danger mt-2 mb-4 " role="alert">
+                            {{msg_pass}}
+                        </div>
+                        {% endif %}
                     </div>
-
-                    {%if msg_pass %} {{msg_pass}} {% endif %}
-
                     <div class="form-group col-md-10" style="margin-inline: auto;">
-                        <input type="text" class="form-control" name="hospital_mobile_no" placeholder="Phone Number" style="border-radius: 20px;" autocomplete="off" required>
+                        <input type="text" class="form-control" name="hospital_mobile_no" placeholder="Phone Number" style="border-radius: 20px;" autocomplete="off" required> {%if msg_phone %}
+                        <div class="alert alert-danger mt-2 mb-4" role="alert">
+                            {{msg_phone}}
+                        </div>
+                        {% endif %}
                     </div>
-                    {%if msg_phone %} {{msg_phone}} {% endif %}
                     <!-- Address input -->
                     <div class="form-group col-md-10" style="margin-inline: auto;">
                         <textarea type="text" class="form-control" name="hospital_address" placeholder="Address" rows="3" style="border-radius: 20px;" autocomplete="off" required></textarea>
@@ -85,10 +93,14 @@
                     </div>
 
                     <!--- state -->
-                    {%if msg_zip %} {{msg_zip}} {% endif %}
+
                     <!--- pincode -->
                     <div class="form-group col-md-10" style="margin-inline: auto;">
-                        <input type="text" class="form-control" name="zip_code" placeholder="Zip Code" style="border-radius: 20px;" autocomplete="off" required>
+                        <input type="text" class="form-control" name="zip_code" placeholder="Zip Code" style="border-radius: 20px;" autocomplete="off" required> {%if msg_zip %}
+                        <div class="alert alert-danger mt-2 mb-4" role="alert">
+                            {{msg_zip}}
+                        </div>
+                        {% endif %}
                     </div>
 
                     <!-- Submit button -->

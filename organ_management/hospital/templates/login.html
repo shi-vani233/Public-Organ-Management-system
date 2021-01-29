@@ -46,7 +46,11 @@
             <div class="col-md-8 pt-5 text-center">
 
                 <form action="/Hospital/loginhospital/" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %} {%if msg_login %} {{msg_login}} {% endif %}
+                    {% csrf_token %} {%if msg_login %}
+                    <div class="alert alert-danger" role="alert">
+                        {{msg_login}}
+                    </div>
+                    {% endif %}
                     <!--Name-->
                     <!-- Email input -->
                     <div class="form-group col-md-10" style="margin-inline: auto;">

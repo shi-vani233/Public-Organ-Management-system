@@ -35,10 +35,13 @@
         </div>
     </nav>
 
-
     <!--- Registered Hospital List -->
     <div class="container">
-        {%if msg%} {{msg}} {% endif %}
+        {%if msg%}
+        <div class="alert alert-success" role="alert">
+            {{msg}}
+        </div>
+        {% endif %}
         <h2 class="my-4 text-center display-4">Registered Hospital List</h2>
         {% for hospital in hospitals%}
         <div class="card mb-2 text-dark biLeft " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">

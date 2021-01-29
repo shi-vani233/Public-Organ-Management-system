@@ -60,8 +60,8 @@ def registerhospital(request):
     hospitals=Hospital.objects.all()
     if not (msg_pass or msg_phone or msg_zip):
         try:
-            user=User.objects.create_user(username=hospital_email,email=hospital_email)
-            user.set_password(password)
+            user=User.objects.create_user(username=hospital_email,email=hospital_email,password=password)
+            #user.set_password(password)
             user.save()
             hosp=Hospital(hospital_email=hospital_email,hospital_name=hospital_name,hospital_city=hospital_city,
                 hospital_mobile_no=hospital_mobile_no,hospital_address=hospital_address,zip_code=zip_code)
@@ -69,7 +69,7 @@ def registerhospital(request):
             msg="you are successfully registered, Go for Login!"
             return render(request ,'main.html',{'msg':msg,'hospitals':hospitals})
         except:
-            msg_error="this email already registered"
+            msg_error="this email is already registered"
             return render(request,'register.html',{'msg_error':msg_error})
     else:
         return render(request ,'register.html',{'msg_pass':msg_pass,'msg_phone':msg_phone,'msg_zip':msg_zip})
