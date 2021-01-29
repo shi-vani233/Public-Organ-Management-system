@@ -66,7 +66,9 @@
                 </form>
                 <div class="text-center">
                     <p>Not a member? <a href="/Hospital/registerpage">Register</a></p>
-
+                </div>
+                <form action="{% url 'password_reset' %}">
+                    <input class="btn btn-outline-dark btn-sm" type="submit" value="Forgot your password?">
                 </div>
 
             </div>
