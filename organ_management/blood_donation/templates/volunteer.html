@@ -35,76 +35,79 @@
     <!--volunteer card-->
 
     <div class="container">
+        {%if msg%}
+        <div class="alert alert-success" role="alert">
+            {{msg}}
+        </div>
+        {% endif %}
         <div class="text-center align-items-center py-5 my-2 mb-4">
             <a id="volbtn2" class="btn text-center btn-lg " data-toggle="modal" data-target="#donorModal" style="margin:auto;">Donor Registration</a>
         </div>
         <h2 class="mb-5 text-center display-4">Volunteers</h2>
-
-
-        <form>
-            <div class="p-2 bg-light rounded-pill shadow-sm my-4" style="width:30%;margin: auto;">
-                <div class="input-group">
-                    <input id="search" type="text" placeholder="Search for Blood Group" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
-                    <div class="input-group-append">
-                        <button id="button-addon1" type="submit" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+        <div class="p-2 bg-light rounded-pill shadow-sm my-4" style="width:30%;margin: auto;">
+            <div class="input-group">
+                <input id="search" type="text" placeholder="Search for Blood Group" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
+                <div class="input-group-append">
+                    <button id="button-addon1" type="submit" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="card my-2 text-dark biLeft " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> Rahul Shetty
+                    </div>
+                    <div class="col">
+                        Vadodara
+                    </div>
+                    <div class="col">
+                        A+ve
+                    </div>
+                    <div class="col text-center">
+                        <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
                     </div>
                 </div>
             </div>
-            <div class="card my-2 text-dark biLeft " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> Rahul Shetty
-                        </div>
-                        <div class="col">
-                            Vadodara
-                        </div>
-                        <div class="col">
-                            A+ve
-                        </div>
-                        <div class="col text-center">
-                            <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
-                        </div>
+        </div>
+        <div class="card  my-2 text-dark biLeft" style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> Siya Patel
+                    </div>
+                    <div class="col">
+                        Ahembdabad
+                    </div>
+                    <div class="col">
+                        AB+ve
+                    </div>
+                    <div class="col  text-center">
+                        <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
                     </div>
                 </div>
             </div>
-            <div class="card  my-2 text-dark biLeft" style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> Siya Patel
-                        </div>
-                        <div class="col">
-                            Ahembdabad
-                        </div>
-                        <div class="col">
-                            AB+ve
-                        </div>
-                        <div class="col  text-center">
-                            <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
-                        </div>
+        </div>
+        <div class="card  my-2 text-dark biLeft" style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> Manav Modi
+                    </div>
+                    <div class="col">
+                        Vadodara
+                    </div>
+                    <div class="col">
+                        O+ve
+                    </div>
+                    <div class="col  text-center">
+                        <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
                     </div>
                 </div>
             </div>
-            <div class="card  my-2 text-dark biLeft" style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> Manav Modi
-                        </div>
-                        <div class="col">
-                            Vadodara
-                        </div>
-                        <div class="col">
-                            O+ve
-                        </div>
-                        <div class="col  text-center">
-                            <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
     </div>
+
     <div class="modal fade" id="donorModal" tabindex="-1" role="dialog" aria-labelledby="donorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -114,23 +117,24 @@
               </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/Blood_Donation/Registervol/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Name</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Name" style="border-radius: 20px;">
+                                <input type="text" class="form-control" id="inputEmail3" name="volunteer_name" placeholder="Name" style="border-radius: 20px;">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Email</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Email" style="border-radius: 20px;">
+                                <input type="email" class="form-control" id="inputPassword3" name="volunteer_email" placeholder="Email" style="border-radius: 20px;">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">Contact No.</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Contact No." style="border-radius: 20px;">
+                                <input type="text" class="form-control" id="inputPassword3" name="volunteer_mobile_no" placeholder="Contact No." style="border-radius: 20px;">
                             </div>
                         </div>
                         <fieldset class="form-group">
@@ -138,14 +142,14 @@
                                 <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="gridRadios1">
+                                        <input class="form-check-input" type="radio" name="volunteer_gender" id="Male" value="Male" checked>
+                                        <label class="form-check-label" for="Male">
                                     Male
                                   </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                        <label class="form-check-label" for="gridRadios2">
+                                        <input class="form-check-input" type="radio" name="volunteer_gender" id="Female" value="Female">
+                                        <label class="form-check-label" for="Female">
                                     Female
                                   </label>
                                     </div>
@@ -155,41 +159,40 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Blood Group</label>
                             <div class="col-sm-8">
-                                <select id="inputState" class="form-control" style="border-radius: 20px;">
-                                    <option selected>A+</option>
-                                    <option>A-</option>
-                                    <option>B+</option>
-                                    <option>B-</option>
-                                    <option>AB+</option>
-                                    <option>AB-</option>
-                                    <option>O+</option>
-                                    <option>O-</option>
+                                <select id="inputState" class="form-control" style="border-radius: 20px;" name="volunteer_bloodGroup">
+                                    <option name="A+" value="A+" selected>A+</option>
+                                    <option name="A-" value="A-">A-</option>
+                                    <option name="B+" value="B+" >B+</option>
+                                    <option name="B-" value="B-" >B-</option>
+                                    <option name="AB+" value="AB+" >AB+</option>
+                                    <option name="AB-" value="AB-" >AB-</option>
+                                    <option name="O+" value="O+" >O+</option>
+                                    <option name="O-" value="O-" >O-</option>
                                   </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-4 col-form-label">City</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="City" style="border-radius: 20px;">
+                                <input type="text" class="form-control" id="inputPassword3" name="volunteer_city" placeholder="City" style="border-radius: 20px;">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-dark btn-block mb-4" style="
+
+                        <input type="submit" class="btn btn-dark btn-block mb-4" style="
                                 border-radius: 30px;
                                 width: 50%;
                                 margin: auto;
                                 box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);
-                            ">Register</button>
-                        </div>
+                            " value="Register" />
+                    </form>
+
                 </div>
-                </form>
+
             </div>
 
         </div>
     </div>
-
-
     <br>
     <br>
     <br>
