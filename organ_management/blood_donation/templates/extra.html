@@ -1,0 +1,14 @@
+<div class="p-2 bg-light rounded-pill shadow-sm my-4" style="width:30%;margin: auto;">
+            <div class="input-group">
+                <input id="search" type="text" placeholder="Search for Blood Group" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
+                <div class="input-group-append">
+                    <button id="button-addon1" type="submit" class="btn btn-link text-info"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+
+
+        <form action="/Blood_Donation/searchBloodGroup/" method="GET" value="{{request.GET.q}}">
+        Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search for Blood donation"/>
+        <input type="submit" name="submit" value="Search"/>
+        </form>
