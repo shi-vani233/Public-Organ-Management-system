@@ -8,6 +8,20 @@ class Hospital(models.Model):
     hospital_address=models.CharField(max_length=100,help_text = 'write your email')
     zip_code=models.CharField(max_length=6)
 
+class Donor(models.Model):
+    assign_id=models.AutoField(primary_key=True)
+    donor_name=models.CharField(max_length=50)
+    donor_dob=models.DateTimeField()
+    donor_height=models.CharField(max_length=50)
+    donor_weight=models.CharField(max_length=50)
+    donor_bloodGroup=models.CharField(max_length=10)
+    donor_gender=models.CharField(max_length=10)
+    donor_diseases=models.CharField(max_length=50,blank=True)
+    donor_addiction=models.CharField(max_length=50,blank=True)
+    donor_info=models.CharField(max_length=200,blank=True)
+    donor_added_time=models.DateTimeField(default=None)
+
+
     
 
 
