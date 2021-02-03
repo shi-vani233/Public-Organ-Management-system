@@ -34,7 +34,11 @@
             </div>
         </div>
     </nav>
-
+    {% if msg_donor %}
+    <div class="alert alert-success" role="alert">
+        {{msg_donor}}
+    </div>
+    {% endif %}
     <div class="container">
         <div class="text-center align-items-center pt-3 my-5 mb-2">
             <a id="volbtn2" class="btn text-center btn-lg " data-toggle="modal" data-target="#exampleModal3" style="margin:auto;">Add Donor</a>
@@ -74,30 +78,42 @@
                     </div>
 
                     <div class="modal-body">
-                        <form>
+                        <form action="/Hospital/add_donor/" method="POST">
+                        {% csrf_token %}
                             <!-- Name -->
                             <div class="form-group">
-                                <input type="text" id="nm" class="form-control" placeholder="Name" style="border-radius: 20px;" />
+                                <input type="text" name="donor_name" id="nm" class="form-control" placeholder="Name" style="border-radius: 20px;" />
                             </div>
 
                             <!-- Birth Date -->
                             <div class="form-group">
-                                <input class="form-control" id="date" name="date" placeholder="Birthdate : MM/DD/YYY" type="text" style="border-radius: 20px;" />
+                                <input class="form-control" type="date" name="donor_dob" id="date" placeholder="Birthdate : DD/MM/YYYY" style="border-radius: 20px;" />
                             </div>
 
                             <!-- Organ to donate -->
-                            <div class="form-group">
-                                <input type="text" id="organ" class="form-control" placeholder="Which organ would you like to donate?" style="border-radius: 20px;" />
+                            <div class="form-group">                                
+                                <label for="inputEmail3" class="col-sm-4 col-form-label">Blood Group</label>
+                                <div class="col-sm-8">
+                                    <select id="inputState" class="form-control" style="border-radius: 20px;" name="donor_organ">
+                                        <option name="kidney" value="kidney" selected>kidney</option>
+                                        <option name="liver" value="liver">liver</option>
+                                        <option name="lungs" value="lungs" >lungs</option>
+                                        <option name="intestine" value="intestine" >intestine</option>
+                                        <option name="corneas" value="corneas" >corneas</option>
+                                        <option name="heart" value="heart" >heart</option>
+                                        <option name="pancreas" value="pancreas" >pancreas</option>
+                                    </select>
+                                </div>    
                             </div>
 
                             <!-- Gender -->
                             <label for="gender">Gender :</label><br>
                             <div class="form-check form-check-inline" id="gender">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" name="donor_gender" id="inlineRadio1" value="Male">
                                 <label class="form-check-label" for="inlineRadio1">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input class="form-check-input" type="radio" name="donor_gender" id="inlineRadio2" value="Female">
                                 <label class="form-check-label" for="inlineRadio2">Female</label>
                             </div><br><br>
 
@@ -105,46 +121,54 @@
                                 <div class="col-4">
                                     <!-- Height -->
                                     <div class="form-group">
-                                        <input type="text" id="height" class="form-control" placeholder="Height" style="border-radius: 20px;" />
+                                        <input type="text" id="height" name="donor_height" class="form-control" placeholder="Height" style="border-radius: 20px;" />
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <!-- Weight -->
                                     <div class="form-group">
-                                        <input type="text" id="weight" class="form-control" placeholder="weight" style="border-radius: 20px;" />
+                                        <input type="text" id="weight" name="donor_weight" class="form-control" placeholder="weight" style="border-radius: 20px;" />
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <!-- Blood Group -->
                                     <div class="form-group">
-                                        <input type="text" id="bloodgrp" class="form-control" placeholder="Blood Group" style="border-radius: 20px;" />
+                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Blood Group</label>
+                                        <div class="col-sm-8">
+                                            <select id="inputState" class="form-control" style="border-radius: 20px;" name="donor_bloodGroup">
+                                                <option name="A+" value="A+" selected>A+</option>
+                                                <option name="A-" value="A-">A-</option>
+                                                <option name="B+" value="B+" >B+</option>
+                                                <option name="B-" value="B-" >B-</option>
+                                                <option name="AB+" value="AB+" >AB+</option>
+                                                <option name="AB-" value="AB-" >AB-</option>
+                                                <option name="O+" value="O+" >O+</option>
+                                                <option name="O-" value="O-" >O-</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="txt1">Please List if you have any drug Allergies :</label>
-                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                            </div>
+                            <!-- Any Diseases -->
 
-                            <!-- Any Dieseas -->
-                            <label for="dieseas">Have you had any ? (Please check all that apply)</label><br>
+                            <label for="dieseas">Have you had any diseases? (Please check all that apply)</label><br>
                             <div class="row">
                                 <div class="col-4">
-                                    <div class="form-check" id="dieseas">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <div class="form-check" id="diseases">
+                                        <input class="form-check-input" name="donor_diseases" type="checkbox" value="Asthma" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                         Asthma
                                     </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                        <input class="form-check-input" name="donor_diseases" type="checkbox" value="Cancer" id="defaultCheck2">
                                         <label class="form-check-label" for="defaultCheck2">
                                         Cancer
                                     </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                        <input class="form-check-input" name="donor_diseases" type="checkbox" value="Diabetes" id="defaultCheck3">
                                         <label class="form-check-label" for="defaultCheck3">
                                         Diabetes
                                     </label>
@@ -152,41 +176,21 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                                        <input class="form-check-input" name="donor_diseases" type="checkbox" value="Anemia" id="defaultCheck4">
                                         <label class="form-check-label" for="defaultCheck4">
                                         Anemia
                                     </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                                        <input class="form-check-input" name="donor_diseases" type="checkbox" value="heart-Dieseas" id="defaultCheck5">
                                         <label class="form-check-label" for="defaultCheck5">
                                         heart Dieseas
                                     </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                                        <input class="form-check-input" name="donor_diseases" type="checkbox" value="Blood-Pressure" id="defaultCheck6">
                                         <label class="form-check-label" for="defaultCheck6">
                                         High Blood Pressure
-                                    </label>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck7">
-                                        <label class="form-check-label" for="defaultCheck7">
-                                        Hipatitis
-                                    </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck8">
-                                        <label class="form-check-label" for="defaultCheck8">
-                                        Tuberclosis
-                                    </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck9">
-                                        <label class="form-check-label" for="defaultCheck9">
-                                        Epilepsy Seizures
                                     </label>
                                     </div>
                                 </div>
@@ -197,7 +201,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check" id="addict">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input" name="donor_addiction"  type="checkbox" value="Alcohol" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                         Alcohol
                                     </label>
@@ -205,7 +209,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                        <input class="form-check-input" name="donor_addiction" type="checkbox" value="Smoking" id="defaultCheck2">
                                         <label class="form-check-label" for="defaultCheck2">
                                         Smoking
                                     </label>
@@ -213,7 +217,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-check" id="addiction">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                                        <input class="form-check-input" name="donor_addiction" type="checkbox" value="Caffine" id="defaultCheck3">
                                         <label class="form-check-label" for="defaultCheck3">
                                         Caffine
                                     </label>
@@ -223,22 +227,11 @@
 
                             <div class="form-group">
                                 <label for="txt1">Please List if you have any other illness :</label>
-                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="txt1">Please List if you have any operations and dates of each :</label>
-                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="txt1">Please List your current medications :</label>
-                                <textarea class="form-control" id="Txt1" rows="1"></textarea>
+                                <textarea name="donor_info" class="form-control" id="Txt1" rows="1"></textarea>
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" id="loginbtn" class="btn btn-dark btn-block btn-lg mb-4">Submit</button>
-
+                            <input type="submit" id="loginbtn" value="submit" class="btn btn-dark btn-block btn-lg mb-4"/>
                         </form>
                     </div>
 

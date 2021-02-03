@@ -48,48 +48,31 @@
             <th scope="col">Blood Group</th>
             <th scope="col">Any Dieseas</th>
             <th scope="col">Any other illness</th>
-            <th scope="col">operations and dates</th>
             <th scope="col">Addiction</th>
             <th scope="col">.</th>
         </tr>
     </thead>
     <tbody>
+        {% for item in don %}
         <tr>
-            <th scope="row">1</th>
-            <td>Mayank</td>
-            <td>Male</td>
-            <td>10/10/92</td>
-            <td>eye</td>
-            <td>6 foot</td>
-            <td>75</td>
-            <td>A+</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{item.donor_name}}</td>
+            <td>{{item.donor_gender}}</td>
+            <td>{{item.donor_dob}}</td>
+            <td>{{item.donor_organ}}</td>
+            <td>{{item.donor_height}}</td>
+            <td>{{item.donor_weight}}</td>
+            <td>{{item.donor_bloodGroup}}</td>
+            <td>{{item.donor_diseases}}
+            </td>
+            <td>{{item.donor_info}}</td>
+            <td>{{item.donor_addiction}}</td>
             <td>
                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
                 <button type="button" class="btn btn-warning btn-sm" style="color:white;">Edit</button>
             </td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Priyanka</td>
-            <td>Female</td>
-            <td>09/07/90</td>
-            <td>liver</td>
-            <td>5.5 foot</td>
-            <td>67</td>
-            <td>B+</td>
-            <td>Blood Pressure</td>
-            <td>No</td>
-            <td>No</td>
-            <td>Smoking</td>
-            <td>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                <button type="button" class="btn btn-warning btn-sm" style="color:white;">Edit</button>
-            </td>
-        </tr>
+        {% endfor %}
     </tbody>
     </table>
 

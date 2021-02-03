@@ -1,4 +1,5 @@
-from django.db.models.fields import EmailField
+from django.db.models.fields import DateTimeField, EmailField
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
@@ -9,14 +10,13 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 from django.core.mail import send_mail
-from hospital.models import Hospital
+from hospital.models import Hospital,Donor
+import simplejson as json
+import datetime
 
 def Mainpage(request):
     hospitals=Hospital.objects.all()
     return render(request, 'main.html', {'hospitals':hospitals})
-
-def DonorList(request):
-    return render(request, 'donorList.html', context=None)
 
 def registerpage(request):
     return render(request, 'register.html', context=None)
@@ -92,4 +92,49 @@ def logout(request):
     auth.logout(request)
     return redirect('/Hospital/Mainpage/')
 
+def add_donor(request):
+    
+    if request.user.is_authenticated:
+        donor_name=request.POST.get('donor_name','')
+        donor_dob=request.POST.get('donor_dob','')
+        donor_organ=request.POST.get('donor_organ','')
+        donor_height=request.POST.get('donor_height','')
+        donor_weight=request.POST.get('donor_weight','')
+        donor_bloodGroup=request.POST.get('donor_bloodGroup','')
+        donor_gender=request.POST.get('donor_gender','')
+        donor_info=request.POST.get('donor_info','')
+        donor_diseases=request.POST.getlist('donor_diseases','')
+        donor_addiction=request.POST.getlist('donor_addiction','')
+        donor_added_time=datetime.datetime.now() 
+        hospital_email=request.user.username
+
+        print(type(donor_diseases))
+
+        don=Donor(donor_name=donor_name,
+                    donor_dob=donor_dob,
+                    donor_organ=donor_organ,
+                    donor_height=donor_height,
+                    donor_weight=donor_weight,
+                    donor_bloodGroup=donor_bloodGroup,
+                    donor_gender=donor_gender,
+                    donor_info=donor_info,
+                    donor_diseases = donor_diseases,
+                    donor_addiction = donor_addiction,
+                    donor_added_time=donor_added_time,
+                    hospital_email=hospital_email,
+                    )
+        don.save()
+    
+    msg_donor="Donor added successfully!"
+    return render(request, 'hospitalHome.html',{'msg_donor':msg_donor})
+
+def DonorList(request):
+    if request.user.is_authenticated:
+        hospital_email=request.user.username
+
+        don=Donor.objects.filter(hospital_email=hospital_email)
+        # for i in don:
+        #     print(i.donor_diseases)
+        # print("..............................")
+        return render(request, 'donorList.html', {'don':don})
 
