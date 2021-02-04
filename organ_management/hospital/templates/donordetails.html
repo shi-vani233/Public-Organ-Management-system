@@ -36,47 +36,40 @@
         </div>
     </nav>
 
-    <table class="table">
-        <thead style="background-color: #00cc44; color:white;">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">BirthDate</th>
-                <th scope="col">Organ</th>
-                <th scope="col">Height</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Blood Group</th>
-                <th scope="col">Any Dieseas</th>
-                <th scope="col">Any other illness</th>
-                <th scope="col">Addiction</th>
-                <th scope="col">.</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in don %}
-            <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{item.donor_name}}</td>
-                <td>{{item.donor_gender}}</td>
-                <td>{{item.donor_dob}}</td>
-                <td>{{item.donor_organ}}</td>
-                <td>{{item.donor_height}}</td>
-                <td>{{item.donor_weight}}</td>
-                <td>{{item.donor_bloodGroup}}</td>
-                <td>{%if item.donor_diseases %} {{item.donor_diseases}} {% else%} not having any diseases {% endif %}
-                </td>
-                <td>{% if item.donor_info %} {{item.donor_info}} {%else%} Nothing serious {% endif %}
-                </td>
-                <td>{%if item.donor_addiction%}{{item.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
-                <td>
-                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                    <button type="button" class="btn btn-warning btn-sm" style="color:white;">Edit</button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container py-5 scale-in-center">
+        {% for i in hos %} {% if i.hospital_email == donor.hospital_email %}
+        <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 100%;height:60%; margin: auto;border-radius: 20px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+
+                <div class="card-title">
+                    <h1>{{i.hospital_name}}</h1>
+                </div>
+                <p class="card-text">
+                    <div class="row"> {{i.hospital_address}},{{i.hospital_city}}</div>
+
+                    <div class="row"> donor Name: {{donor.donor_name}}</div>
+                    <div class="row">donor organ: {{donor.donor_organ}}</div>
+                    <div class="row"> donor Gender: {{donor.donor_gender}}</div>
+                    <div class="row">donor height: {{donor.donor_height}}</div>
+                    <div class="row">donor weight: {{donor.donor_weight}}</div>
+                    <div class="row">if donor has dieseas: {%if donor.donor_diseases %} {{donor.donor_diseases}} {% else%} not having any diseases {% endif %}</div>
+                    <div class="row">if donor has addiction: {%if donor.donor_addiction%}{{donor.donor_addiction}}{%else%} don't have any addiction{% endif %}</div>
+
+                    <div class="row">Any Other Concerns: {% if donor.donor_info %} {{donor.donor_info}} {%else%} Nothing serious {% endif %}</div>
+
+
+                </p>
+                <form action="" method="POST">
+
+                    <input type="submit" id="donbtn" class="btn text-center btn-primary" value="Send request">
+                </form>
+            </div>
+
+
+        </div>
+        {% endif %} {% endfor %}
+    </div>
+
 
 
 </body>
