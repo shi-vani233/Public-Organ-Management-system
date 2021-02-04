@@ -1,9 +1,9 @@
 <html>
 
 <head>
-<title>
-    Save-Lifes
-</title>
+    <title>
+        Save-Lifes
+    </title>
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
@@ -18,7 +18,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 </head>
 
 <body>
@@ -30,79 +30,58 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav" style="font-size: 20px;">
-                <a class="nav-item nav-link" data-toggle="modal" data-target="#exampleModal" active>Log Out</a>
+                <a class="nav-item nav-link" href="/Hospital/hospitalHome/">Hospital Home</a>
+                <a class="nav-item nav-link" href="/Hospital/logout/">Log Out</a>
             </div>
         </div>
     </nav>
 
-    <table class="table">
-    <thead  style="background-color: #00cc44; color:white;">
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Organ</th>
-        <th scope="col">Hospital Name</th>
-        <th scope="col">Hosiptal Email</th>
-        <th scope="col">Hospital Address</th>
-        <th scope="col">city</th>
-        <th scope="col">.</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <th scope="row">1</th>
-        <td><a data-toggle="modal" data-target="#exampleModal1">Nayan</a></td>
-        <td>Lungs</td>
-        <td>Apollo</td>
-        <td>apollo@gmail.com</td>
-        <td>MG Road</td>
-        <td>Ahembdabad</td>
-        <td>
-            <button type="button" class="btn btn-danger btn-sm">Request</button>
-        </td>
-    </tr>
-        <tr>
-        <th scope="row">2</th>
-        <td>Manali</td>
-        <td>heart</td>
-        <td>Sterling</td>
-        <td>sterling@gmail.com</td>
-        <td>MG Road</td>
-        <td>Vadodara</td>
-        <td>
-            <button type="button" class="btn btn-danger btn-sm">Request</button>
-        </td>
-        </tr>
-    </tbody>
-    </table>
+    <div class="container">
 
-     <!--login modal-->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                </div>
-                <div class="modal-body">
-                    <th> Medical History </th><br><br>
-                    <p>Name          : Nayan Desai</p>
-                    <p> Birthdate     : 10/10/92</p>   
-                    <p>Organ         : Lungs</p> 
-                    <p>Gender        : Male</p>
-                    <p> Height        : 6 foot</p>
-                    <p>Weight        : 75</p>
-                    <p> Blood Group   : A+</p>
-                    <p> Any Dieseas   : No</p>
-                    <p> Other illness : No </p>
-                    <p> Addiction     : No</P>
-                </div>
-
-            </div>
+        <div class="input-group col-md-4 py-5" style="margin-top: 50px; margin-left:350px;">
+            <input class="form-control py-2 border-right-0 border" type="search" placeholder="search for Donors" id="example-search-input">
+            <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-left-0 border" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+          </span>
         </div>
+
+
+
+
+        <h2 class="mb-5 text-center display-4">Donors</h2>
+        {% for item in other_donors %} {% for i in hos %} {% if item.hospital_email == i.hospital_email %}
+        <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h5 class="card-title">{{i.hospital_name}}
+                        </h5>
+
+                        <p class="card-text">
+                            {{i.hospital_address}},{{i.hospital_city}} <br>Organ: {{item.donor_organ}}
+
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <form action="/Hospital/DonorDetails/" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{item.donor_id}}">
+                            <input type="submit" id="donbtn" class="btn text-center btn-primary" value="View Donor Details">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{item.donor_added_time}}
+            </div>
+
+        </div>
+        {% endif %} {% endfor %} {% endfor %}
     </div>
 
 
 </body>
+
 </html>

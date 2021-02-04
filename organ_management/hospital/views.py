@@ -26,9 +26,6 @@ def loginpage(request):
     c.update(csrf(request))
     return render(request, 'login.html', context=None)
 
-def PotentialDonorList(request):
-    return render(request, 'potentialDonor.html', context=None)
-
 def hospitalHome(request):
     if request.user.is_authenticated:
         return render(request, 'hospitalHome.html', context=None)
@@ -107,9 +104,7 @@ def add_donor(request):
         donor_addiction=request.POST.getlist('donor_addiction','')
         donor_added_time=datetime.datetime.now() 
         hospital_email=request.user.username
-
         print(type(donor_diseases))
-
         don=Donor(donor_name=donor_name,
                     donor_dob=donor_dob,
                     donor_organ=donor_organ,
@@ -137,4 +132,22 @@ def DonorList(request):
         #     print(i.donor_diseases)
         # print("..............................")
         return render(request, 'donorList.html', {'don':don})
+
+def PotentialDonorList(request):
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        don=Donor.objects.exclude(hospital_email=loggedin_user)
+        hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
+
+
+def DonorDetails(request):
+    if request.user.is_authenticated:
+    #got donor_id from template by hidden field
+        loggedin_user=request.user.username
+        getid=request.POST.get('id','')
+        donor=Donor.objects.get(donor_id=getid)
+        hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        return render(request, 'donordetails.html',{'donor':donor,'hos':hos})
+
 
