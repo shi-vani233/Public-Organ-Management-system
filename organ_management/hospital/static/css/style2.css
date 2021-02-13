@@ -3,6 +3,17 @@
     font-size: 30px;
 }
 
+a#volbtn2 {
+    background-color: rgb(77, 194, 201);
+    color: white;
+}
+
+a#volbtn2:hover {
+    border-color: rgb(77, 194, 201);
+    color: rgb(77, 194, 201);
+    background-color: white;
+}
+
 
 /*.navbar-nav a:hover {
     background-color: #5c8a8a;
