@@ -39,13 +39,11 @@
         <div class="alert alert-success" role="alert">
             {{msg}}
         </div>
-        {% endif %}
-        {%if msg_phone%}
+        {% endif %} {%if msg_phone%}
         <div class="alert alert-danger mt-2 mb-4" role="alert">
             {{msg_phone}}
         </div>
-        {% endif %}
-        {%if msg_email %}
+        {% endif %} {%if msg_email %}
         <div class="alert alert-danger mt-2 mb-4" role="alert">
             {{msg_email}}
         </div>
@@ -54,70 +52,55 @@
             <a id="volbtn2" class="btn text-center btn-lg " data-toggle="modal" data-target="#donorModal" style="margin:auto;">Donor Registration</a>
         </div>
 
-        
+
         <div class="p-2 bg-light rounded-pill shadow-sm my-4" style="width:30%;margin: auto;">
             <form action="/Blood_Donation/searchBloodGroup/" method="GET" value="{{request.GET.q}}">
-            <div class="input-group">
-                <input id="search" type="text" name="q" value="{{request.GET.q}}"  placeholder="Search for Blood Group" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
-                <div class="input-group-append">
-                     <input type="submit" name="submit" value="Search"/>
+                <div class="input-group">
+                    <input id="search" type="text" name="q" value="{{request.GET.q}}" placeholder="Search for Blood Group" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
+                    <div class="input-group-append">
+                        <input type="submit" name="submit" value="Search" />
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
 
 
-        {% if submitbutton == 'Search' and request.GET.q != '' %}
-        {% if results %}
-        <center><h1>Results for <b>{{ request.GET.q }}</b></h1></centre>
-        <br/><br/>
-
-        {% for result in results %}
-        
-        <div class="card my-2 text-dark biLeft " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+        {% if submitbutton == 'Search' and request.GET.q != '' %} {% if results %}
+        <center>
+            <h1>Results for <b>{{ request.GET.q }}</b></h1>
+        </center>
+        <br/><br/> {% for result in results %}
+        <div class="card my-2 text-dark biLeft " id="show" style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;">  {{result.volunteer_name}}
+                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> {{result.volunteer_name}}
                     </div>
-                    <div class="col">
-                        {{result.volunteer_bloodGroup}}
+                    <div class="col">{{result.volunteer_bloodGroup}}
                     </div>
                     <div class="col">
                         {{result.volunteer_city}}
                     </div>
                     <div class="col text-center">
-                        <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
-                        {{result.volunteer_mobile_no}}
+                        <i class="fa fa-phone" aria-hidden="true"> Contact No.</i> {{result.volunteer_mobile_no}}
                     </div>
                 </div>
             </div>
         </div>
-
-        {% endfor %}
-        {% else %}
-        No search results for this query
-        {% endif %}
-        {% endif %}
-
-                
-
-        
-        {% if volunteers %}
-            <h2 class="mb-5 text-center display-4">Volunteers</h2>
-        {% endif %}
-        {% for vol in volunteers%}
+        {% endfor %} {% else %} No search results for this query {% endif %} {% endif %} {% if volunteers %}
+        <h2 class="mb-5 text-center display-4">Volunteers</h2>
+        {% endif %} {% for vol in volunteers%}
         <div class="card my-2 text-dark biLeft " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;">  {{vol.volunteer_name}}
+                        <img src="{% static 'images/user.png' %}" alt="Avatar" style="width:50px; border-radius: 50%;"> {{vol.volunteer_name}}
                     </div>
                     <div class="col">
-                         {{vol.volunteer_bloodGroup}}
+                        {{vol.volunteer_bloodGroup}}
                     </div>
                     <div class="col">
-                         {{vol.volunteer_city}}
+                        {{vol.volunteer_city}}
                     </div>
                     <div class="col text-center">
                         <i class="fa fa-phone" aria-hidden="true"> Contact No.</i>
@@ -125,61 +108,61 @@
                 </div>
             </div>
         </div>
-         {% endfor%}
+        {% endfor%}
 
 
-    <div class="modal fade" id="donorModal" tabindex="-1" role="dialog" aria-labelledby="donorModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal fade" id="donorModal" tabindex="-1" role="dialog" aria-labelledby="donorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/Blood_Donation/Registervol/" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Name</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" name="volunteer_name" placeholder="Name" style="border-radius: 20px;" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-4 col-form-label">Email</label>
-                            <div class="col-sm-8">
-                                <input type="email" class="form-control" id="inputPassword3" name="volunteer_email" placeholder="Email" style="border-radius: 20px;" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-4 col-form-label">Contact No.</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputPassword3" name="volunteer_mobile_no" placeholder="Contact No." style="border-radius: 20px;" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Blood_Donation/Registervol/" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-4 col-form-label">Name</label>
                                 <div class="col-sm-8">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="volunteer_gender" id="Male" value="Male" checked>
-                                        <label class="form-check-label" for="Male">
-                                    Male
-                                  </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="volunteer_gender" id="Female" value="Female">
-                                        <label class="form-check-label" for="Female">
-                                    Female
-                                  </label>
-                                    </div>
+                                    <input type="text" class="form-control" id="inputEmail3" name="volunteer_name" placeholder="Name" style="border-radius: 20px;" autocomplete="off" required>
                                 </div>
                             </div>
-                        </fieldset>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Blood Group</label>
-                            <div class="col-sm-8">
-                                <select id="inputState" class="form-control" style="border-radius: 20px;" name="volunteer_bloodGroup">
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-4 col-form-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="inputPassword3" name="volunteer_email" placeholder="Email" style="border-radius: 20px;" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-4 col-form-label">Contact No.</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputPassword3" name="volunteer_mobile_no" placeholder="Contact No." style="border-radius: 20px;" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-4 pt-0">Gender</legend>
+                                    <div class="col-sm-8">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="volunteer_gender" id="Male" value="Male" checked>
+                                            <label class="form-check-label" for="Male">
+                                    Male
+                                  </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="volunteer_gender" id="Female" value="Female">
+                                            <label class="form-check-label" for="Female">
+                                    Female
+                                  </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-4 col-form-label">Blood Group</label>
+                                <div class="col-sm-8">
+                                    <select id="inputState" class="form-control" style="border-radius: 20px;" name="volunteer_bloodGroup">
                                     <option name="A+" value="A+" selected>A+</option>
                                     <option name="A-" value="A-">A-</option>
                                     <option name="B+" value="B+" >B+</option>
@@ -189,39 +172,39 @@
                                     <option name="O+" value="O+" >O+</option>
                                     <option name="O-" value="O-" >O-</option>
                                   </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-4 col-form-label">City</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputPassword3" name="volunteer_city" placeholder="City" style="border-radius: 20px;" autocomplete="off" required>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-4 col-form-label">City</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputPassword3" name="volunteer_city" placeholder="City" style="border-radius: 20px;" autocomplete="off" required>
+                                </div>
                             </div>
-                        </div>
 
 
-                        <input type="submit" class="btn btn-dark btn-block mb-4" style="
+                            <input type="submit" class="btn btn-dark btn-block mb-4" style="
                                 border-radius: 30px;
                                 width: 50%;
                                 margin: auto;
                                 box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);
                             " value="Register" />
-                    </form>
+                        </form>
+
+                    </div>
 
                 </div>
 
             </div>
-
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-   </div>
 
-     <!--footer-->
+    <!--footer-->
     <footer class="pt-5 pb-2 " style="background-color: rgba(0, 0, 0, 0.1) ">
         <div class="container ">
             <div class="row ">
