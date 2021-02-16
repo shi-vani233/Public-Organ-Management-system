@@ -1,4 +1,4 @@
-<html>
+ <html>
 
 <head>
     <title>
@@ -36,7 +36,14 @@
         </div>
     </nav>
 
+     {%if msg %}
+        <div class="alert alert-success" role="alert">
+            {{msg}}
+        </div>
+        {% endif %} 
+
     <div class="container py-5 scale-in-center">
+
         {% for i in hos %} {% if i.hospital_email == donor.hospital_email %}
         <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 100%;height:60%; margin: auto;border-radius: 20px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
             <div class="card-body">
@@ -59,10 +66,20 @@
 
 
                 </p>
-                <form action="" method="POST">
-
-                    <input type="submit" id="donbtn" class="btn text-center btn-primary" value="Send request">
-                </form>
+                {% if ChangedState == True %}
+                     <form action="/Hospital/CancelRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{donor.donor_id}}">
+                        <input type="submit" id="donbtn" class="btn text-center btn-danger" value="Cancel request">
+                    </form>
+                {% else %}
+                    <form action="/Hospital/SendRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{donor.donor_id}}">
+                        <input type="submit" id="donbtn" class="btn text-center btn-primary" value="Send request">
+                    </form>
+                {% endif %}
+                
             </div>
 
 

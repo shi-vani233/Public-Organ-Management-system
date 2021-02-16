@@ -26,6 +26,14 @@ class Donor(models.Model):
     class Meta:
         unique_together = ('donor_id','hospital_email')
 
+class OrganRequest(models.Model):
+    req_id=models.AutoField(primary_key=True)
+    sender = models.ForeignKey(Hospital,on_delete=models.CASCADE, related_name="sender")
+    reciever = models.ForeignKey(Hospital,on_delete=models.CASCADE, related_name="reciever")
+    status = models.BooleanField(blank=True, null=False, default=True)
+    organ_request_time=models.DateTimeField(auto_now_add=True)
+
+
     
 
 

@@ -10,9 +10,11 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 from django.core.mail import send_mail
-from hospital.models import Hospital,Donor
+from hospital.models import Hospital,Donor, OrganRequest
 import simplejson as json
 import datetime
+
+global ChangedState
 
 def Mainpage(request):
     hospitals=Hospital.objects.all()
@@ -148,6 +150,43 @@ def DonorDetails(request):
         getid=request.POST.get('id','')
         donor=Donor.objects.get(donor_id=getid)
         hos=Hospital.objects.exclude(hospital_email=loggedin_user)
-        return render(request, 'donordetails.html',{'donor':donor,'hos':hos})
+        temp = donor.hospital_email
+        reciever = Hospital.objects.get(hospital_email=temp)
+        loggedin_user=request.user.username
+        sender = Hospital.objects.get(hospital_email=loggedin_user)
+        obj = OrganRequest.objects.filter(sender=sender, reciever=reciever)
+        if obj.exists():
+            ChangedState = True
+        else:
+            ChangedState = False
+        return render(request, 'donordetails.html',{'donor':donor,'hos':hos, 'ChangedState':ChangedState})
 
+def SendRequest(request):
+    if request.user.is_authenticated:
+        getid=request.POST.get('id','')
+        donor=Donor.objects.get(donor_id=getid)
+        temp = donor.hospital_email
+        reciever = Hospital.objects.get(hospital_email=temp)
+        loggedin_user=request.user.username
+        sender = Hospital.objects.get(hospital_email=loggedin_user)
+        req = OrganRequest(sender=sender, reciever=reciever)
+        req.save()
+        msg="Request Successfully Sent"
+        ChangedState = True
+        hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        return render(request, 'donordetails.html',{'msg':msg, 'hos':hos, 'donor':donor, 'ChangedState':ChangedState})
 
+def CancelRequest(request):
+    if request.user.is_authenticated:
+        getid=request.POST.get('id','')
+        donor=Donor.objects.get(donor_id=getid)
+        temp = donor.hospital_email
+        reciever = Hospital.objects.get(hospital_email=temp)
+        loggedin_user=request.user.username
+        sender = Hospital.objects.get(hospital_email=loggedin_user)
+        obj = OrganRequest.objects.filter(sender=sender, reciever=reciever)
+        obj.delete()
+        msg="Request Successfully Deleted"
+        ChangedState = False
+        hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        return render(request, 'donordetails.html',{'msg':msg, 'hos':hos, 'donor':donor, 'ChangedState':ChangedState})
