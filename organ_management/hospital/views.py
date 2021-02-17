@@ -1,5 +1,5 @@
 from django.db.models.fields import DateTimeField, EmailField
-from django.http.response import JsonResponse
+from django.http.response import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
@@ -137,9 +137,11 @@ def DonorList(request):
 
 def PotentialDonorList(request):
     if request.user.is_authenticated:
+        
         loggedin_user=request.user.username
         don=Donor.objects.exclude(hospital_email=loggedin_user)
         hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        
         return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
 
 
@@ -192,4 +194,35 @@ def CancelRequest(request):
         return render(request, 'donordetails.html',{'msg':msg, 'hos':hos, 'donor':donor, 'ChangedState':ChangedState})
 
 def ViewRequest(request):
-    return render(request, 'viewrequest.html', context=None)
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        current_user = Hospital.objects.get(hospital_email=loggedin_user) 
+        allreq = OrganRequest.objects.filter(reciever=current_user,accepted=False,declined=False)
+        acceptedreq=OrganRequest.objects.filter(reciever=current_user,accepted=True,declined=False)
+        return render(request, 'viewrequest.html', {'allreq' : allreq,'acceptedreq':acceptedreq})
+
+def AcceptRequest(request):
+    if request.user.is_authenticated:
+        getid=request.POST.get('id','')
+        organ_request=OrganRequest.objects.get(req_id=getid)
+        organ_request.accepted=True
+        organ_request.save()
+
+        loggedin_user=request.user.username
+        current_user = Hospital.objects.get(hospital_email=loggedin_user) 
+        allreq = OrganRequest.objects.filter(reciever=current_user,accepted=False,declined=False)
+        acceptedreq=OrganRequest.objects.filter(reciever=current_user,accepted=True,declined=False)
+        return render(request, 'viewrequest.html',{'allreq' : allreq,'acceptedreq':acceptedreq})
+
+def DeclineRequest(request):
+    if request.user.is_authenticated:
+        getid=request.POST.get('id','')
+        organ_request=OrganRequest.objects.get(req_id=getid)
+        organ_request.declined=True
+        organ_request.save()
+
+        loggedin_user=request.user.username
+        current_user = Hospital.objects.get(hospital_email=loggedin_user) 
+        allreq = OrganRequest.objects.filter(reciever=current_user,accepted=False,declined=False)
+        acceptedreq=OrganRequest.objects.filter(reciever=current_user,accepted=True,declined=False)
+        return render(request, 'viewrequest.html',{'allreq' : allreq,'acceptedreq':acceptedreq})
