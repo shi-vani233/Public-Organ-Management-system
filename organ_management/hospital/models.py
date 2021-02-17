@@ -30,6 +30,7 @@ class OrganRequest(models.Model):
     req_id=models.AutoField(primary_key=True)
     sender = models.ForeignKey(Hospital,on_delete=models.CASCADE, related_name="sender")
     reciever = models.ForeignKey(Hospital,on_delete=models.CASCADE, related_name="reciever")
+    donor = models.ForeignKey(Donor,on_delete=models.CASCADE, related_name="Donor",default=None)
     status = models.BooleanField(blank=True, null=False, default=True)
     organ_request_time=models.DateTimeField(auto_now_add=True)
 

@@ -154,7 +154,7 @@ def DonorDetails(request):
         reciever = Hospital.objects.get(hospital_email=temp)
         loggedin_user=request.user.username
         sender = Hospital.objects.get(hospital_email=loggedin_user)
-        obj = OrganRequest.objects.filter(sender=sender, reciever=reciever)
+        obj = OrganRequest.objects.filter(sender=sender, reciever=reciever,donor=donor)
         if obj.exists():
             ChangedState = True
         else:
@@ -169,7 +169,7 @@ def SendRequest(request):
         reciever = Hospital.objects.get(hospital_email=temp)
         loggedin_user=request.user.username
         sender = Hospital.objects.get(hospital_email=loggedin_user)
-        req = OrganRequest(sender=sender, reciever=reciever)
+        req = OrganRequest(sender=sender, reciever=reciever,donor=donor)
         req.save()
         msg="Request Successfully Sent"
         ChangedState = True
@@ -184,9 +184,12 @@ def CancelRequest(request):
         reciever = Hospital.objects.get(hospital_email=temp)
         loggedin_user=request.user.username
         sender = Hospital.objects.get(hospital_email=loggedin_user)
-        obj = OrganRequest.objects.filter(sender=sender, reciever=reciever)
+        obj = OrganRequest.objects.filter(sender=sender, reciever=reciever,donor=donor)
         obj.delete()
         msg="Request Successfully Deleted"
         ChangedState = False
         hos=Hospital.objects.exclude(hospital_email=loggedin_user)
         return render(request, 'donordetails.html',{'msg':msg, 'hos':hos, 'donor':donor, 'ChangedState':ChangedState})
+
+def ViewRequest(request):
+    return render(request, 'viewrequest.html', context=None)

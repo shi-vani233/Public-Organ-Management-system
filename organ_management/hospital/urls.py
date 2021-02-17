@@ -1,5 +1,5 @@
 from django.urls import path
-from hospital.views import Mainpage, add_donor,hospitalHome,DonorList,PotentialDonorList,registerhospital,loginhospital,logout,registerpage,loginpage,DonorDetails, SendRequest,CancelRequest
+from hospital.views import Mainpage, add_donor,hospitalHome,DonorList,PotentialDonorList,registerhospital,loginhospital,logout,registerpage,loginpage,DonorDetails, SendRequest,CancelRequest,ViewRequest
 from django.conf.urls import url
 from . import views
 from django.contrib.auth import views as auth_views
@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^DonorDetails/',DonorDetails),
     url(r'^SendRequest/',SendRequest),
     url(r'^CancelRequest/',CancelRequest),
+     url(r'^ViewRequest/',ViewRequest),
 
     path('password_reset/',PasswordResetView.as_view(template_name='password_reset.html'),name='password_reset'),
 	path('password_reset/complete/',PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
