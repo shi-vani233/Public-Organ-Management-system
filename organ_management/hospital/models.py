@@ -33,6 +33,7 @@ class OrganRequest(models.Model):
     donor = models.ForeignKey(Donor,on_delete=models.CASCADE, related_name="Donor",default=None)
     accepted = models.BooleanField(blank=True, null=False, default=False)
     declined = models.BooleanField(blank=True, null=False, default=False)
+    pending = models.BooleanField(blank=True, null=False, default=True)
     organ_request_time=models.DateTimeField(auto_now_add=True)
 
 

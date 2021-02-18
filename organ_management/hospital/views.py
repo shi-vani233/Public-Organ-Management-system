@@ -141,7 +141,16 @@ def PotentialDonorList(request):
         loggedin_user=request.user.username
         don=Donor.objects.exclude(hospital_email=loggedin_user)
         hos=Hospital.objects.exclude(hospital_email=loggedin_user)
-        
+        allreadyaccepted=OrganRequest.objects.filter(accepted=True)
+        if allreadyaccepted.exists():
+            temp=[]
+            for i in allreadyaccepted:
+                for j in don:
+                    if i.donor.donor_id != j.donor_id:
+                        obj=Donor.objects.get(donor_id=j.donor_id)
+                        temp.append(obj) 
+            return render(request,'potentialDonor.html',{'other_donors':temp,'hos':hos})     
+               
         return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
 
 
@@ -206,6 +215,7 @@ def AcceptRequest(request):
         getid=request.POST.get('id','')
         organ_request=OrganRequest.objects.get(req_id=getid)
         organ_request.accepted=True
+        organ_request.pending=False
         organ_request.save()
 
         loggedin_user=request.user.username
@@ -219,6 +229,7 @@ def DeclineRequest(request):
         getid=request.POST.get('id','')
         organ_request=OrganRequest.objects.get(req_id=getid)
         organ_request.declined=True
+        organ_request.pending=False
         organ_request.save()
 
         loggedin_user=request.user.username
@@ -226,3 +237,11 @@ def DeclineRequest(request):
         allreq = OrganRequest.objects.filter(reciever=current_user,accepted=False,declined=False)
         acceptedreq=OrganRequest.objects.filter(reciever=current_user,accepted=True,declined=False)
         return render(request, 'viewrequest.html',{'allreq' : allreq,'acceptedreq':acceptedreq})
+
+def ViewYourSentRequest(request):
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        current_user = Hospital.objects.get(hospital_email=loggedin_user)
+        allreq = OrganRequest.objects.filter(sender=current_user) 
+        return render(request, 'yourrequest.html', {'allreq' : allreq})
+

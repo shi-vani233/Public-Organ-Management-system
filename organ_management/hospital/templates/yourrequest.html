@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <title>
+        Save-Lifes
+    </title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+    <script src="{% static 'javascript/j1.js' %}" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+</head>
+
+<body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #f1f1f1;">
+        <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
+        <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="font-size: 20px;">
+                <a class="nav-item nav-link " href="/Hospital/hospitalHome/" active>Hospital Home</a>
+                <a class="nav-item nav-link" href="/Hospital/logout/">Log Out</a>
+            </div>
+        </div>
+    </nav>
+    <h2 class="mb-5 text-center display-4">Your Requests</h2>
+    {% for req in allreq %}
+    <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="card-title">{{req.reciever.hospital_name}}
+                    </h5>
+
+                    <p class="card-text">
+                        {{req.reciever.hospital_email}},{{req.reciever.hospital_city}} <br>donor name: {{req.donor.donor_name}},you request for Organ: {{req.donor.donor_organ}}
+                    </p>
+                </div>
+                {% if req.pending == True %}
+                <div class="col-md-2 ">
+                    <input type="submit" class="btn text-center btn-info" value="Pending" disabled>
+                </div>
+                <div class="col-md-2">
+                    <form action="/Hospital/CancelRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{req.donor.donor_id}}">
+                        <input type="submit" class="btn text-center btn-danger" value="Cancel request">
+                    </form>
+                </div>
+                {% else %} {% if req.accepted == True %}
+                <div class="col-md-4">
+                    Your request is accepted. Contact this hospital.
+                </div>
+                {% endif %} {% if req.declined == True %}
+                <div class="col-md-4">
+                    sorry, can't help you at this.
+                </div>
+                {% endif %} {% endif %}
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</body>
+
+
+</html>
