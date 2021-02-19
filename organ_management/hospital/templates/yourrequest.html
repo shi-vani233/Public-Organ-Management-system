@@ -45,7 +45,9 @@
                     </h5>
 
                     <p class="card-text">
-                        {{req.reciever.hospital_email}},{{req.reciever.hospital_city}} <br>donor name: {{req.donor.donor_name}},you request for Organ: {{req.donor.donor_organ}}
+                        {{req.reciever.hospital_email}}<br> {{req.reciever.hospital_city}} <br>donor name: {{req.donor.donor_name}}<br>
+                        <h5>you request was for Organ: {{req.donor.donor_organ}}</h5>
+
                     </p>
                 </div>
                 {% if req.pending == True %}
@@ -61,11 +63,11 @@
                 </div>
                 {% else %} {% if req.accepted == True %}
                 <div class="col-md-4">
-                    Your request is accepted. Contact this hospital.
+                    Your request is accepted. Contact this hospital at {{req.reciever.hospital_mobile_no}}
                 </div>
                 {% endif %} {% if req.declined == True %}
                 <div class="col-md-4">
-                    sorry, can't help you at this.
+                    sorry, this is unavailable.
                 </div>
                 {% endif %} {% endif %}
             </div>

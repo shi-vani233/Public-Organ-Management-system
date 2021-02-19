@@ -30,6 +30,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav" style="font-size: 20px;">
+                <a class="nav-item nav-link active" href="/Hospital/ViewRequest/">Requests</a>
                 <a class="nav-item nav-link " href="/Hospital/hospitalHome/" active>Hospital Home</a>
                 <a class="nav-item nav-link" href="/Hospital/logout/">Log Out</a>
             </div>
@@ -37,57 +38,60 @@
     </nav>
 
     <h2 class="mb-5 text-center display-4">Pending Requests :(</h2>
-        {% for req in allreq %} 
-            <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h5 class="card-title">{{req.sender.hospital_name}}
-                            </h5>
+    {% for req in allreq %}
+    <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="card-title">{{req.sender.hospital_name}}
+                    </h5>
 
-                            <p class="card-text">
-                                {{req.sender.hospital_email}},{{req.sender.hospital_city}} <br>For: {{req.donor.donor_name}},Organ: {{req.donor.donor_organ}}
-                            </p>
-                        </div>
-                        <div class="col-md-2 d-flex justify-content-end" >
-                            <form action="/Hospital/AcceptRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.req_id}}">
-                                <input type="submit" id="donbtn" class="btn text-center btn-success" value="Accept">
-                            </form>
-                        </div>
-                        <div class="col-md-2">
-                            <form action="/Hospital/DeclineRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.req_id}}">
-                                <input type="submit" id="donbtn" class="btn text-center btn-danger" value="Decline">
-                            </form>
-                        </div>
-                    </div>
+                    <p class="card-text">
+                        {{req.sender.hospital_email}},{{req.sender.hospital_city}} <br>For: {{req.donor.donor_name}},Organ: {{req.donor.donor_organ}}
+                    </p>
                 </div>
-
-            </div>
-        {% endfor %} 
-        <br>
-        <br>
-        <h2 class="mb-5 text-center display-4">Accepted Requests :)</h2>
-        {% for req in acceptedreq %} 
-            <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h5 class="card-title">{{req.sender.hospital_name}}
-                            </h5>
-
-                            <p class="card-text">
-                                {{req.sender.hospital_email}},{{req.sender.hospital_city}} <br>For: {{req.donor.donor_name}},Organ: {{req.donor.donor_organ}}
-                            </p>
-                        </div>
-                    </div>
+                <div class="col-md-2 d-flex justify-content-end">
+                    <form action="/Hospital/AcceptRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{req.req_id}}">
+                        <input type="submit" class="btn text-center btn-success" value="Accept">
+                    </form>
                 </div>
-
+                <div class="col-md-2">
+                    <form action="/Hospital/DeclineRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{req.req_id}}">
+                        <input type="submit" class="btn text-center btn-danger" value="Decline">
+                    </form>
+                </div>
             </div>
-        {% endfor %}
+        </div>
+        <div class="card-footer text-muted">
+            Send you request at : {{req.organ_request_time}}
+        </div>
+
+    </div>
+    {% endfor %}
+    <br>
+    <br>
+    <h2 class="mb-5 text-center display-4">Accepted Requests :)</h2>
+    {% for req in acceptedreq %}
+    <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="card-title">{{req.sender.hospital_name}}
+                    </h5>
+
+                    <p class="card-text">
+                        {{req.sender.hospital_email}},{{req.sender.hospital_city}} <br>For: {{req.donor.donor_name}},Organ: {{req.donor.donor_organ}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
 
 </body>
 

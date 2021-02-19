@@ -1,4 +1,4 @@
- <html>
+<html>
 
 <head>
     <title>
@@ -37,10 +37,10 @@
     </nav>
 
     {% if msg %}
-        <div class="alert alert-success" role="alert">
-            {{msg}}
-        </div>
-    {% endif %} 
+    <div class="alert alert-success" role="alert">
+        {{msg}}
+    </div>
+    {% endif %}
 
     <div class="container py-5 scale-in-center">
 
@@ -67,19 +67,19 @@
 
                 </p>
                 {% if ChangedState == True %}
-                     <form action="/Hospital/CancelRequest/" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{donor.donor_id}}">
-                        <input type="submit" id="donbtn" class="btn text-center btn-danger" value="Cancel request">
-                    </form>
+                <form action="/Hospital/CancelRequest/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{donor.donor_id}}">
+                    <input type="submit" class="btn text-center btn-danger" value="Cancel request">
+                </form>
                 {% else %}
-                    <form action="/Hospital/SendRequest/" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{donor.donor_id}}">
-                        <input type="submit" id="donbtn" class="btn text-center btn-primary" value="Send request">
-                    </form>
+                <form action="/Hospital/SendRequest/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{donor.donor_id}}">
+                    <input type="submit" class="btn text-center btn-primary" value="Send request">
+                </form>
                 {% endif %}
-                
+
             </div>
 
 

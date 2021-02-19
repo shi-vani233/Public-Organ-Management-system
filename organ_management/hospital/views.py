@@ -30,7 +30,13 @@ def loginpage(request):
 
 def hospitalHome(request):
     if request.user.is_authenticated:
-        return render(request, 'hospitalHome.html', context=None)
+        loggedin_user=request.user.username
+        current_user = Hospital.objects.get(hospital_email=loggedin_user) 
+        allreq = OrganRequest.objects.filter(reciever=current_user,accepted=False,declined=False)
+        i=0
+        for c in allreq:
+            i=i+1
+        return render(request, 'hospitalHome.html',{'i':i})
     else:
         return HttpResponseRedirect('/Hospital/Mainpage/')
 
