@@ -1,7 +1,25 @@
+<div class="card mb-2 text-dark biLeft " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        {{hospital.hospital_name}}
+                    </div>
+                    <div class="col">
+                        {{hospital.hospital_address}}
+                    </div>
+                    <div class="col">
+                        {{hospital.hospital_email}}
+                    </div>
+                    <div class="col text-center" style="margin-top:10px;">
+                        {{hospital.hospital_city}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <html>
 
 <head>
-
     <title>
         Save-Lifes
     </title>
@@ -21,8 +39,8 @@
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-   
-    <style>
+
+     <style>
         body{
              background-image: linear-gradient(140deg, #42d7d7 0%, #42b2d7 50%, #BFD641 75%);
 
@@ -47,10 +65,11 @@
         }
     </style>
 
-</head>
-<body>
 
- <!--navbar-->
+</head>
+
+<body>
+    <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #f1f1f1;">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,61 +77,48 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav" style="font-size: 20px;">
-                <a class="nav-item nav-link" href="/Home/Homepage">Home</a>
-                <a class="nav-item nav-link" href="/Hospital/loginpage">Login</a>
-                <a class="nav-item nav-link active" href="/Hospital/Mainpage">Hospitals</a>
+                <a class="nav-item nav-link active" href="/Hospital/hospitalHome/" active>Hospital Home</a>
+                <a class="nav-item nav-link" href="/Hospital/logout/">Log Out</a>
             </div>
         </div>
     </nav>
-
     {% if msg_donor %}
     <div class="alert alert-success" role="alert">
         {{msg_donor}}
     </div>
     {% endif %}
+    <div class="container">
 
-     <!-- Search Button -->
+
+        <div class="text-center align-items-center pt-3 my-5 mb-2">
+            <a id="volbtn2" class="btn text-center btn-lg " data-toggle="modal" data-target="#exampleModal3" style="margin:auto;">Add Donor</a>
+        </div>
+
+
+        <!-- Search Button -->
         <div class="row">
-            <div class="input-group col-md-4" style="margin-top: 50px; margin-left:500px;">
+            <div class="input-group col-md-4" style="margin-top: 50px; margin-left:350px;">
                 <input class="form-control py-2 border-right-0 border" type="search" placeholder="search for Donors" id="example-search-input">
                 <span class="input-group-append">
-                <button class="btn btn-light border-left-0 border" type="button">
+                <button class="btn btn-outline-secondary border-left-0 border" type="button">
                     <i class="fa fa-search"></i>
                 </button>
               </span>
             </div>
         </div>
 
-    <div class="bg-text" data-aos="zoom-in">
-    <h1>Add New Donors</h1>
-    <button style="color:white;"  type="button" class="btn btn-success"><a data-toggle="modal" data-target="#exampleModal3" style="margin:auto;">Add Donor</a>
-    </div>
 
-    <div class="bg-text" data-aos="zoom-in">
-    <h1>The Registered Donor list</h1>
-    <button style="color:white;"  type="button" class="btn btn-success"> <a href="/Hospital/donorList/" style="color:white;" >View List</a></button>
-    </div>
+        <!-- List of Content -->
+        <div class="card" style="width: 50rem; margin-top:50px; margin-left:150px">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="background-color: #66c2ff; color:white;"><a href="/Hospital/donorList/" style="color:white;" href="#">Donor List</a></li>
+                <li class="list-group-item" style="background-color: #4db8ff ; color:white;"><a href="/Hospital/potentialDonor/" style="color:white;" href="#"> Potential Donor from other hospitals</a></li>
+                <li class="list-group-item" style="background-color:#66c2ff; color:white;"><a href="/Hospital/ViewRequest/" style="color:white;">Requests for you</a></li>
+                <li class="list-group-item" style="background-color: #4db8ff ; color:white;"><a href="/Hospital/ViewYourSentRequest/" style="color:white;">Notifications</a></li>
+            </ul>
+        </div>
 
-    <div class="bg-text" data-aos="zoom-in">
-    <h1>The Potential Donor list</h1>
-    <p>The Donors added by other Hospitals are listed here.</p>
-    <button style="color:white;"  type="button" class="btn btn-success"> <a href="/Hospital/potentialDonor/" style="color:white;" >View List</a></button>
-    </div>
-
-    <div class="bg-text" data-aos="zoom-in">
-    <h1>Request List</h1>
-    <p>The organ Request sent by other Hospitals are shown here.</p>
-    <button style="color:white;"  type="button" class="btn btn-success"> <a href="/Hospital/ViewRequest/" style="color:white;" >View List</a></button>
-    </div>
-
-    <div class="bg-text" data-aos="zoom-in">
-    <h1>Your Sent Request List</h1>
-    <p>The organ Requests that you sent to other Hospitals are shown here.</p>
-    <button style="color:white;"  type="button" class="btn btn-success"> <a href="/Hospital/ViewYourSentRequest/" style="color:white;" >View List</a></button>
-    </div>
-    
-
-    <!-- Add Donar Modal -->
+        <!-- Add Donar Modal -->
         <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -284,16 +290,6 @@
             </div>
         </div>
     </div>
-    
-     
-
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({
-        offset: 300,
-        duration: 1200
-    });
-  </script>
-
 </body>
+
 </html>
