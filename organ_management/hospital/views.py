@@ -147,6 +147,21 @@ def PotentialDonorList(request):
         loggedin_user=request.user.username
         don=Donor.objects.exclude(hospital_email=loggedin_user)
         hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        
+        today_datetime = datetime.datetime.now()
+        today_date=today_datetime.strftime("%d")
+        today_month=today_datetime.month
+        today_year=today_datetime.year
+
+        today_hour = today_datetime.hour
+        temp1=[]
+        for item in don:
+            if item.donor_added_time.strftime("%d") == today_date and item.donor_added_time.month == today_month and item.donor_added_time.year == today_year :
+                temp1.append(item)
+            elif item.donor_added_time.strftime("%d") == int(today_date)+1:
+                if abs(item.donor_added_time.hour - today_hour) < 24 :
+                    temp1.append(item)
+        don=temp1
         allreadyaccepted=OrganRequest.objects.filter(accepted=True)
         if allreadyaccepted.exists():
             temp=[]
@@ -154,7 +169,8 @@ def PotentialDonorList(request):
                 for j in don:
                     if i.donor.donor_id != j.donor_id:
                         obj=Donor.objects.get(donor_id=j.donor_id)
-                        temp.append(obj) 
+                        temp.append(obj)
+ 
             return render(request,'potentialDonor.html',{'other_donors':temp,'hos':hos})     
                
         return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
