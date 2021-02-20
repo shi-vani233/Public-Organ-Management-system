@@ -34,7 +34,7 @@ class OrganRequest(models.Model):
     accepted = models.BooleanField(blank=True, null=False, default=False)
     declined = models.BooleanField(blank=True, null=False, default=False)
     pending = models.BooleanField(blank=True, null=False, default=True)
-    organ_request_time=models.DateTimeField(auto_now_add=True)
+    organ_request_time=models.DateTimeField(default=None)
 
 
     

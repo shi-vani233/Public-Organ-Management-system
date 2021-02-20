@@ -47,7 +47,6 @@
                     <p class="card-text">
                         {{req.reciever.hospital_email}}<br> {{req.reciever.hospital_city}} <br>donor name: {{req.donor.donor_name}}<br>
                         <h5>you request was for Organ: {{req.donor.donor_organ}}</h5>
-
                     </p>
                 </div>
                 {% if req.pending == True %}
@@ -71,6 +70,9 @@
                 </div>
                 {% endif %} {% endif %}
             </div>
+        </div>
+        <div class="card-footer text-muted">
+            requested on: {{req.organ_request_time}}
         </div>
 
     </div>

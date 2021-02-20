@@ -202,7 +202,8 @@ def SendRequest(request):
         reciever = Hospital.objects.get(hospital_email=temp)
         loggedin_user=request.user.username
         sender = Hospital.objects.get(hospital_email=loggedin_user)
-        req = OrganRequest(sender=sender, reciever=reciever,donor=donor)
+        organ_request_time=datetime.datetime.now() 
+        req = OrganRequest(sender=sender, reciever=reciever,donor=donor,organ_request_time=organ_request_time)
         req.save()
         msg="Request Successfully Sent"
         ChangedState = True
