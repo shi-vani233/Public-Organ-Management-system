@@ -1,3 +1,4 @@
+from typing import final
 from django.db.models.fields import DateTimeField, EmailField
 from django.http.response import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import render
@@ -227,9 +228,30 @@ def SearchDonor(request):
             if query is not None:
                 lookups= Q(donor_organ__icontains=query)
                 results= Donor.objects.filter(lookups).distinct()
-                context={'results': results,
+                source_hos=Hospital.objects.get(hospital_email=loggedin_user)
+                class key:  
+                    def __init__(self, donor, donor_distance):  
+                        self.donor = donor  
+                        self.donor_distance = donor_distance
+                distance=[]
+                for result in results:
+                    destination_hos=Hospital.objects.get(hospital_email=result.hospital_email)
+                    point_destination_hos=(destination_hos.hospital_latitude, destination_hos.hospital_longitude)
+                    point_source_hos=(source_hos.hospital_latitude, source_hos.hospital_longitude)
+
+                    dis=geopy_distance(point_source_hos, point_destination_hos).km
+                    distance.append( key(result, dis) ) 
+                distance.sort(key=lambda x: x.donor_distance)
+                final_result=[]
+                for i in distance:
+                    final_result.append(i.donor)
+
+
+
+                context={'results': final_result,
                         'submitbutton': submitbutton,
                         'hos':hos}
+                
                 return render(request, 'potentialDonor.html', context)
 
 

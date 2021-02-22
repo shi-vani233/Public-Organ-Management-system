@@ -7,7 +7,7 @@ a="Piplod,surat"+" "
 b="Surat"
 c=a+b
 location1 = geolocator.geocode(c)
-location2 = geolocator.geocode("Pune")
+location2 = geolocator.geocode("pune")
 location3 = geolocator.geocode("delhi")
 def Homepage(request):
     print(location1.address)
