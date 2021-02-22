@@ -38,20 +38,48 @@
 
     <div class="container">
 
-        <div class="input-group col-md-4 py-5" style="margin-top: 50px; margin-left:350px;">
-            <input class="form-control py-2 border-right-0 border" type="search" placeholder="search for Donors" id="example-search-input">
-            <span class="input-group-append">
-            <button class="btn btn-outline-secondary border-left-0 border" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-          </span>
+        <div class="p-2 bg-light rounded-pill shadow-sm my-4" style="width:30%;margin: auto;">
+            <form action="/Hospital/SearchDonor/" method="GET" value="{{request.GET.q}}">
+                <div class="input-group">
+                    <input id="search" type="text" name="q" value="{{request.GET.q}}" placeholder="Search for Organ" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
+                    <div class="input-group-append">
+                        <input type="submit" name="submit" value="Search" />
+                    </div>
+                </div>
+            </form>
         </div>
 
-
-
-
+        {% if submitbutton == 'Search' and request.GET.q != '' %} {% if results %}
+        <center>
+            <h1>Results for <b>{{ request.GET.q }}</b></h1>
+        </center>
+        <br/><br/> {% for result in results %} {% for i in hos %} {% if result.hospital_email == i.hospital_email %}
+        <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h5 class="card-title">{{i.hospital_name}}
+                        </h5>
+                        <p class="card-text">
+                            {{i.hospital_address}},{{i.hospital_city}} <br>Organ: {{result.donor_organ}}
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <form action="/Hospital/DonorDetails/" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{result.donor_id}}">
+                            <input type="submit" id="donbtn" class="btn text-center btn-primary" value="View Donor Details">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{result.donor_added_time}}
+            </div>
+        </div>
+        {% endif %} {% endfor %}{% endfor %} {% else %} No search results for this query {% endif %} {% endif %} {% if other_donors %}
         <h2 class="mb-5 text-center display-4">Donors</h2>
-        {% for item in other_donors %} {% for i in hos %} {% if item.hospital_email == i.hospital_email %}
+        {% endif %} {% for item in other_donors %} {% for i in hos %} {% if item.hospital_email == i.hospital_email %}
         <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
             <div class="card-body">
                 <div class="row">
@@ -61,7 +89,6 @@
 
                         <p class="card-text">
                             {{i.hospital_address}},{{i.hospital_city}} <br>Organ: {{item.donor_organ}}
-
                         </p>
                     </div>
                     <div class="col-md-3">

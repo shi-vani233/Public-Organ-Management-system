@@ -13,7 +13,11 @@ from django.core.mail import send_mail
 from hospital.models import Hospital,Donor, OrganRequest
 import simplejson as json
 import datetime
+from geopy.geocoders import Nominatim
+from geopy.distance import distance as geopy_distance
+from django.db.models import Q
 
+geolocator = Nominatim(user_agent="hospital")
 global ChangedState
 
 def Mainpage(request):
@@ -50,6 +54,11 @@ def registerhospital(request):
     zip_code=request.POST.get('zip_code','')
     password=request.POST.get('password','')
     repassword=request.POST.get('repassword','')
+    a=hospital_address+" "
+    b=hospital_city
+    c=a+b
+    location1 = geolocator.geocode(c)
+    print(location1.address)
     if password!=repassword or len(password)<6:
         msg_pass="password and confirm password must be same with minimum length 6"
     else:
@@ -69,7 +78,8 @@ def registerhospital(request):
             #user.set_password(password)
             user.save()
             hosp=Hospital(hospital_email=hospital_email,hospital_name=hospital_name,hospital_city=hospital_city,
-                hospital_mobile_no=hospital_mobile_no,hospital_address=hospital_address,zip_code=zip_code)
+                hospital_mobile_no=hospital_mobile_no,hospital_address=hospital_address,zip_code=zip_code,
+                hospital_latitude=location1.latitude,hospital_longitude=location1.longitude)
             hosp.save()
             msg="you are successfully registered, Go for Login!"
             return render(request ,'main.html',{'msg':msg,'hospitals':hospitals})
@@ -174,6 +184,54 @@ def PotentialDonorList(request):
             return render(request,'potentialDonor.html',{'other_donors':temp,'hos':hos})     
                
         return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
+
+
+def SearchDonor(request):
+    if request.user.is_authenticated:
+        
+        loggedin_user=request.user.username
+        hos=Hospital.objects.exclude(hospital_email=loggedin_user)
+        don=Donor.objects.exclude(hospital_email=loggedin_user)
+        
+        today_datetime = datetime.datetime.now()
+        today_date=today_datetime.strftime("%d")
+        today_month=today_datetime.month
+        today_year=today_datetime.year
+
+        today_hour = today_datetime.hour
+        temp1=[]
+        for item in don:
+            if item.donor_added_time.strftime("%d") == today_date and item.donor_added_time.month == today_month and item.donor_added_time.year == today_year :
+                temp1.append(item)
+            elif item.donor_added_time.strftime("%d") == int(today_date)+1:
+                if abs(item.donor_added_time.hour - today_hour) < 24 :
+                    temp1.append(item)
+        don=temp1
+        allreadyaccepted=OrganRequest.objects.filter(accepted=True)
+
+        if request.method == 'GET':
+            query= request.GET.get('q')
+            submitbutton= request.GET.get('submit')
+
+            if query=="":
+                if allreadyaccepted.exists():
+                    temp=[]
+                    for i in allreadyaccepted:
+                        for j in don:
+                            if i.donor.donor_id != j.donor_id:
+                                obj=Donor.objects.get(donor_id=j.donor_id)
+                                temp.append(obj)
+                    return render(request,'potentialDonor.html',{'other_donors':temp,'hos':hos})     
+                return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
+
+            if query is not None:
+                lookups= Q(donor_organ__icontains=query)
+                results= Donor.objects.filter(lookups).distinct()
+                context={'results': results,
+                        'submitbutton': submitbutton,
+                        'hos':hos}
+                return render(request, 'potentialDonor.html', context)
+
 
 
 def DonorDetails(request):

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'blood_donation.apps.BloodDonationConfig',
     'hospital.apps.HospitalConfig',
-    'simplejson'
+    'simplejson',
+    'geopy'
 ]
 
 MIDDLEWARE = [

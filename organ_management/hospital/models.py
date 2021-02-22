@@ -7,6 +7,9 @@ class Hospital(models.Model):
     hospital_mobile_no=models.CharField(max_length=10)
     hospital_address=models.CharField(max_length=100,help_text = 'write your email')
     zip_code=models.CharField(max_length=6)
+    hospital_latitude=models.FloatField(default=None)
+    hospital_longitude=models.FloatField(default=None)
+
 
 class Donor(models.Model):
     donor_id=models.AutoField(primary_key=True)
