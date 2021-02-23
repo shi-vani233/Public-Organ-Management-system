@@ -1,0 +1,36 @@
+def TranpslantTrends(request):
+    if request.user.is_authenticated:
+        kidney=request.POST.get('kidney','')
+        liver=request.POST.get('liver','')
+        lung=request.POST.get('lung','')
+        heart=request.POST.get('heart','')
+        pancreas=request.POST.get('pancreas','')
+        intestine=request.POST.get('intestine','')
+        eye=request.POST.get('eye','')
+        skin=request.POST.get('skin','')
+        loggedin_user=request.user.username
+        current_hospital = Hospital.objects.get(hospital_email=loggedin_user)
+        trend=Trends(kidney=kidney,liver=liver, eye=eye, skin=skin, heart=heart, pancreas=pancreas,
+        intestine=intestine, lung=lung,hospital=current_hospital)
+        trend.save()
+        print("Trends Successfully Saved")
+
+    return render(request, 'hospitalHome.html')   
+
+
+    class Trends(models.Model):
+    trend_id=models.AutoField(primary_key=True)
+    kidney=models.CharField(max_length=30)
+    liver=models.CharField(max_length=30)
+    eye=models.CharField(max_length=30)
+    skin=models.CharField(max_length=30)
+    heart=models.CharField(max_length=30)
+    pancreas=models.CharField(max_length=30)
+    lung=models.CharField(max_length=30)
+    intestine=models.CharField(max_length=30)
+    hospital=models.ForeignKey(Hospital,on_delete=models.CASCADE)
+    
+
+    admin.site.register(Trends)
+
+     <input type="submit" id="donbtn" class="btn text-center btn-primary" style="padding:0px; background-color:#03B3CB; color:white; border:none" value="{{hospital.hospital_name}}">

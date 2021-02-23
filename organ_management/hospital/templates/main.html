@@ -101,7 +101,11 @@
                 <li>
                     <div class="row">
                         <div class="col">
-                            {{hospital.hospital_name}}
+                             <form action="/Hospital/ViewTrends/" method="POST">
+                            {% csrf_token %}
+                                <input type="hidden" name="email" value="{{hospital.hospital_email}}">
+                                <input type="submit" id="donbtn" class="btn text-center btn-primary" style="padding:0px; background-color:#03B3CB; color:white; border:none" value="{{hospital.hospital_name}}">
+                            </form>
                         </div>
                         <div class="col">
                             {{hospital.hospital_address}}
@@ -109,7 +113,7 @@
                         <div class="col">
                             {{hospital.hospital_email}}
                         </div>
-                        <div class="col text-center" style="margin-top:10px;">
+                        <div class="col text-center">
                             {{hospital.hospital_city}}
                         </div>
                     </div>

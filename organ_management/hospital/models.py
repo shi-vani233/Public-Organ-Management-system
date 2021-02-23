@@ -39,7 +39,17 @@ class OrganRequest(models.Model):
     pending = models.BooleanField(blank=True, null=False, default=True)
     organ_request_time=models.DateTimeField(default=None)
 
+class Transplant(models.Model):
+    trend_id=models.AutoField(primary_key=True)
+    kidney=models.CharField(max_length=30)
+    liver=models.CharField(max_length=30)
+    eye=models.CharField(max_length=30)
+    skin=models.CharField(max_length=30)
+    heart=models.CharField(max_length=30)
+    pancreas=models.CharField(max_length=30)
+    lung=models.CharField(max_length=30)
+    intestine=models.CharField(max_length=30)
+    hospital=models.ForeignKey(Hospital,on_delete=models.CASCADE)
 
-    
 
 

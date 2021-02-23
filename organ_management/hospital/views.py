@@ -11,12 +11,13 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 from django.core.mail import send_mail
-from hospital.models import Hospital,Donor, OrganRequest
+from hospital.models import Hospital,Donor, OrganRequest, Transplant
 import simplejson as json
 import datetime
 from geopy.geocoders import Nominatim
 from geopy.distance import distance as geopy_distance
 from django.db.models import Q
+from home.models import Pledge
 
 geolocator = Nominatim(user_agent="hospital")
 global ChangedState
@@ -169,8 +170,9 @@ def PotentialDonorList(request):
         for item in don:
             if item.donor_added_time.strftime("%d") == today_date and item.donor_added_time.month == today_month and item.donor_added_time.year == today_year :
                 temp1.append(item)
-            elif item.donor_added_time.strftime("%d") == int(today_date)+1:
-                if abs(item.donor_added_time.hour - today_hour) < 24 :
+            elif int(item.donor_added_time.strftime("%d"))+1 == int(today_date):
+                print(item.donor_added_time.hour - today_hour)
+                if item.donor_added_time.hour - today_hour < 24 and item.donor_added_time.hour - today_hour >= 0:
                     temp1.append(item)
         don=temp1
         allreadyaccepted=OrganRequest.objects.filter(accepted=True)
@@ -204,8 +206,9 @@ def SearchDonor(request):
         for item in don:
             if item.donor_added_time.strftime("%d") == today_date and item.donor_added_time.month == today_month and item.donor_added_time.year == today_year :
                 temp1.append(item)
-            elif item.donor_added_time.strftime("%d") == int(today_date)+1:
-                if abs(item.donor_added_time.hour - today_hour) < 24 :
+            elif int(item.donor_added_time.strftime("%d"))+1 == int(today_date):
+                print(item.donor_added_time.hour - today_hour)
+                if item.donor_added_time.hour - today_hour < 24 and item.donor_added_time.hour - today_hour >= 0:
                     temp1.append(item)
         don=temp1
         allreadyaccepted=OrganRequest.objects.filter(accepted=True)
@@ -348,3 +351,36 @@ def ViewYourSentRequest(request):
         allreq = OrganRequest.objects.filter(sender=current_user) 
         return render(request, 'yourrequest.html', {'allreq' : allreq})
 
+def PledgedDonorsList(request):
+    if request.user.is_authenticated:
+        loggedin_user=request.user.username
+        current_hospital = Hospital.objects.get(hospital_email=loggedin_user)
+        donor = Pledge.objects.filter(pledge_hospital=current_hospital)
+        return render(request, 'pledgeddonordetails.html',{'donor' : donor})
+
+def TransplantTrends(request):
+    if request.user.is_authenticated:
+        kidney=request.POST.get('kidney','')
+        liver=request.POST.get('liver','')
+        lung=request.POST.get('lung','')
+        heart=request.POST.get('heart','')
+        pancreas=request.POST.get('pancreas','')
+        intestine=request.POST.get('intestine','')
+        eye=request.POST.get('eye','')
+        skin=request.POST.get('skin','')
+        loggedin_user=request.user.username
+        current_hospital = Hospital.objects.get(hospital_email=loggedin_user)
+        trend=Transplant(kidney=kidney,liver=liver, eye=eye, skin=skin, heart=heart, pancreas=pancreas,
+        intestine=intestine, lung=lung, hospital=current_hospital)
+        trend.save()
+        print("Trends Successfully Saved")
+    return render(request, 'hospitalHome.html')   
+
+def ViewTrends(request):
+    getemail=request.POST.get('email','')
+    print(getemail)
+    hos = Hospital.objects.get(hospital_email=getemail)
+    print(hos)
+    trend = Transplant.objects.get(hospital=hos)
+    print(trend)
+    return render(request, 'viewtrends.html', {'trend': trend})
