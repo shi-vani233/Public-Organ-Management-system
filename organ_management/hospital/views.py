@@ -418,3 +418,9 @@ def DonationList(request):
             temp1.save()
             print("temp1 is stored")
     return render(request, 'hospitalHome.html')
+
+def ViewDonationList(request):
+    loggedin_user = request.user.username
+    hos = Hospital.objects.get(hospital_email=loggedin_user)
+    don = Donation.objects.get(hospital=hos)
+    return render(request, 'viewdonationlist.html', {'don':don})
