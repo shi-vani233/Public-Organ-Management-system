@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 from django.core.mail import send_mail
-from hospital.models import Hospital,Donor, OrganRequest, Transplant
+from hospital.models import Hospital,Donor, OrganRequest, Transplant, Donation
 import simplejson as json
 import datetime
 from geopy.geocoders import Nominatim
@@ -357,24 +357,7 @@ def PledgedDonorsList(request):
         current_hospital = Hospital.objects.get(hospital_email=loggedin_user)
         donor = Pledge.objects.filter(pledge_hospital=current_hospital)
         return render(request, 'pledgeddonordetails.html',{'donor' : donor})
-
-def TransplantTrends(request):
-    if request.user.is_authenticated:
-        kidney=request.POST.get('kidney','')
-        liver=request.POST.get('liver','')
-        lung=request.POST.get('lung','')
-        heart=request.POST.get('heart','')
-        pancreas=request.POST.get('pancreas','')
-        intestine=request.POST.get('intestine','')
-        eye=request.POST.get('eye','')
-        skin=request.POST.get('skin','')
-        loggedin_user=request.user.username
-        current_hospital = Hospital.objects.get(hospital_email=loggedin_user)
-        trend=Transplant(kidney=kidney,liver=liver, eye=eye, skin=skin, heart=heart, pancreas=pancreas,
-        intestine=intestine, lung=lung, hospital=current_hospital)
-        trend.save()
-        print("Trends Successfully Saved")
-    return render(request, 'hospitalHome.html')   
+   
 
 def ViewTrends(request):
     getemail=request.POST.get('email','')
@@ -384,3 +367,54 @@ def ViewTrends(request):
     trend = Transplant.objects.get(hospital=hos)
     print(trend)
     return render(request, 'viewtrends.html', {'trend': trend})
+
+
+def DonationList(request):
+    if request.user.is_authenticated:
+        donor_name=request.POST.get('donor_name','')
+        patient_name=request.POST.get('patient_name','')
+        organ=request.POST.get('organ','')
+        details_added_time=datetime.datetime.now()
+        loggedin_user=request.user.username
+        current_user=Hospital.objects.get(hospital_email=loggedin_user)
+        donation=Donation(donor_name=donor_name, patient_name=patient_name,organ=organ,
+        details_added_time=details_added_time, hospital=current_user)
+        donation.save()  
+        print("Details are saved successfully")  
+        temp=Transplant.objects.filter(hospital=current_user)
+        if temp.exists():
+            if(organ == "kidney"):
+                temp.kidney += 1
+            if(organ == "liver"):
+                temp.liver += 1
+            if(organ == "lung"):
+                temp.lung += 1
+            if(organ == "heart"):
+                temp.heart += 1
+            if(organ == "intestine"):
+                temp.intestine += 1
+            if(organ == "eye"):
+                temp.eye += 1
+            if(organ == "skin"):
+                temp.skin += 1
+            temp.save()
+            print("temp is stored")
+        else:
+            temp1 = Transplant(hospital=current_user)
+            if(organ == "kidney"):
+                temp1.kidney = 1
+            if(organ == "liver"):
+                temp1.liver = 1
+            if(organ == "lung"):
+                temp1.lung = 1
+            if(organ == "heart"):
+                temp1.heart = 1
+            if(organ == "intestine"):
+                temp1.intestine = 1
+            if(organ == "eye"):
+                temp1.eye = 1
+            if(organ == "skin"):
+                temp1.skin = 1
+            temp1.save()
+            print("temp1 is stored")
+    return render(request, 'hospitalHome.html')

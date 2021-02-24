@@ -34,3 +34,25 @@ def TranpslantTrends(request):
     admin.site.register(Trends)
 
      <input type="submit" id="donbtn" class="btn text-center btn-primary" style="padding:0px; background-color:#03B3CB; color:white; border:none" value="{{hospital.hospital_name}}">
+
+
+     class Donation(models.Model):
+    donation_id=models.AutoField(primary_key=True)
+    donor_name=models.CharField(max_length=50)
+    patient_name=models.CharField(max_length=50)
+    organ=models.CharField(max_length=30)
+    details_added_time=models.DateTimeField(default=None)
+    hospital=models.ForeignKey(Hospital,on_delete=models.CASCADE)
+
+def DonationList(request):
+    if request.user.is_authenticated:
+        donor_name=request.POST.get('donor_name','')
+        patient_name=request.POST.get('patient_name','')
+        organ=request.POST.get('organ','')
+        details_added_time=datetime.datetime.now()
+        donation=Donation(donor_name=donor_name, patient_name=patient_name,organ=organ,details_added_time=details_added_time)
+        donation.save()
+        print("Details are saved successfully")
+    return render(request, 'hospitalHome.html')      
+
+ url(r'^DonationList/',DonationList),

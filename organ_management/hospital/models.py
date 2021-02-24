@@ -41,15 +41,21 @@ class OrganRequest(models.Model):
 
 class Transplant(models.Model):
     trend_id=models.AutoField(primary_key=True)
-    kidney=models.CharField(max_length=30)
-    liver=models.CharField(max_length=30)
-    eye=models.CharField(max_length=30)
-    skin=models.CharField(max_length=30)
-    heart=models.CharField(max_length=30)
-    pancreas=models.CharField(max_length=30)
-    lung=models.CharField(max_length=30)
-    intestine=models.CharField(max_length=30)
+    kidney=models.IntegerField(default=0)
+    liver=models.IntegerField(default=0)
+    eye=models.IntegerField(default=0)
+    skin=models.IntegerField(default=0)
+    heart=models.IntegerField(default=0)
+    pancreas=models.IntegerField(default=0)
+    lung=models.IntegerField(default=0)
+    intestine=models.IntegerField(default=0)
     hospital=models.ForeignKey(Hospital,on_delete=models.CASCADE)
 
 
-
+class Donation(models.Model):
+    donation_id=models.AutoField(primary_key=True)
+    donor_name=models.CharField(max_length=50)
+    patient_name=models.CharField(max_length=50)
+    organ=models.CharField(max_length=30)
+    details_added_time=models.DateTimeField(default=None)
+    hospital=models.ForeignKey(Hospital,on_delete=models.CASCADE)

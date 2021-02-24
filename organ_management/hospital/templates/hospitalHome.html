@@ -98,8 +98,8 @@
     </div>
 
     <div class="bg-text" data-aos="zoom-in">
-        <h1>Transplant Tends</h1>
-        <p>Hospitals Have To give numbers of successfull donations done in the current year.</p>
+        <h1>Donation List</h1>
+        <p>Hospitals can view detais of their previous Donations here.</p>
         <button style="color:white;" type="button" class="btn btn-success"> <a  data-toggle="modal" data-target="#exampleModal4" href="/Hospital/TranplantTrends/" style="color:white;" >View List</a></button>
     </div>
 
@@ -278,7 +278,7 @@
     </div>
 
 
-     <!-- Add Transplant Trends -->
+     <!-- Add Donation records -->
     <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -289,96 +289,34 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/Hospital/TransplantTrends/" method="POST">
+                    <form action="/Hospital/DonationList/" method="POST">
                         {% csrf_token %}
+                    
+                    <!-- Donors -->
+                    <div class="form-group">
+                        <label for="nm"> Donor Name: </label>
+                        <input type="text" name="donor_name" id="nm" class="form-control"  style="border-radius: 20px;" autocomplete="off" required/>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Kidney </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="kidney" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Liver </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="liver" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Lung </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="lung" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                         <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Heart </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="heart" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                         <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Pancreas </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="pancreas" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Intestine </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="intestine" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Eye </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="eye" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm">
-                                <label for="nm" style="margin-left:5vh;"> Skin </label>
-                            </div>
-                            <div class="col-sm">
-                                <div class="form-group">
-                                    <input type="text" name="skin" id="nm" class="form-control"  style="border-radius: 20px; margin-right:10vh;" autocomplete="off" required/>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Patient -->
+                    <div class="form-group">
+                        <label for="nm"> Patient Name: </label>
+                        <input type="text" name="patient_name" id="nm" class="form-control"  style="border-radius: 20px;" autocomplete="off" required/>
+                    </div>
+                        
+                    <!-- Organ Donated -->
+                    <div class="form-group">
+                        <label for="inputEmail3">Organ Donated:</label>
+                        <select id="inputState" class="form-control" style="border-radius: 20px;" name="organ">
+                            <option name="kidney" value="kidney" selected>Kidney</option>
+                            <option name="liver" value="liver">Liver</option>
+                            <option name="lung" value="lung" >Lung</option>
+                            <option name="heart" value="heart" >Heart</option>
+                            <option name="pancreas" value="pancreas" >Pancreas</option>
+                            <option name="eye" value="eye" >Eye</option>
+                            <option name="skin" value="skin" >Skin</option>
+                        </select>
+                    </div>
                         
                     <!-- Submit button -->
                         <input type="submit" id="loginbtn" value="submit" class="btn btn-dark btn-block btn-lg mb-4" />
