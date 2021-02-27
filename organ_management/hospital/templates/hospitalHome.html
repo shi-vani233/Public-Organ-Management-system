@@ -23,27 +23,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
     <style>
-        body {
-            background-image: linear-gradient(140deg, #42d7d7 0%, #42b2d7 50%, #BFD641 75%);
-        }
-        
         .bg-text {
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
+            background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
             color: white;
             font-weight: bold;
             border: 3px solid #f1f1f1;
             margin: auto;
             margin-bottom: 30vh;
             margin-top: 20vh;
-            width: 50%;
-            padding: 40px;
+            width: 60%;
+            height: 40%;
+            padding-top: 80px;
             text-align: center;
             border-radius: 20px;
         }
         
-        .bg-text button {
-            margin-top: 10px;
+        a#hosbtn {
+            border-color: #10325f;
+            color: rgb(255, 255, 255);
+            border-width: 3px;
+            background-color: #10325f;
+        }
+        
+        a#hosbtn:hover {
+            background-color: inherit;
+            color: white;
+            border-color: #ffffff;
         }
     </style>
 
@@ -52,7 +58,7 @@
 <body>
 
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #f1f1f1;">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -77,31 +83,36 @@
     {% endif %}
 
     <div class="bg-text" data-aos="zoom-in">
-        <h1>Add New Donors</h1>
-        <button style="color:white;" type="button" class="btn btn-success"><a data-toggle="modal" data-target="#exampleModal3" style="margin:auto;">Add Donor</a>
+        <i class="fa fa-male" style="font-size: 38px;"></i>
+        <h3>is there any organ donor at your hospital !</h3>
+        <a data-toggle="modal" data-target="#exampleModal3" class="btn btn-outline-light btn-lg" id="hosbtn">Add Donor</a>
     </div>
 
     <div class="bg-text" data-aos="zoom-in">
-    <h1>The Registered Donor list</h1>
-    <button style="color:white;"  type="button" class="btn btn-success"> <a href="/Hospital/donorList/" style="color:white;" >View List</a></button>
+        <i class="fas fa-clipboard-list" style="font-size: 38px;"></i>
+        <h3>The Registered Donor list</h3>
+        <a href="/Hospital/donorList/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
     </div>
 
     <div class="bg-text" data-aos="zoom-in">
-        <h1>The Potential Donor list</h1>
+        <i class="fas fa-search-location" style="font-size: 38px;"></i>
+        <h3>The Potential Donor list</h3>
         <p>The Donors added by other Hospitals are listed here.</p>
-        <button style="color:white;" type="button" class="btn btn-success"> <a href="/Hospital/potentialDonor/" style="color:white;" >View List</a></button>
+        <a href="/Hospital/potentialDonor/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
     </div>
 
     <div class="bg-text" data-aos="zoom-in">
-        <h1>Your Sent Request List</h1>
+        <i class="fas fa-users" style="font-size: 38px;"></i>
+        <h3>Your Sent Request List</h3>
         <p>The organ Requests that you sent to other Hospitals are shown here.</p>
-        <button style="color:white;" type="button" class="btn btn-success"> <a href="/Hospital/ViewYourSentRequest/" style="color:white;" >View List</a></button>
+        <a href="/Hospital/ViewYourSentRequest/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
     </div>
 
     <div class="bg-text" data-aos="zoom-in">
-        <h1>Add Donation Details </h1>
+        <i class="fa fa-male" style="font-size: 38px;"></i>
+        <h3>Add Donation Details </h3>
         <p>Hospitals can enter the details of Donation already made.</p>
-        <button style="color:white;" type="button" class="btn btn-success"> <a  data-toggle="modal" data-target="#exampleModal4" href="/Hospital/TranplantTrends/" style="color:white;" >View List</a></button>
+        <a data-toggle="modal" data-target="#exampleModal4" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
     </div>
 
 
@@ -279,7 +290,7 @@
     </div>
 
 
-     <!-- Add Donation records -->
+    <!-- Add Donation records -->
     <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -292,23 +303,23 @@
                 <div class="modal-body">
                     <form action="/Hospital/DonationList/" method="POST">
                         {% csrf_token %}
-                    
-                    <!-- Donors -->
-                    <div class="form-group">
-                        <label for="nm"> Donor Name: </label>
-                        <input type="text" name="donor_name" id="nm" class="form-control"  style="border-radius: 20px;" autocomplete="off" required/>
-                    </div>
 
-                    <!-- Patient -->
-                    <div class="form-group">
-                        <label for="nm"> Patient Name: </label>
-                        <input type="text" name="patient_name" id="nm" class="form-control"  style="border-radius: 20px;" autocomplete="off" required/>
-                    </div>
-                        
-                    <!-- Organ Donated -->
-                    <div class="form-group">
-                        <label for="inputEmail3">Organ Donated:</label>
-                        <select id="inputState" class="form-control" style="border-radius: 20px;" name="organ">
+                        <!-- Donors -->
+                        <div class="form-group">
+                            <label for="nm"> Donor Name: </label>
+                            <input type="text" name="donor_name" id="nm" class="form-control" style="border-radius: 20px;" autocomplete="off" required/>
+                        </div>
+
+                        <!-- Patient -->
+                        <div class="form-group">
+                            <label for="nm"> Patient Name: </label>
+                            <input type="text" name="patient_name" id="nm" class="form-control" style="border-radius: 20px;" autocomplete="off" required/>
+                        </div>
+
+                        <!-- Organ Donated -->
+                        <div class="form-group">
+                            <label for="inputEmail3">Organ Donated:</label>
+                            <select id="inputState" class="form-control" style="border-radius: 20px;" name="organ">
                             <option name="kidney" value="kidney" selected>Kidney</option>
                             <option name="liver" value="liver">Liver</option>
                             <option name="lung" value="lung" >Lung</option>
@@ -316,10 +327,11 @@
                             <option name="pancreas" value="pancreas" >Pancreas</option>
                             <option name="eye" value="eye" >Eye</option>
                             <option name="skin" value="skin" >Skin</option>
+                            <option name="intestine" value="intestine" >intestine</option>
                         </select>
-                    </div>
-                        
-                    <!-- Submit button -->
+                        </div>
+
+                        <!-- Submit button -->
                         <input type="submit" id="loginbtn" value="submit" class="btn btn-dark btn-block btn-lg mb-4" />
                     </form>
                 </div>
@@ -339,6 +351,40 @@
         });
     </script>
 
+
+    <!--footer-->
+    <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );">
+        <div class="container text-white">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <div class="logo-part">
+                        <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
+                    font-size: 45px;"> Save-Lifes</a>
+                        <p>7637 Laurel Dr. King Of Prussia, PA 19406 Donated tissues save or dramatically enhance the quality of life for the people who receive them. As an organ and tissue donor, you can enhance the lives of up to 75 people. Corneas, the
+                            middle ear, skin, heart valves, bone, veins, cartilage, tendons, and ligaments can be stored in tissue banks and used to restore sight, cover burns, repair hearts, replace veins, and mend damaged connective tissue and cartilage
+                            in recipients.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center">
+                    <h3 class="text mb-4">Contact Us: <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white">Email1</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Email2</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Email3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </footer>
 </body>
 
 </html>

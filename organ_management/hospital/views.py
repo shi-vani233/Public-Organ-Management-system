@@ -364,9 +364,10 @@ def ViewTrends(request):
     print(getemail)
     hos = Hospital.objects.get(hospital_email=getemail)
     print(hos)
-    trend = Transplant.objects.get(hospital=hos)
-    print(trend)
-    return render(request, 'viewtrends.html', {'trend': trend})
+    trend = Transplant.objects.filter(hospital=hos)
+    if trend.exists():
+        return render(request, 'viewtrends.html', {'trend': trend,'hos':hos})
+    return render(request, 'viewtrends.html',{'hos':hos})
 
 
 def DonationList(request):
@@ -383,21 +384,25 @@ def DonationList(request):
         print("Details are saved successfully")  
         temp=Transplant.objects.filter(hospital=current_user)
         if temp.exists():
-            if(organ == "kidney"):
-                temp.kidney += 1
-            if(organ == "liver"):
-                temp.liver += 1
-            if(organ == "lung"):
-                temp.lung += 1
-            if(organ == "heart"):
-                temp.heart += 1
-            if(organ == "intestine"):
-                temp.intestine += 1
-            if(organ == "eye"):
-                temp.eye += 1
-            if(organ == "skin"):
-                temp.skin += 1
-            temp.save()
+            for i in temp:
+                print(i.kidney)
+                if(organ == "kidney"):
+                    i.kidney += 1
+                if(organ == "liver"):
+                    i.liver +=1
+                if(organ == "lung"):
+                    i.lung += 1
+                if(organ == "heart"):
+                    i.heart += 1
+                if(organ == "intestine"):
+                    i.intestine += 1
+                if(organ == "eye"):
+                    i.eye += 1
+                if(organ == "skin"):
+                    i.skin += 1
+                if(organ=="pancreas"):
+                    i.pancreas +=1
+                i.save()
             print("temp is stored")
         else:
             temp1 = Transplant(hospital=current_user)
@@ -415,6 +420,8 @@ def DonationList(request):
                 temp1.eye = 1
             if(organ == "skin"):
                 temp1.skin = 1
+            if(organ=="pancreas"):
+                temp1.pancreas =1
             temp1.save()
             print("temp1 is stored")
     return render(request, 'hospitalHome.html')
@@ -422,5 +429,7 @@ def DonationList(request):
 def ViewDonationList(request):
     loggedin_user = request.user.username
     hos = Hospital.objects.get(hospital_email=loggedin_user)
-    don = Donation.objects.get(hospital=hos)
-    return render(request, 'viewdonationlist.html', {'don':don})
+    don = Donation.objects.filter(hospital=hos)
+    if don.exists():
+        return render(request, 'viewdonationlist.html', {'don':don})
+    return render(request, 'viewdonationlist.html')

@@ -9,7 +9,7 @@
     }
     
     .navbar-nav a:hover {
-        color: #555;
+        color: rgb(187, 187, 187);
     }
     
     .navbar-nav a {
@@ -82,7 +82,7 @@
     
     div#card-flip {
         height: 120px;
-        border-color: rgb(77, 194, 201);
+        border-color: rgb(2, 109, 109);
         border-radius: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     }
@@ -99,8 +99,8 @@
     
     div#card-front {
         transform: rotateY(0deg);
-        border-color: rgb(77, 194, 201);
-        color: rgb(77, 194, 201);
+        border-color: rgb(2, 109, 109);
+        color: rgb(2, 109, 109);
         border-radius: 20px;
         background-color: rgb(248, 255, 255);
     }
@@ -109,7 +109,7 @@
         transform: rotateY(180deg);
         position: absolute;
         top: 0;
-        background-color: rgb(77, 194, 201);
+        background-color: rgb(2, 109, 109);
         color: white;
         border-radius: 20px;
     }

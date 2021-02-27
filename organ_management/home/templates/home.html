@@ -17,10 +17,45 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
+<style>
+    div#card-flip {
+        height: 120px;
+        border-color: rgb(2, 109, 109);
+        border-radius: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    div#card-flip>div {
+        backface-visibility: hidden;
+        transition: transform 700ms;
+        transition-timing-function: linear;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        display: flex;
+    }
+    
+    div#card-front {
+        transform: rotateY(0deg);
+        border-color: rgb(2, 109, 109);
+        color: rgb(2, 109, 109);
+        border-radius: 20px;
+        background-color: rgb(248, 255, 255);
+    }
+    
+    div#card-back {
+        transform: rotateY(180deg);
+        position: absolute;
+        top: 0;
+        background: rgb(2, 109, 109);
+        color: white;
+        border-radius: 20px;
+    }
+</style>
 
 <body>
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgb(243, 243, 243);">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -39,7 +74,7 @@
         <div class="d-flex justify-content-center align-items-center h-100">
             <div class="text-white" id="mainpagetext">
                 <h3 class="mb-3">Give yourself and those in need an elixir of life by pledging your organs.</h3>
-                <a class="btn btn-outline-light btn-lg"  data-toggle="modal" data-target="#exampleModal3" id="b1">Take Donor Pledge</a>
+                <a class="btn btn-outline-light btn-lg" data-toggle="modal" data-target="#exampleModal3" id="b1">Take Donor Pledge</a>
             </div>
         </div>
     </div>
@@ -55,8 +90,8 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             </ol>
-            <div class="carousel-inner my-5 py-5" style="background-color:rgb(77, 194, 201); 
-            background: linear-gradient(to bottom, #2F80ED, rgb(77, 194, 201));box-shadow: 2px 2px 6px 1px rgb(153, 152, 152);border:none;">
+            <div class="carousel-inner my-5 py-5" style="background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));border:none;">
                 <div class="carousel-item active">
                     <p class="text-center blockquote text-white" style="font-size:25px;margin-left: 150px; margin-right: 150px;">
                         a kidney recipient can enjoy a healthier, happier life with a working transplanted kidney that lasts an average of 12 years. </p>
@@ -88,7 +123,7 @@
             </a>
         </div>
     </div>
-    <div class="container">
+    <div class="container mb-5">
         <h2 class="my-5 text-center " style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
             How Donation Works</h2>
         <div class="row">
@@ -161,8 +196,11 @@
     <br>
     <br>
     <br>
-
-     <!-- Add Donar Pledge Modal -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Add Donar Pledge Modal -->
     <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -173,7 +211,7 @@
                 </div>
 
                 <div class="modal-body">
-                     {%if msg %}
+                    {%if msg %}
                     <div class="alert alert-success" role="alert">
                         {{msg}}
                     </div>
@@ -196,7 +234,7 @@
 
                         <!-- Mobile No -->
                         <div class="form-group">
-                           <input type="text" class="form-control" id="inputPassword3" name="pledge_mobile_no" placeholder="Contact No." style="border-radius: 20px;" autocomplete="off" required>
+                            <input type="text" class="form-control" id="inputPassword3" name="pledge_mobile_no" placeholder="Contact No." style="border-radius: 20px;" autocomplete="off" required>
                         </div>
 
                         <!-- Organ to donate -->
@@ -204,10 +242,10 @@
                             <input type="text" name="pledge_organ" id="nm" class="form-control" placeholder="Which organ would you pledge to donate?" style="border-radius: 20px;" autocomplete="off" required/>
                         </div>
 
-                         <!-- Select Hospital -->
-                            <div class="form-group">
-                                <label for="inputEmail3" style="border-radius: 20px;">Select Hospital To pledge your Organ</label>
-                                    <select id="inputState" class="form-control" style="border-radius: 20px;" name="pledge_hospital">
+                        <!-- Select Hospital -->
+                        <div class="form-group">
+                            <label for="inputEmail3" style="border-radius: 20px;">Select Hospital To pledge your Organ</label>
+                            <select id="inputState" class="form-control" style="border-radius: 20px;" name="pledge_hospital">
                                     <option selected> -- </option>
                                     {% for i  in hos %}
                                         <option name="hospital_email" value="hospital_email">
@@ -215,7 +253,7 @@
                                         </option>
                                     {% endfor %}
                                     </select>
-                            </div>
+                        </div>
 
                         <!-- Gender -->
                         <label for="gender">Gender :</label><br>
@@ -228,10 +266,10 @@
                             <label class="form-check-label" for="inlineRadio2">Female</label>
                         </div><br><br>
 
-                         <!-- Blood Group -->
-                            <div class="form-group">
-                                <label for="inputEmail3" style="border-radius: 20px;">Blood Group</label>
-                                    <select id="inputState" class="form-control" style="border-radius: 20px;" name="pledge_bloodGroup">
+                        <!-- Blood Group -->
+                        <div class="form-group">
+                            <label for="inputEmail3" style="border-radius: 20px;">Blood Group</label>
+                            <select id="inputState" class="form-control" style="border-radius: 20px;" name="pledge_bloodGroup">
                                         <option name="A+" value="A+" selected>A+</option>
                                         <option name="A-" value="A-">A-</option>
                                         <option name="B+" value="B+" >B+</option>
@@ -241,8 +279,8 @@
                                         <option name="O+" value="O+" >O+</option>
                                         <option name="O-" value="O-" >O-</option>
                                     </select>
-                            </div>
-                        
+                        </div>
+
 
                         <!-- Any Diseases -->
                         <div class="form-group">
@@ -297,8 +335,8 @@
 
 
     <!--footer-->
-    <footer class="pt-5 pb-2" style="background-color: rgba(0, 0, 0, 0.1)">
-        <div class="container">
+    <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );  ">
+        <div class="container text-white">
             <div class="row">
                 <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                     <div class="logo-part">
@@ -315,13 +353,13 @@
                     </h3>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!" class="text-dark">Email1</a>
+                            <a href="#!" class="text-white">Email1</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Email2</a>
+                            <a href="#!" class="text-white">Email2</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Email3</a>
+                            <a href="#!" class="text-white">Email3</a>
                         </li>
                     </ul>
                 </div>
