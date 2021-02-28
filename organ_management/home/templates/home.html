@@ -246,9 +246,8 @@
                         <div class="form-group">
                             <label for="inputEmail3" style="border-radius: 20px;">Select Hospital To pledge your Organ</label>
                             <select id="inputState" class="form-control" style="border-radius: 20px;" name="pledge_hospital">
-                                    <option selected> -- </option>
                                     {% for i  in hos %}
-                                        <option name="hospital_email" value="hospital_email">
+                                        <option value="{{i.hospital_email}}">
                                             {{i.hospital_name}}, {{i.hospital_city}}
                                         </option>
                                     {% endfor %}

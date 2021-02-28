@@ -16,9 +16,11 @@ def DonorPledge(request):
     pledge_bloodGroup=request.POST.get('pledge_bloodGroup','')
     pledge_gender=request.POST.get('pledge_gender','')
     pledge_info=request.POST.get('pledge_info','')
-    pledge_diseases=request.POST.getlist('pledge_diseases','')
+    pledge_diseases=request.POST.get('pledge_diseases','')
     pledge_addiction=request.POST.getlist('pledge_addiction','')
     pledge_organ=request.POST.get('pledge_organ','')  
+    print(pledge_hospital)
+    print(pledge_diseases)
     current_hos = Hospital.objects.get(hospital_email=pledge_hospital)
     hos = Hospital.objects.all() 
     if len(pledge_mobile_no)!=10:

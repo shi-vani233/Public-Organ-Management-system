@@ -231,6 +231,15 @@ def SearchDonor(request):
             if query is not None:
                 lookups= Q(donor_organ__icontains=query)
                 results= Donor.objects.filter(lookups).distinct()
+                temp1=[]
+                for item in results:
+                    if item.donor_added_time.strftime("%d") == today_date and item.donor_added_time.month == today_month and item.donor_added_time.year == today_year :
+                        temp1.append(item)
+                    elif int(item.donor_added_time.strftime("%d"))+1 == int(today_date):
+                        print(item.donor_added_time.hour - today_hour)
+                        if item.donor_added_time.hour - today_hour < 24 and item.donor_added_time.hour - today_hour >= 0:
+                            temp1.append(item)
+                results=temp1
                 source_hos=Hospital.objects.get(hospital_email=loggedin_user)
                 class key:  
                     def __init__(self, donor, donor_distance):  

@@ -19,43 +19,44 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <style>
-        .list-type4{
-    width:100%;
-    margin:0 auto;
-    }
-    
-    .list-type4 ol{
-    counter-reset: li;
-    list-style: none;
-    *list-style: decimal;
-    font-size: 15px;
-    font-family: 'Raleway', sans-serif;
-    padding: 0;
-    /*margin-bottom: 4em;*/
-    }
-
-    .list-type4 .row{
-    padding: .4em .4em .4em 2em;
-    *padding: .4em;
-    margin: .5em 0;
-    background: #03B3CB;
-    color: white;
-    text-decoration: none;
-    box-shadow:inset 0.5em 0 black;
-    -webkit-transition: box-shadow 1s;
-    transition: box-shadow 1s;
-    }
-
-    .list-type4 .row:hover{
-    box-shadow:inset 2em 0 black;
-    }
+        .list-type4 {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .list-type4 ol {
+            counter-reset: li;
+            list-style: none;
+            *list-style: decimal;
+            font-size: 15px;
+            font-family: 'Raleway', sans-serif;
+            padding: 0;
+            /*margin-bottom: 4em;*/
+        }
+        
+        .list-type4 .row {
+            padding: .4em .4em .4em 2em;
+            *padding: .4em;
+            margin: .5em 0;
+            background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+            color: white;
+            text-decoration: none;
+            box-shadow: inset 0.5em 0 rgb(2, 109, 109);
+            -webkit-transition: box-shadow 1s;
+            transition: box-shadow 1s;
+        }
+        
+        .list-type4 .row:hover {
+            box-shadow: inset 15em 0 rgb(1, 53, 53);
+        }
     </style>
 
 </head>
 
 <body>
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #f1f1f1;">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -70,15 +71,15 @@
     </nav>
 
     <!--- Registered Hospital List -->
-    <div class="container">
+    <div class="container my-5">
         {%if msg%}
         <div class="alert alert-success" role="alert">
             {{msg}}
         </div>
         {% endif %}
-        <h2 class="my-4 text-center display-4">Registered Hospital List</h2>
+        <h2 class="text-center display-4 pt-5 mb-5">Registered Hospital List</h2>
 
-         <div class="list" style="background-color:black; color:white; padding: .4em .4em .4em 2em;">
+        <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
             <div class="row">
                 <div class="col">
                     Hospital Name
@@ -101,10 +102,10 @@
                 <li>
                     <div class="row">
                         <div class="col">
-                             <form action="/Hospital/ViewTrends/" method="POST">
-                            {% csrf_token %}
+                            <form action="/Hospital/ViewTrends/" method="POST">
+                                {% csrf_token %}
                                 <input type="hidden" name="email" value="{{hospital.hospital_email}}">
-                                <input type="submit" id="donbtn" class="btn text-center btn-primary" style="padding:0px; background-color:#03B3CB; color:white; border:none" value="{{hospital.hospital_name}}">
+                                <input type="submit" id="donbtn" class="btn text-center btn-primary" style="padding:0px; background-color:inherit; color:white; border:none" value="{{hospital.hospital_name}}">
                             </form>
                         </div>
                         <div class="col">
@@ -122,63 +123,99 @@
         </div>
         {% endfor%}
 
+    </div>
+    <!--login modal-->
 
-        <!--login modal-->
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/Hospital/loginhospital/" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="form-title text-center mb-4">
-                                <h2>Login</h2>
+                </div>
+                <div class="modal-body">
+                    <form action="/Hospital/loginhospital/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-title text-center mb-4">
+                            <h2>Login</h2>
+                        </div>
+                        <!-- Email input -->
+                        <div class="form-group">
+                            <input type="email" id="emaillogin" name="hospital_email" class="form-control" placeholder="email address" style="border-radius: 20px;" />
+                        </div>
+                        <!-- Password input -->
+                        <div class="form-group">
+
+                            <input type="password" id="passlogin" name="password" class="form-control" placeholder="password" style="border-radius: 20px;" />
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+
+                            <div class="col text-center">
+
+                                <a href="#!">Forgot password?</a>
                             </div>
-                            <!-- Email input -->
-                            <div class="form-group">
-                                <input type="email" id="emaillogin" name="hospital_email" class="form-control" placeholder="email address" style="border-radius: 20px;" />
-                            </div>
-                            <!-- Password input -->
-                            <div class="form-group">
+                        </div>
 
-                                <input type="password" id="passlogin" name="password" class="form-control" placeholder="password" style="border-radius: 20px;" />
-                            </div>
-
-                            <!-- 2 column grid layout for inline styling -->
-                            <div class="row mb-4">
-
-                                <div class="col text-center">
-
-                                    <a href="#!">Forgot password?</a>
-                                </div>
-                            </div>
-
-                            <!-- Submit button -->
-                            <input type="submit" id="loginbtn" class="btn btn-dark btn-block btn-lg mb-4" value="Sign In">
+                        <!-- Submit button -->
+                        <input type="submit" id="loginbtn" class="btn btn-dark btn-block btn-lg mb-4" value="Sign In">
 
 
-                            <!-- Register buttons -->
-                            <div class="text-center">
-                                <p>Not a member? <a href="#!">Register</a></p>
-                                <p>or sign in with:</p>
-                                <button type="button" class="btn btn-light">
+                        <!-- Register buttons -->
+                        <div class="text-center">
+                            <p>Not a member? <a href="#!">Register</a></p>
+                            <p>or sign in with:</p>
+                            <button type="button" class="btn btn-light">
                                 <img src="{% static 'images/google-logo.png' %}" style="width:50px; border-radius: 50%;">
                           </button>
 
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                </div>
 
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br> <br>
+    <br>
+    <br>
+    <!--footer-->
+    <footer class="pt-5 mt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );">
+        <div class="container text-white">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <div class="logo-part">
+                        <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
+                font-size: 45px;"> Save-Lifes</a>
+                        <p>7637 Laurel Dr. King Of Prussia, PA 19406 Donated tissues save or dramatically enhance the quality of life for the people who receive them. As an organ and tissue donor, you can enhance the lives of up to 75 people. Corneas, the
+                            middle ear, skin, heart valves, bone, veins, cartilage, tendons, and ligaments can be stored in tissue banks and used to restore sight, cover burns, repair hearts, replace veins, and mend damaged connective tissue and cartilage
+                            in recipients.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center">
+                    <h3 class="text mb-4">Contact Us: <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white">Email1</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Email2</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Email3</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-
+    </footer>
 
 </body>
 
