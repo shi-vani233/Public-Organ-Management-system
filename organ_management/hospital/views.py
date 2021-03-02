@@ -18,6 +18,11 @@ from geopy.geocoders import Nominatim
 from geopy.distance import distance as geopy_distance
 from django.db.models import Q
 from home.models import Pledge
+import matplotlib.pyplot as plt
+import io
+import base64,urllib
+
+
 
 geolocator = Nominatim(user_agent="hospital")
 global ChangedState
@@ -375,7 +380,27 @@ def ViewTrends(request):
     print(hos)
     trend = Transplant.objects.filter(hospital=hos)
     if trend.exists():
-        return render(request, 'viewtrends.html', {'trend': trend,'hos':hos})
+        left = [1,2,3,4,5,6,7,8] 
+ 
+        for i in trend:
+            height = [i.kidney,i.liver,i.lung,i.heart,i.pancreas,i.skin,i.eye,i.intestine] 
+  
+        tick_label = ['kidney','liver','eye','skin','heart','pancreas','lung','intestine'] 
+        plt.bar(left, height, tick_label = tick_label, width = 0.5,color="aqua") 
+        plt.ylim([0,10])
+        plt.xlabel('Organ') 
+
+        plt.ylabel('No. of transplants') 
+
+        plt.title('Records') 
+
+        fig=plt.gcf()
+        buf=io.BytesIO()
+        fig.savefig(buf,format='png')
+        buf.seek(0)
+        string=base64.b64encode(buf.read())
+        uri=urllib.parse.quote(string)
+        return render(request, 'viewtrends.html', {'trend': trend,'hos':hos,'data':uri})
     return render(request, 'viewtrends.html',{'hos':hos})
 
 
