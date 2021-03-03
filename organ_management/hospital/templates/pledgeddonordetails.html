@@ -19,6 +19,42 @@
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+     <style>
+        .list-type4 {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .list-type4 ol {
+            counter-reset: li;
+            list-style: none;
+            *list-style: decimal;
+            font-size: 15px;
+            font-family: 'Raleway', sans-serif;
+            padding: 0;
+            width:100%;
+            /*margin-bottom: 4em;*/
+        }
+        
+        .list-type4 .row {
+            padding: .4em .4em .4em 2em;
+            *padding: .4em;
+            margin: .5em 0;
+            background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+            color: white;
+            text-decoration: none;
+            box-shadow: inset 0.5em 0 rgb(2, 109, 109);
+            -webkit-transition: box-shadow 1s;
+            transition: box-shadow 1s;
+        }
+        
+        .list-type4 .row:hover {
+            box-shadow: inset 15em 0 rgb(1, 53, 53);
+        }
+    </style>
+
 </head>
 
 <body>
@@ -36,39 +72,83 @@
         </div>
     </nav>
 
-    <table class="table">
-        <thead style="background-color: #00cc44; color:white;">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Organ</th>
-                <th scope="col">Contact No</th>
-                <th scope="col">Blood Group</th>
-                <th scope="col">Any Dieseas</th>
-                <th scope="col">Any other illness</th>
-                <th scope="col">Addiction</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in donor %}
-            <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{i.pledge_name}}</td>
-                <td>{{i.pledge_gender}}</td>
-                <td>{{i.pledge_organ}}</td>
-                <td>{{i.pledge_mobile_no}}</td>
-                <td>{{i.pledge_bloodGroup}}</td>
-                <td>{% if i.pledge_diseases %} {{i.pledge_diseases}} {% else %} not having any diseases {% endif %}
-                </td>
-                <td>{% if i.pledge_info %} {{i.pledge_info}} {% else %} Nothing serious {% endif %}
-                </td>
-                <td>{% if i.pledge_addiction %}{{i.pledge_addiction}}{% else %} don't have any addiction{% endif %}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container my-5">
+        <h2 class="text-center display-4 pt-5 mb-5">Pledged Donor List</h2>
 
+        <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
+            <div class="row">
+                 <div class="col">
+                    #
+                </div>
+                <div class="col">
+                    Name
+                </div>
+                <div class="col">
+                    Gender
+                </div>
+                <div class="col">
+                    Organ
+                </div>
+                <div class="col">
+                    Contact No
+                </div>
+                <div class="col">
+                    Blood Group
+                </div>
+                <div class="col">
+                    Any Dieseas
+                </div>
+                <div class="col">
+                    Any other illness
+                </div>
+                <div class="col">
+                    Addiction
+                </div>
+            </div>
+        </div>
+
+        {% for i in donor %}
+        <div class="list-type4">
+            <ol>
+                <li>
+                    <div class="row">
+                       <div class="col">
+                            {{forloop.counter}}
+                        </div>
+                        <div class="col">
+                            {{i.pledge_name}}
+                        </div>
+                        <div class="col">
+                            {{i.pledge_gender}}
+                        </div>
+                        <div class="col">
+                            {{i.pledge_organ}}
+                        </div>
+                        <div class="col">
+                            {{i.pledge_mobile_no}}
+                        </div>
+                        <div class="col">
+                            {{i.pledge_bloodGroup}}
+                        </div>
+                        <div class="col">
+                            {% if i.pledge_diseases %} {{i.pledge_diseases}} {% else %} not having any diseases {% endif %}
+                        </div>
+                        <div class="col">
+                            {% if i.pledge_info %} {{i.pledge_info}} {% else %} Nothing serious {% endif %}
+                        </div>
+                        <div class="col">
+                            {% if i.pledge_addiction %}{{i.pledge_addiction}}{% else %} don't have any addiction{% endif %}
+                        </div>
+
+                    </div>
+                </li>
+            </ol>
+        </div>
+        {% endfor%}
+
+    </div>
+
+    
 </body>
 
 </html>

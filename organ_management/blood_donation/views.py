@@ -47,6 +47,10 @@ def Registervol(request):
     else:
         return render(request ,'volunteer.html',{'msg_phone':msg_phone, 'msg_email':msg_email, 'volunteers':volunteers})
 
+def VolunteerList(request):
+    volunteers=Volunteer.objects.all()
+    return render(request,'VolunteerList.html',{'volunteers':volunteers})
+
 def searchBloodGroup(request):
     if request.method == 'GET':
         query= request.GET.get('q')
@@ -61,10 +65,10 @@ def searchBloodGroup(request):
             context={'results': results,
                      'submitbutton': submitbutton}
 
-            return render(request, 'volunteer.html', context)
+            return render(request, 'VolunteerList.html', context)
 
         else:
-            return render(request, 'volunteer.html')
+            return render(request, 'VolunteerList.html')
 
     else:
-        return render(request, 'volunteer.html')
+        return render(request, 'VolunteerList.html')

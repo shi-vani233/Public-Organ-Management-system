@@ -19,6 +19,43 @@
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+     <style>
+        .list-type4 {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .list-type4 ol {
+            counter-reset: li;
+            list-style: none;
+            *list-style: decimal;
+            font-size: 15px;
+            font-family: 'Raleway', sans-serif;
+            padding: 0;
+            width:100%;
+            /*margin-bottom: 4em;*/
+        }
+        
+        .list-type4 .row {
+            padding: .4em .4em .4em 2em;
+            *padding: .4em;
+            margin: .5em 0;
+            background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+            color: white;
+            text-decoration: none;
+            box-shadow: inset 0.5em 0 rgb(2, 109, 109);
+            -webkit-transition: box-shadow 1s;
+            transition: box-shadow 1s;
+        }
+        
+        .list-type4 .row:hover {
+            box-shadow: inset 15em 0 rgb(1, 53, 53);
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -36,50 +73,103 @@
         </div>
     </nav>
 
-    <table class="table">
-        <thead style="background-color: #00cc44; color:white;">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">BirthDate</th>
-                <th scope="col">Organ</th>
-                <th scope="col">Height</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Blood Group</th>
-                <th scope="col">Any Dieseas</th>
-                <th scope="col">Any other illness</th>
-                <th scope="col">Addiction</th>
-                <th scope="col"> </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in don %}
-            <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{item.donor_name}}</td>
-                <td>{{item.donor_gender}}</td>
-                <td>{{item.donor_dob}}</td>
-                <td>{{item.donor_organ}}</td>
-                <td>{{item.donor_height}}</td>
-                <td>{{item.donor_weight}}</td>
-                <td>{{item.donor_bloodGroup}}</td>
-                <td>{%if item.donor_diseases %} {{item.donor_diseases}} {% else%} not having any diseases {% endif %}
-                </td>
-                <td>{% if item.donor_info %} {{item.donor_info}} {%else%} Nothing serious {% endif %}
-                </td>
-                <td>{%if item.donor_addiction%}{{item.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
-                <td>
-                    <form action="/Hospital/Deletedonor/" method="POST">
+     <div class="container my-5">
+        <h2 class="text-center display-4 pt-5 mb-5">Registered Donor List</h2>
+
+        <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
+            <div class="row">
+                 <div class="col">
+                    #
+                </div>
+                <div class="col">
+                    Name
+                </div>
+                <div class="col">
+                    Gender
+                </div>
+                <div class="col">
+                    BirthDate
+                </div>
+                <div class="col">
+                    Organ
+                </div>
+                <div class="col">
+                    Height
+                </div>
+                <div class="col">
+                    Weight
+                </div>
+                <div class="col">
+                    Blood Group
+                </div>
+                <div class="col">
+                    Any Dieseas
+                </div>
+                <div class="col">
+                    Any other illness
+                </div>
+                <div class="col">
+                    Addiction
+                </div>
+                 <div class="col">
+                    .
+                </div>
+            </div>
+        </div>
+
+         {% for item in don %}
+        <div class="list-type4">
+            <ol>
+                <li>
+                    <div class="row">
+                       <div class="col">
+                            {{forloop.counter}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_name}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_gender}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_dob}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_organ}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_height}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_weight}}
+                        </div>
+                        <div class="col">
+                            {{item.donor_bloodGroup}}
+                        </div>
+                        <div class="col">
+                            {%if item.donor_diseases %} {{item.donor_diseases}} {% else%} not having any diseases {% endif %}
+                        </div>
+                        <div class="col">
+                            {% if item.donor_info %} {{item.donor_info}} {%else%} Nothing serious {% endif %}
+                        </div>
+                        <div class="col">
+                            {%if item.donor_addiction%}{{item.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
+                        </div>
+                        <div class="col">
+                             <form action="/Hospital/Deletedonor/" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{item.donor_id}}">
                         <input type="submit"  class="btn btn-danger btn-sm" value="Delete" />
                     </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                        </div>
+
+                    </div>
+                </li>
+            </ol>
+        </div>
+        {% endfor%}
+
+    </div>
 
 
 </body>
