@@ -23,7 +23,7 @@
 
 <body>
     <!--navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #f1f1f1;">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -50,7 +50,7 @@
                 <th scope="col">Any Dieseas</th>
                 <th scope="col">Any other illness</th>
                 <th scope="col">Addiction</th>
-                <th scope="col">.</th>
+                <th scope="col"> </th>
             </tr>
         </thead>
         <tbody>
@@ -70,8 +70,11 @@
                 </td>
                 <td>{%if item.donor_addiction%}{{item.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
                 <td>
-                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                    <button type="button" class="btn btn-warning btn-sm" style="color:white;">Edit</button>
+                    <form action="/Hospital/Deletedonor/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{item.donor_id}}">
+                        <input type="submit"  class="btn btn-danger btn-sm" value="Delete" />
+                    </form>
                 </td>
             </tr>
             {% endfor %}

@@ -467,3 +467,14 @@ def ViewDonationList(request):
     if don.exists():
         return render(request, 'viewdonationlist.html', {'don':don})
     return render(request, 'viewdonationlist.html')
+
+def Deletedonor(request):
+    if request.user.is_authenticated:
+        getid=request.POST.get('id','')
+        dondel=Donor.objects.get(donor_id=getid)
+        dondel.delete()
+        hospital_email=request.user.username
+
+
+        don=Donor.objects.filter(hospital_email=hospital_email)
+        return render(request, 'donorList.html', {'don':don})
