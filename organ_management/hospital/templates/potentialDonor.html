@@ -94,12 +94,12 @@
     <br>
     <br>
     <div class="container">
-        <div class="p-2 bg-light rounded-pill shadow-sm my-5" style="width:30%;margin: auto;">
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm my-5" style="width:50%;margin: auto;">
             <form action="/Hospital/SearchDonor/" method="GET" value="{{request.GET.q}}">
                 <div class="input-group">
-                    <input id="search" type="text" name="q" value="{{request.GET.q}}" placeholder="Search for Organ" aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
+                    <input id="search" type="text" name="q" value="{{request.GET.q}}" placeholder="Search for Organ . . . . " aria-describedby="button-addon1" class="form-control border-0 bg-light" style="box-shadow: none;">
                     <div class="input-group-append">
-                        <input type="submit" name="submit" value="Search" />
+                        <button type="submit" name="submit" value="Search" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </form>

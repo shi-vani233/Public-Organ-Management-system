@@ -56,7 +56,10 @@ def searchBloodGroup(request):
         query= request.GET.get('q')
 
         submitbutton= request.GET.get('submit')
-
+        if query=="":
+            volunteers=Volunteer.objects.all()
+            return render(request,'VolunteerList.html',{'volunteers':volunteers})
+       
         if query is not None:
             lookups= Q(volunteer_bloodGroup__icontains=query) | Q(volunteer_city__icontains=query)
 
@@ -66,9 +69,3 @@ def searchBloodGroup(request):
                      'submitbutton': submitbutton}
 
             return render(request, 'VolunteerList.html', context)
-
-        else:
-            return render(request, 'VolunteerList.html')
-
-    else:
-        return render(request, 'VolunteerList.html')

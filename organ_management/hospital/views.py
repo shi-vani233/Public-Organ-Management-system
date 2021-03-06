@@ -385,7 +385,7 @@ def ViewTrends(request):
         for i in trend:
             height = [i.kidney,i.liver,i.lung,i.heart,i.pancreas,i.skin,i.eye,i.intestine] 
   
-        tick_label = ['kidney','liver','eye','skin','heart','pancreas','lung','intestine'] 
+        tick_label = ['kidney','liver','lung','heart','pancreas','skin','eye','intestine'] 
         plt.bar(left, height, tick_label = tick_label, width = 0.5,color="aqua") 
         plt.ylim([0,10])
         plt.xlabel('Organ') 

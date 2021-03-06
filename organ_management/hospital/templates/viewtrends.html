@@ -20,6 +20,99 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 </head>
+<style>
+    .fa-clinic-medical:hover {
+        animation: heart .5s cubic-bezier(.36, .07, .57, .99) infinite;
+    }
+    
+    @keyframes heart {
+        0% {
+            transform: scale(1.5);
+        }
+        20% {
+            transform: scale(2);
+        }
+        30% {
+            transform: scale(1.5);
+        }
+        40% {
+            transform: scale(2);
+        }
+        100% {
+            transform: scale(1.5);
+        }
+    }
+    
+    .fa-map-marker-alt:hover {
+        animation: lock 1s cubic-bezier(.36, .07, .57, .99) infinite;
+    }
+    
+    @keyframes lock {
+        0% {
+            transform: scale(1.5) translateY(0);
+        }
+        20% {
+            transform: scale(1.5) translateY(-5px);
+        }
+        30% {
+            transform: scale(1.5) translateY(5px);
+        }
+        50% {
+            transform: scale(1.5) translateY(-5px);
+        }
+        60% {
+            transform: scale(1.5) translateY(5px);
+        }
+        100% {
+            transform: scale(1.5) translateY(0);
+        }
+    }
+    
+    .fa-phone-alt:hover {
+        transform-origin: 75% 25%;
+        animation: unlock 1s cubic-bezier(.36, .07, .57, .99) infinite;
+    }
+    
+    @keyframes unlock {
+        0% {
+            transform: scale(1.5) rotate(-15deg);
+        }
+        15% {
+            transform: scale(1.5) rotate(-40deg);
+        }
+        30% {
+            transform: scale(1.5) rotate(5deg);
+        }
+        45% {
+            transform: scale(1.5) rotate(-30deg);
+        }
+        60% {
+            transform: scale(1.5) rotate(-5deg);
+        }
+        75% {
+            transform: scale(1.5) rotate(-20deg);
+        }
+        90% {
+            transform: scale(1.5) rotate(-15deg);
+        }
+        100% {
+            transform: scale(1.5) rotate(-15deg);
+        }
+    }
+    
+    .fa-address-card:hover {
+        animation: refresh 1s cubic-bezier(.36, .07, .57, .99) infinite;
+    }
+    
+    @keyframes refresh {
+        from {
+            transform: scale(1.5) rotate(0);
+        }
+        to {
+            transform: scale(1.5) rotate(360deg);
+        }
+    }
+</style>
 
 <body>
     <!--navbar-->
@@ -34,20 +127,31 @@
             </div>
         </div>
     </nav>
-    <h2 class="mb-5 text-center display-4">Tranplant Trends </h2>
-    <div class="container py-5 scale-in-center">
 
-        <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;margin: auto;border-radius: 20px;width: 60%;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+    <div class="container py-5">
+        <h2 class="my-5 text-center display-4" style="color:#10325f;"><i class='fas fa-clinic-medical' style="margin-right: 20px;"></i> {{hos.hospital_name}} </h2>
+        <div class="card my-2 text-dark" style="background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));margin: auto;border-radius: 20px;width: 60%;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
 
-            <div class="card-body">
+            <div class="card-body text-white">
 
-                <div class="card-title">
-                    <h1>{{hos.hospital_name}}</h1>
+
+                <br>
+                <div class="card-text" style="font-size: 20px;">
+                    <p>
+                        <i class='fas fa-map-marker-alt' style="margin-right: 20px;"></i> {{hos.hospital_city}}
+                    </p>
+                    <p>
+                        <i class='fas fa-phone-alt' style="margin-right: 20px;"></i> {{hos.hospital_mobile_no}}
+                    </p>
+                    <p>
+                        <i class='fas fa-address-card' style="margin-right: 20px;"></i> {{hos.hospital_address}}, {{hos.zip_code}}
+                    </p>
                 </div>
-
             </div>
-            <img src="data:image/png;base64,{{data}}" alt="">
         </div>
+        <br><br><br>
+        <h2 class="my-5 text-center display-4">Tranplant Trends </h2>
+        <div class="d-flex justify-content-center"> <img src="data:image/png;base64,{{data}}" alt=""></div>
 
 
     </div>

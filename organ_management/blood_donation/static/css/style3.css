@@ -38,12 +38,12 @@
 /*css for blood donation page*/
 
 a#volbtn {
-    border-color: rgb(77, 194, 201);
-    color: rgb(77, 194, 201);
+    border-color: #10325f;
+    color: #10325f;
 }
 
 a#volbtn:hover {
-    background-color: rgb(77, 194, 201);
+    background-color: #10325f;
     color: white;
 }
 
