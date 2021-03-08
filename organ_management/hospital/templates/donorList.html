@@ -73,49 +73,51 @@
         </div>
     </nav>
     <h2 class="text-center display-4 pt-5 mb-5">Registered Donor List</h2>
-    <table class="table">
-        <thead style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"> Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">BirthDate</th>
-                <th scope="col">Organ</th>
-                <th scope="col">Height</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Blood Group</th>
-                <th scope="col">Any Dieseas</th>
-                <th scope="col">Any other illness</th>
-                <th scope="col">Addiction</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody style="background: rgb(2, 109, 109);
+    <div class="container-fluid">
+        <table class="table">
+            <thead style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"> Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">BirthDate</th>
+                    <th scope="col">Organ</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Blood Group</th>
+                    <th scope="col">Any Dieseas</th>
+                    <th scope="col">Any other illness</th>
+                    <th scope="col">Addiction</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody style="background: rgb(2, 109, 109);
         background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));color: white;">
-            {% for item in don %}
-            <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td> {{item.donor_name}}</td>
-                <td>{{item.donor_gender}}</td>
-                <td> {{item.donor_dob}}</td>
-                <td> {{item.donor_organ}}</td>
-                <td> {{item.donor_height}} </td>
-                <td> {{item.donor_weight}}</td>
-                <td> {{item.donor_bloodGroup}}</td>
-                <td> {%if item.donor_diseases %} {{item.donor_diseases}} {% else%} not having any diseases {% endif %}</td>
-                <td> {% if item.donor_info %} {{item.donor_info}} {%else%} Nothing serious {% endif %}</td>
-                <td> {%if item.donor_addiction%}{{item.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
-                <td>
-                    <form action="/Hospital/Deletedonor/" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{item.donor_id}}">
-                        <input type="submit" class="btn btn-dark" value="Delete" style="background-color: #10325f;" />
-                    </form>
-                </td>
-            </tr>
-            {% endfor%}
-        </tbody>
-    </table>
+                {% for item in don %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td> {{item.donor_name}}</td>
+                    <td>{{item.donor_gender}}</td>
+                    <td> {{item.donor_dob}}</td>
+                    <td> {{item.donor_organ}}</td>
+                    <td> {{item.donor_height}} </td>
+                    <td> {{item.donor_weight}}</td>
+                    <td> {{item.donor_bloodGroup}}</td>
+                    <td> {%if item.donor_diseases %} {{item.donor_diseases}} {% else%} not having any diseases {% endif %}</td>
+                    <td> {% if item.donor_info %} {{item.donor_info}} {%else%} Nothing serious {% endif %}</td>
+                    <td> {%if item.donor_addiction%}{{item.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
+                    <td>
+                        <form action="/Hospital/Deletedonor/" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{item.donor_id}}">
+                            <input type="submit" class="btn btn-dark" value="Delete" style="background-color: #10325f;" />
+                        </form>
+                    </td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
 
 </body>
 

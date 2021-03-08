@@ -14,6 +14,7 @@ from django.db.models import Q
 
 # Create your views here.
 def BloodDonationHome(request):
+    print("YASH GANDO 6 BAUJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ")
     return render(request, 'BloodDonation.html', context=None)
 
 def VolunteerPage(request):

@@ -153,8 +153,9 @@ def DonorList(request):
         hospital_email=request.user.username
 
         don=Donor.objects.filter(hospital_email=hospital_email)
-        # for i in don:
-        #     print(i.donor_diseases)
+        for i in don:
+            temp_list=i.donor_diseases.strip("']['").split(',')
+            print(type(temp_list))
         # print("..............................")
         return render(request, 'donorList.html', {'don':don})
 
@@ -387,7 +388,7 @@ def ViewTrends(request):
   
         tick_label = ['kidney','liver','lung','heart','pancreas','skin','eye','intestine'] 
         plt.bar(left, height, tick_label = tick_label, width = 0.5,color="aqua") 
-        plt.ylim([0,10])
+        plt.ylim([0,20])
         plt.xlabel('Organ') 
 
         plt.ylabel('No. of transplants') 
