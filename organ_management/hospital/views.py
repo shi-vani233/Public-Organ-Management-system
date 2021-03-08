@@ -14,6 +14,8 @@ from django.core.mail import send_mail
 from hospital.models import Hospital,Donor, OrganRequest, Transplant, Donation
 import simplejson as json
 import datetime
+from django.core import paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from geopy.geocoders import Nominatim
 from geopy.distance import distance as geopy_distance
 from django.db.models import Q
@@ -464,9 +466,17 @@ def DonationList(request):
 def ViewDonationList(request):
     loggedin_user = request.user.username
     hos = Hospital.objects.get(hospital_email=loggedin_user)
-    don = Donation.objects.filter(hospital=hos)
+    don = Donation.objects.filter(hospital=hos).order_by('details_added_time').reverse()
     if don.exists():
-        return render(request, 'viewdonationlist.html', {'don':don})
+        paginator = Paginator(don,10)
+        page = request.GET.get('page', 1)
+        try:
+            donn = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        return render(request, 'viewdonationlist.html', {'don':donn})
     return render(request, 'viewdonationlist.html')
 
 def Deletedonor(request):
@@ -475,7 +485,7 @@ def Deletedonor(request):
         dondel=Donor.objects.get(donor_id=getid)
         dondel.delete()
         hospital_email=request.user.username
-
+        msg="Deleted successfully!!"
 
         don=Donor.objects.filter(hospital_email=hospital_email)
-        return render(request, 'donorList.html', {'don':don})
+        return render(request, 'donorList.html', {'don':don,'msg_error':msg})

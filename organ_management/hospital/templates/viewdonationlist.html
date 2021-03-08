@@ -20,7 +20,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
-     <style>
+    <style>
         .list-type4 {
             width: 100%;
             margin: 0 auto;
@@ -40,24 +40,24 @@
             padding: .4em .4em .4em 2em;
             *padding: .4em;
             margin: .5em 0;
-            background: rgb(2, 109, 109);
-            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
-            color: white;
+            background: rgb(147, 240, 212);
+            background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
+            
             text-decoration: none;
-            box-shadow: inset 0.5em 0 rgb(2, 109, 109);
+            box-shadow: inset 0.5em 0 rgb(94, 164, 204);
             -webkit-transition: box-shadow 1s;
             transition: box-shadow 1s;
         }
-        
+
         .list-type4 .row:hover {
-            box-shadow: inset 15em 0 rgb(1, 53, 53);
+            box-shadow: inset 3em 0 #10325f;
         }
     </style>
-
 
 </head>
 
 <body>
+    
     <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
@@ -73,6 +73,7 @@
     
      <div class="container my-5">
         <h2 class="text-center display-4 pt-5 mb-5">Donation List</h2>
+
 
         <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
             <div class="row">
@@ -113,9 +114,27 @@
             </ol>
         </div>
          {% endfor %} {% endif %}
-
+        
+        {% if don.has_other_pages %}
+            <ul class="pagination">
+            {% if don.has_previous %}
+                <li class="page-item mr-2 "> <a class="page-link" href="?page={{ don.previous_page_number }}"> Previous</a> </li>
+            {% endif %}
+            {% for i in don.paginator.page_range %}
+                {% if don.number == i %}
+                    <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
+                    
+                {% else %}
+                    <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if don.has_next %}
+                <li class="page-item mr-2"><a class="page-link" href="?page={{ don.next_page_number }}">Next</a></li>
+            {% endif %}
+            </ul>
+        {% endif %}
     </div>
-
+    
 </body>
 
 </html>

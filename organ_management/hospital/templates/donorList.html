@@ -41,17 +41,17 @@
             padding: .4em .4em .4em 2em;
             *padding: .4em;
             margin: .5em 0;
-            background: rgb(2, 109, 109);
-            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
-            color: white;
+            background: rgb(147, 240, 212);
+            background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
+            
             text-decoration: none;
-            box-shadow: inset 0.5em 0 rgb(2, 109, 109);
+            box-shadow: inset 0.5em 0 rgb(94, 164, 204);
             -webkit-transition: box-shadow 1s;
             transition: box-shadow 1s;
         }
-        
+
         .list-type4 .row:hover {
-            box-shadow: inset 15em 0 rgb(1, 53, 53);
+            box-shadow: inset 3em 0 #10325f;
         }
     </style>
 
@@ -73,6 +73,18 @@
         </div>
     </nav>
     <h2 class="text-center display-4 pt-5 mb-5">Registered Donor List</h2>
+    
+    {% if msg_error %}
+        <div class="alert alert-danger" role="alert">
+            {{msg_error}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    
+    
     <div class="container-fluid">
         <table class="table">
             <thead style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
@@ -91,8 +103,8 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody style="background: rgb(2, 109, 109);
-        background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));color: white;">
+            <tbody style="background: rgb(147, 240, 212);
+            background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));">
                 {% for item in don %}
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
@@ -117,6 +129,7 @@
                 {% endfor%}
             </tbody>
         </table>
+
     </div>
 
 </body>

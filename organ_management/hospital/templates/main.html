@@ -20,36 +20,37 @@
 
     <style>
         .list-type4 {
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        .list-type4 ol {
-            counter-reset: li;
-            list-style: none;
-            *list-style: decimal;
-            font-size: 15px;
-            font-family: 'Raleway', sans-serif;
-            padding: 0;
-            /*margin-bottom: 4em;*/
-        }
-        
-        .list-type4 .row {
-            padding: .4em .4em .4em 2em;
-            *padding: .4em;
-            margin: .5em 0;
-            background: rgb(2, 109, 109);
-            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
-            color: white;
-            text-decoration: none;
-            box-shadow: inset 0.5em 0 rgb(2, 109, 109);
-            -webkit-transition: box-shadow 1s;
-            transition: box-shadow 1s;
-        }
-        
-        .list-type4 .row:hover {
-            box-shadow: inset 15em 0 rgb(1, 53, 53);
-        }
+    width: 100%;
+    margin: 0 auto;
+}
+
+.list-type4 ol {
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+    padding: 0;
+    /*margin-bottom: 4em;*/
+}
+
+.list-type4 .row {
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: .5em 0;
+    background: rgb(147, 240, 212);
+    background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
+    
+    text-decoration: none;
+    box-shadow: inset 0.5em 0 rgb(94, 164, 204);
+    -webkit-transition: box-shadow 1s;
+    transition: box-shadow 1s;
+}
+
+.list-type4 .row:hover {
+    box-shadow: inset 3em 0 #10325f;
+}
+
     </style>
 
 </head>
@@ -79,7 +80,7 @@
         {% endif %}
         <h2 class="text-center display-4 pt-5 mb-5">Registered Hospital List</h2>
 
-        <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
+        <div class="list" style="background-color:#10325f; color:white; padding: .4em .4em .4em 2em;">
             <div class="row">
                 <div class="col">
                     Hospital Name
@@ -105,7 +106,7 @@
                             <form action="/Hospital/ViewTrends/" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="email" value="{{hospital.hospital_email}}">
-                                <input type="submit" id="donbtn" class="btn text-center btn-primary" style="padding:0px; background-color:inherit; color:white; border:none" value="{{hospital.hospital_name}}">
+                                <input type="submit" id="donbtn" class="btn text-center btn-primary" style="font-weight: bold; padding:0px; background-color:inherit; color:black; border:none" value="{{hospital.hospital_name}}">
                             </form>
                         </div>
                         <div class="col">

@@ -138,3 +138,36 @@ a#hosbtn:hover {
     }
     
 }
+
+
+.list-type4 {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.list-type4 ol {
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+    padding: 0;
+    /*margin-bottom: 4em;*/
+}
+
+.list-type4 .row {
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: .5em 0;
+    background: rgb(147, 240, 212);
+    background: linear-gradient(to top left, rgb(160, 213, 243), rgb(147, 240, 212));
+    color: white;
+    text-decoration: none;
+    box-shadow: inset 0.5em 0 rgb(2, 109, 109);
+    -webkit-transition: box-shadow 1s;
+    transition: box-shadow 1s;
+}
+
+.list-type4 .row:hover {
+    box-shadow: inset 15em 0 rgb(1, 53, 53);
+}
