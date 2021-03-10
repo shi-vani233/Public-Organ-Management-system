@@ -1,5 +1,5 @@
 from django.urls import path
-from hospital.views import  Deletedonor, ViewYourSentRequest,AcceptRequest, DeclineRequest, Mainpage, add_donor,hospitalHome,DonorList,PotentialDonorList,registerhospital,loginhospital,logout,registerpage,loginpage,DonorDetails, SendRequest,CancelRequest,ViewRequest,SearchDonor, PledgedDonorsList, ViewTrends,DonationList,ViewDonationList
+from hospital.views import  Deletedonor, SearchData, ViewYourSentRequest,AcceptRequest, DeclineRequest, Mainpage, add_donor,hospitalHome,DonorList,PotentialDonorList,registerhospital,loginhospital,logout,registerpage,loginpage,DonorDetails, SendRequest,CancelRequest,ViewRequest,SearchDonor, PledgedDonorsList, ViewTrends,DonationList,ViewDonationList
 from django.conf.urls import url
 from . import views
 from django.contrib.auth import views as auth_views
@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^ViewTrends/',ViewTrends),
     url(r'^ViewDonationList/',ViewDonationList),
     url(r'^Deletedonor/',Deletedonor),
+    url(r'^SearchData/',SearchData),
 
 
 

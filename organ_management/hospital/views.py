@@ -191,8 +191,16 @@ def PotentialDonorList(request):
                     if i.donor.donor_id != j.donor_id:
                         obj=Donor.objects.get(donor_id=j.donor_id)
                         temp.append(obj)
- 
-            return render(request,'potentialDonor.html',{'other_donors':temp,'hos':hos})     
+
+            paginator = Paginator(temp,5)
+            page = request.GET.get('page', 1)
+            try:
+                tempp = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+            return render(request,'potentialDonor.html',{'other_donors':tempp,'hos':hos})     
                
         return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
 
@@ -489,3 +497,21 @@ def Deletedonor(request):
 
         don=Donor.objects.filter(hospital_email=hospital_email)
         return render(request, 'donorList.html', {'don':don,'msg_error':msg})
+
+def SearchData(request):
+    if request.method == 'GET':
+        query= request.GET.get('q')
+        loggedin_user = request.user.username
+        hos = Hospital.objects.get(hospital_email=loggedin_user)
+        submitbutton= request.GET.get('submit')
+        if query=="" or request.GET.get('page')!=None:
+            return ViewDonationList(request)
+              
+        if query is not None:
+            lookups= Q(organ__icontains=query) | Q(patient_name__icontains=query) | Q(donor_name__icontains=query)
+            results= Donation.objects.filter(lookups).distinct().filter(hospital=hos)
+
+            context={'results': results,
+                     'submitbutton': submitbutton}
+
+            return render(request, 'ViewDonationList.html', context)

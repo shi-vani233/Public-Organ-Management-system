@@ -1,3 +1,4 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models.fields import EmailField
 from django.shortcuts import render
 from django.shortcuts import render,redirect
@@ -14,7 +15,6 @@ from django.db.models import Q
 
 # Create your views here.
 def BloodDonationHome(request):
-    print("YASH GANDO 6 BAUJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ")
     return render(request, 'BloodDonation.html', context=None)
 
 def VolunteerPage(request):
@@ -50,19 +50,29 @@ def Registervol(request):
 
 def VolunteerList(request):
     volunteers=Volunteer.objects.all()
-    return render(request,'VolunteerList.html',{'volunteers':volunteers})
+
+    if volunteers.exists():
+        paginator = Paginator(volunteers,5)
+        page = request.GET.get('page', 1)
+        try:
+            volunteerss = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        return render(request, 'VolunteerList.html', {'volunteers':volunteerss})
+    return render(request, 'VolunteerList.html')
 
 def searchBloodGroup(request):
     if request.method == 'GET':
         query= request.GET.get('q')
 
         submitbutton= request.GET.get('submit')
-        if query=="":
-            volunteers=Volunteer.objects.all()
-            return render(request,'VolunteerList.html',{'volunteers':volunteers})
+        if query=="" or request.GET.get('page')!=None:
+            return VolunteerList(request)
        
         if query is not None:
-            lookups= Q(volunteer_bloodGroup__icontains=query) | Q(volunteer_city__icontains=query)
+            lookups= Q(volunteer_bloodGroup__icontains=query) | Q(volunteer_city__icontains=query) | Q(volunteer_name__icontains=query)
 
             results= Volunteer.objects.filter(lookups).distinct()
 

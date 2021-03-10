@@ -168,7 +168,30 @@
             </ol>
         </div>
         {% endfor%} {% endif %}
+        
+        <!--pagination for volunteers-->
+        {% if volunteers.has_other_pages %}
+            <ul class="pagination">
+            {% if volunteers.has_previous %}
+                <li class="page-item mr-2 "> <a class="page-link" href="?page={{ volunteers.previous_page_number }}"> Previous</a> </li>
+            {% endif %}
+            {% for i in volunteers.paginator.page_range %}
+                {% if volunteers.number == i %}
+                    <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
+                        
+                {% else %}
+                    <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if volunteers.has_next %}
+                <li class="page-item mr-2"><a class="page-link" href="?page={{ volunteers.next_page_number }}">Next</a></li>
+            {% endif %}
+            </ul>
+        {% endif %}
     </div>
+
+
+
 
 
 
