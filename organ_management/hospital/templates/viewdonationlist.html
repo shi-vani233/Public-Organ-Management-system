@@ -90,7 +90,7 @@
             <h1>Results for <b>{{ request.GET.q }}</b></h1>
         </center>
         <br>
-        <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
+        <div class="list" style="background-color:#10325f; color:white; padding: .4em .4em .4em 2em;">
             <div class="row">
                 <div class="col">
                     Donor Name
@@ -134,7 +134,7 @@
 
         <!--pre result-->
         {% if don %}
-        <div class="list" style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
+        <div class="list" style="background-color:#10325f; color:white; padding: .4em .4em .4em 2em;">
             <div class="row">
                 <div class="col">
                     Donor Name
@@ -172,7 +172,7 @@
                 </li>
             </ol>
         </div>
-        {% endfor %} {% else %} No search results for this query {% endif %}
+        {% endfor %}  {% endif %}
         <!--pagination for donation list-->
         {% if don.has_other_pages %}
         <ul class="pagination">

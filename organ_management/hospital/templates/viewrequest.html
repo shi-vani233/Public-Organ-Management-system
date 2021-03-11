@@ -43,36 +43,46 @@
         <i class="fas fa-folder-open" style="font-size:50px"></i><br>No Requests are Pending!
     </div>
     {% endif%} {% for req in allreq %}
-    <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-8">
-                    <h5 class="card-title">{{req.sender.hospital_name}}
-                    </h5>
-
-                    <p class="card-text">
-                        {{req.sender.hospital_email}},{{req.sender.hospital_city}} <br>For: {{req.donor.donor_name}},Organ: {{req.donor.donor_organ}}
-                    </p>
-                </div>
-                <div class="col-md-2 d-flex justify-content-end">
-                    <form action="/Hospital/AcceptRequest/" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{req.req_id}}">
-                        <input type="submit" class="btn text-center btn-success" value="Accept">
-                    </form>
-                </div>
-                <div class="col-md-2">
-                    <form action="/Hospital/DeclineRequest/" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{req.req_id}}">
-                        <input type="submit" class="btn text-center btn-danger" value="Decline">
-                    </form>
+    <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
+            <div class="card-header" style="   background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+          color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none; margin-bottom:5px; 
+            ">
+                <h1>{{req.sender.hospital_name}}</h1>
+                <div>
+                    <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.sender.hospital_address}},{{req.sender.hospital_city}}
                 </div>
             </div>
-        </div>
-        <div class="card-footer text-muted">
-            Send you request at : {{req.organ_request_time}}
-        </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="card-text" style="font-weight: 500;" p >
+                        For Donor: {{req.donor.donor_name}}<br>
+                        Organ: {{req.donor.donor_organ}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+       
+             <div class="card-footer">
+                <div class="row">
+                    <div class="col">
+                        Send you request at : {{req.organ_request_time}}
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <form action="/Hospital/AcceptRequest/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{req.req_id}}">
+                                <input style="margin-right:5px;" type="submit" class="btn text-center btn-success" value="Accept">
+                        </form>
+                        <form action="/Hospital/DeclineRequest/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{req.req_id}}">
+                                <input type="submit" class="btn text-center btn-danger" value="Decline">
+                        </form>
+                    </div>
+                </div>
+            </div>
 
     </div>
     {% endfor %}
@@ -84,22 +94,47 @@
         <i class="fa fa-comment" style="font-size:50px"></i><br>no accepted request!
     </div>
     {% endif%} {% for req in acceptedreq %}
-    <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-8">
-                    <h5 class="card-title">{{req.sender.hospital_name}}
-                    </h5>
-
-                    <p class="card-text">
-                        {{req.sender.hospital_email}},{{req.sender.hospital_city}} <br>For: {{req.donor.donor_name}},Organ: {{req.donor.donor_organ}}
-                    </p>
+    <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
+            <div class="card-header" style="   background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+          color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none; margin-bottom:5px; 
+            ">
+                <h1>{{req.sender.hospital_name}}</h1>
+                <div>
+                    <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.sender.hospital_address}},{{req.sender.hospital_city}}
                 </div>
             </div>
-        </div>
-        <div class="card-footer text-muted">
-            {{req.organ_request_time}}
-        </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p class="card-text" style="font-weight: 500;" p >
+                        For Donor: {{req.donor.donor_name}}<br>
+                        Organ: {{req.donor.donor_organ}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+       
+             <div class="card-footer">
+                <div class="row">
+                    <div class="col">
+                        Send you request at : {{req.organ_request_time}}
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <form action="/Hospital/AcceptRequest/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{req.req_id}}">
+                                <input style="margin-right:5px;" type="submit" class="btn text-center btn-success" value="Accept">
+                        </form>
+                        <form action="/Hospital/DeclineRequest/" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{req.req_id}}">
+                                <input type="submit" class="btn text-center btn-danger" value="Decline">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
     </div>
     {% endfor %}
 
