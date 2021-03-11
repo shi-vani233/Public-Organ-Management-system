@@ -37,14 +37,12 @@
         </div>
     </nav>
 
-    <h2 class="mb-5 text-center display-4">Pending Requests</h2>
-    {% if allreq%}
-    {% else %}
-        <div class="mb-2 text-center">
-            <i class="fa fa-bookmark" style="font-size:36px"></i><br>no pending requests!
-        </div>
-    {% endif%}
-    {% for req in allreq %}
+    <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Pending Requests :-</h2>
+    {% if allreq%} {% else %}
+    <div class="mb-5 text-center scale-in-center" style="font-size: 20px;">
+        <i class="fas fa-folder-open" style="font-size:50px"></i><br>No Requests are Pending!
+    </div>
+    {% endif%} {% for req in allreq %}
     <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
         <div class="card-body">
             <div class="row">
@@ -80,14 +78,12 @@
     {% endfor %}
     <br>
     <br>
-    <h2 class="mb-5 text-center display-4">Accepted Requests</h2>
-    {% if acceptedreq%}
-    {% else %}
-        <div class="mb-2 text-center">
-            <i class="fa fa-comment" style="font-size:36px"></i><br>no accepted request!
-        </div>
-    {% endif%}
-    {% for req in acceptedreq %}
+    <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Accepted Requests :-</h2>
+    {% if acceptedreq%} {% else %}
+    <div class="mb-5 text-center scale-in-center" style="font-size: 20px;">
+        <i class="fa fa-comment" style="font-size:50px"></i><br>no accepted request!
+    </div>
+    {% endif%} {% for req in acceptedreq %}
     <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
         <div class="card-body">
             <div class="row">

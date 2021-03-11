@@ -22,15 +22,16 @@
 </head>
 <style>
     input#donbtn {
-        border-color: #10325f;
+        border-color: rgb(2, 109, 109);
         color: rgb(255, 255, 255);
-        background-color: #10325f;
+        background-color: rgb(2, 109, 109);
+        border: none;
     }
     
     input#donbtn:hover {
-        background-color: rgb(7, 77, 77);
+        background-color: #10325f;
         color: white;
-        border-color: rgb(255, 255, 255);
+        border: none;
     }
     
     .biLeft {
@@ -74,6 +75,22 @@
             animation-timing-function: ease-out;
         }
     }
+    
+    div#don-card {
+        background: rgb(147, 240, 212);
+        background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
+        color: black;
+        width: 80%;
+        height: 22%;
+        margin: auto;
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px .3px rgb(173, 173, 173);
+        border: none;
+    }
+    
+    div#don-card:hover {
+        box-shadow: 2px 2px 10px .5px rgb(92, 92, 92);
+    }
 </style>
 
 <body>
@@ -110,15 +127,17 @@
             <h1>Results for <b>{{ request.GET.q }}</b></h1>
         </center>
         <br/><br/> {% for result in results %} {% for i in hos %} {% if result.hospital_email == i.hospital_email %}
-        <div class="card my-2 text-white biLeft" style=" background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));width: 80%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+        <div class="card my-2 biLeft" id="don-card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-9">
-                        <h5 class="card-title">{{i.hospital_name}}
-                        </h5>
-                        <p class="card-text">
-                            {{i.hospital_address}},{{i.hospital_city}} <br>Organ: {{result.donor_organ}}
-                        </p>
+                        <h4 class="card-title">{{result.donor_organ}}
+                        </h4>
+                        <div class="card-text">
+                            <div>
+                                <p style="margin-bottom: 2px;font-weight:500;">{{i.hospital_name}}</p>{{i.hospital_address}},{{i.hospital_city}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <form action="/Hospital/DonorDetails/" method="POST">
@@ -129,23 +148,24 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer  text-white ">
+            <div class="card-footer">
                 {{result.donor_added_time}}
             </div>
         </div>
         {% endif %} {% endfor %}{% endfor %} {% else %} No search results for this query {% endif %} {% endif %} {% if other_donors %}
-        <h2 class="mb-5 text-center display-4">Donors</h2>
+        <h2 class="mb-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Donors :-</h2>
         {% endif %} {% for item in other_donors %} {% for i in hos %} {% if item.hospital_email == i.hospital_email %}
-        <div class="card my-4 text-white biLeft" style=" background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));width: 80%;height: 21%;margin: auto;border-radius: 20px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
+        <div class="card my-4 biLeft" id="don-card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-9">
-                        <h5 class="card-title">{{i.hospital_name}}
-                        </h5>
-
-                        <p class="card-text">
-                            {{i.hospital_address}},{{i.hospital_city}} <br>Organ: {{item.donor_organ}}
-                        </p>
+                        <h4 class="card-title">{{item.donor_organ}}
+                        </h4>
+                        <div class="card-text">
+                            <div>
+                                <p style="margin-bottom: 2px;font-weight:500;">{{i.hospital_name}}</p>{{i.hospital_address}},{{i.hospital_city}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <form action="/Hospital/DonorDetails/" method="POST">
@@ -156,30 +176,24 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-white ">
+            <div class="card-footer">
                 {{item.donor_added_time}}
             </div>
 
         </div>
-        {% endif %} {% endfor %} {% endfor %}
-
-        {% if other_donors.has_other_pages %}
-            <ul class="pagination">
+        {% endif %} {% endfor %} {% endfor %} {% if other_donors.has_other_pages %}
+        <ul class="pagination d-flex justify-content-center mt-5">
             {% if other_donors.has_previous %}
-                <li class="page-item mr-2 "> <a class="page-link" href="?page={{ other_donors.previous_page_number }}"> Previous</a> </li>
+            <li class="page-item mr-2 "> <a class="page-link" href="?page={{ other_donors.previous_page_number }}"> Previous</a> </li>
+            {% endif %} {% for i in other_donors.paginator.page_range %} {% if other_donors.number == i %}
+            <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
+
+            {% else %}
+            <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %} {% endfor %} {% if other_donors.has_next %}
+            <li class="page-item mr-2"><a class="page-link" href="?page={{ other_donors.next_page_number }}">Next</a></li>
             {% endif %}
-            {% for i in other_donors.paginator.page_range %}
-                {% if other_donors.number == i %}
-                    <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
-                    
-                {% else %}
-                    <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                {% endif %}
-            {% endfor %}
-            {% if other_donors.has_next %}
-                <li class="page-item mr-2"><a class="page-link" href="?page={{ other_donors.next_page_number }}">Next</a></li>
-            {% endif %}
-            </ul>
+        </ul>
         {% endif %}
     </div>
 

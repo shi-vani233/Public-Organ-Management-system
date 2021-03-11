@@ -81,8 +81,8 @@
     <br>
     <br>
     <div class="container py-5">
-        <h2 class="my-5 text-center " style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-            By pledging Your organs you can save upto 8 lives!</h2>
+        <h1 class="my-5 text-center " style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">
+            By pledging Your organs you can save upto 8 lives!</h1>
         <div id="carouselExampleIndicators" class="carousel slide bg-dark" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -124,8 +124,8 @@
         </div>
     </div>
     <div class="container mb-5">
-        <h2 class="my-5 text-center " style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-            How Donation Works</h2>
+        <h1 class="my-5 text-center " style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">
+            How Donation Works</h1>
         <div class="row">
             <div class="col-6 my-3">
                 <div class="card card-flip" id="card-flip">
@@ -205,6 +205,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
+                    <h4 class="modal-title">Donor Pledge Form</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -223,7 +224,7 @@
                     <form action="/DonorPledge/" method="POST">
                         {% csrf_token %}
                         <!-- Name -->
-                        <div class="form-group">
+                        <div class="form-group ">
                             <input type="text" name="pledge_name" id="nm" class="form-control" placeholder="Name" style="border-radius: 20px;" autocomplete="off" required/>
                         </div>
 

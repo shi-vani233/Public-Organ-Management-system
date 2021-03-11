@@ -31,8 +31,8 @@
             border: 3px solid #f1f1f1;
             margin: auto;
             margin-bottom: 30vh;
-            margin-top: 30vh;
-            width: 60%;
+            margin-top: 20vh;
+            width: 70%;
             height: 40%;
             padding-top: 80px;
             text-align: center;
@@ -40,16 +40,16 @@
         }
         
         a#hosbtn {
-            border-color: #10325f;
+            border: none;
             color: rgb(255, 255, 255);
             border-width: 3px;
             background-color: #10325f;
         }
         
         a#hosbtn:hover {
-            background-color: inherit;
+            background-color: rgb(2, 109, 109);
             color: white;
-            border-color: #ffffff;
+            border: 3px solid white;
         }
     </style>
 
@@ -75,52 +75,56 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        {% if msg_donor %}
+        <div class="alert alert-success alert-dismissible fade show my-5" role="alert" style="width: 70%;margin:auto;">
+            {{msg_donor}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        {% endif %}
 
-    {% if msg_donor %}
-    <div class="alert alert-success" role="alert">
-        {{msg_donor}}
+        <div class="bg-text" data-aos="zoom-in">
+            <i class="fa fa-male" style="font-size: 38px;"></i>
+            <h3>is there any organ donor at your hospital !</h3>
+            <a data-toggle="modal" data-target="#exampleModal3" class="btn btn-outline-light btn-lg" id="hosbtn">Add Donor</a>
+        </div>
+
+        <div class="bg-text" data-aos="zoom-in">
+            <i class="fas fa-clipboard-list" style="font-size: 38px;"></i>
+            <h3>The Registered Donor list</h3>
+            <a href="/Hospital/donorList/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
+        </div>
+
+        <div class="bg-text" data-aos="zoom-in">
+            <i class="fas fa-search-location" style="font-size: 38px;"></i>
+            <h3>The Potential Donor list</h3>
+            <p>The Donors added by other Hospitals are listed here.</p>
+            <a href="/Hospital/potentialDonor/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
+        </div>
+
+        <div class="bg-text" data-aos="zoom-in">
+            <i class="fas fa-users" style="font-size: 38px;"></i>
+            <h3>Your Sent Request List</h3>
+            <p>The organ Requests that you sent to other Hospitals are shown here.</p>
+            <a href="/Hospital/ViewYourSentRequest/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
+        </div>
+
+        <div class="bg-text" data-aos="zoom-in">
+            <i class="fa fa-male" style="font-size: 38px;"></i>
+            <h3>Add Donation Details </h3>
+            <p>Hospitals can enter the details of Donation already made.</p>
+            <a data-toggle="modal" data-target="#exampleModal4" class="btn btn-outline-light btn-lg" id="hosbtn">Add Details</a>
+        </div>
+
     </div>
-    {% endif %}
-
-    <div class="bg-text" data-aos="zoom-in">
-        <i class="fa fa-male" style="font-size: 38px;"></i>
-        <h3>is there any organ donor at your hospital !</h3>
-        <a data-toggle="modal" data-target="#exampleModal3" class="btn btn-outline-light btn-lg" id="hosbtn">Add Donor</a>
-    </div>
-
-    <div class="bg-text" data-aos="zoom-in">
-        <i class="fas fa-clipboard-list" style="font-size: 38px;"></i>
-        <h3>The Registered Donor list</h3>
-        <a href="/Hospital/donorList/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
-    </div>
-
-    <div class="bg-text" data-aos="zoom-in">
-        <i class="fas fa-search-location" style="font-size: 38px;"></i>
-        <h3>The Potential Donor list</h3>
-        <p>The Donors added by other Hospitals are listed here.</p>
-        <a href="/Hospital/potentialDonor/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
-    </div>
-
-    <div class="bg-text" data-aos="zoom-in">
-        <i class="fas fa-users" style="font-size: 38px;"></i>
-        <h3>Your Sent Request List</h3>
-        <p>The organ Requests that you sent to other Hospitals are shown here.</p>
-        <a href="/Hospital/ViewYourSentRequest/" class="btn btn-outline-light btn-lg" id="hosbtn">View List</a>
-    </div>
-
-    <div class="bg-text" data-aos="zoom-in">
-        <i class="fa fa-male" style="font-size: 38px;"></i>
-        <h3>Add Donation Details </h3>
-        <p>Hospitals can enter the details of Donation already made.</p>
-        <a data-toggle="modal" data-target="#exampleModal4" class="btn btn-outline-light btn-lg" id="hosbtn">Add Details</a>
-    </div>
-
-
     <!-- Add Donar Modal -->
     <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
+                    <h4 class="modal-title">Donor Registration Form</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -295,6 +299,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
+                    <h4 class="modal-title">Organ transplant Form</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

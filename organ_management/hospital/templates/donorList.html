@@ -43,13 +43,12 @@
             margin: .5em 0;
             background: rgb(147, 240, 212);
             background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
-            
             text-decoration: none;
             box-shadow: inset 0.5em 0 rgb(94, 164, 204);
             -webkit-transition: box-shadow 1s;
             transition: box-shadow 1s;
         }
-
+        
         .list-type4 .row:hover {
             box-shadow: inset 3em 0 #10325f;
         }
@@ -72,20 +71,18 @@
             </div>
         </div>
     </nav>
-    <h2 class="text-center display-4 pt-5 mb-5">Registered Donor List</h2>
-    
-    {% if msg_error %}
-        <div class="alert alert-danger" role="alert">
+    <h2 class="text-center display-4 pt-5 mb-5" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Registered Donor List :-</h2>
+
+    <div class="container-fluid">
+
+        {% if msg_error %}
+        <div class="alert alert-danger mb-5" role="alert" style="width: 70%;margin:auto;">
             {{msg_error}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    {% endif %}
-
-    
-    
-    <div class="container-fluid">
+        {% endif %}
         <table class="table">
             <thead style="background-color:rgb(1, 53, 53); color:white; padding: .4em .4em .4em 2em;">
                 <tr>

@@ -6,7 +6,6 @@ from home.models import Pledge
 
 def Homepage(request):
     hos = Hospital.objects.all()
-    print("YASH GANDO 6 BAUJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ")
     return render(request, 'home.html', {'hos':hos})
 
 def DonorPledge(request):

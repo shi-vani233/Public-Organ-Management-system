@@ -20,6 +20,20 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 </head>
+<style>
+    input#rebtn {
+        border-color: rgb(2, 109, 109);
+        color: rgb(255, 255, 255);
+        background-color: rgb(2, 109, 109);
+        border: none;
+    }
+    
+    input#rebtn:hover {
+        background-color: #10325f;
+        color: white;
+        border: none;
+    }
+</style>
 
 <body>
     <!--navbar-->
@@ -36,36 +50,66 @@
         </div>
     </nav>
 
-    {% if msg %}
-    <div class="alert alert-success" role="alert">
-        {{msg}}
-    </div>
-    {% endif %}
 
-    <div class="container py-5 scale-in-center">
-
-        {% for i in hos %} {% if i.hospital_email == donor.hospital_email %}
-        <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 100%;height:60%; margin: auto;border-radius: 20px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
-            <div class="card-body">
-
-                <div class="card-title">
-                    <h1>{{i.hospital_name}}</h1>
+    <div class="container">
+        {% if msg %}
+        <div class="alert alert-success mt-5" role="alert" style="width: 70%;margin:auto;">
+            {{msg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        <br> {% for i in hos %} {% if i.hospital_email == donor.hospital_email %}
+        <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 60%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
+            <div class="card-header" style="   background: rgb(2, 109, 109);
+            background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
+          color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none;
+            ">
+                <h1>{{i.hospital_name}}</h1>
+                <div>
+                    <p style="margin-bottom: 2px;font-weight:500;">{{i.hospital_name}}</p>{{i.hospital_address}},{{i.hospital_city}}
                 </div>
-                <p class="card-text">
-                    <div class="row"> {{i.hospital_address}},{{i.hospital_city}}</div>
+            </div>
 
-                    <div class="row"> donor Name: {{donor.donor_name}}</div>
-                    <div class="row">donor organ: {{donor.donor_organ}}</div>
-                    <div class="row"> donor Gender: {{donor.donor_gender}}</div>
-                    <div class="row">donor height: {{donor.donor_height}}</div>
-                    <div class="row">donor weight: {{donor.donor_weight}}</div>
-                    <div class="row">if donor has dieseas: {%if donor.donor_diseases %} {{donor.donor_diseases}} {% else%} not having any diseases {% endif %}</div>
-                    <div class="row">if donor has addiction: {%if donor.donor_addiction%}{{donor.donor_addiction}}{%else%} don't have any addiction{% endif %}</div>
+            <table class="card-table table " style="font-weight: 500;">
+                <tbody>
+                    <tr>
+                        <td>Donor Name:</td>
+                        <td>{{donor.donor_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Donor organ: </td>
+                        <td>{{donor.donor_organ}}</td>
 
-                    <div class="row">Any Other Concerns: {% if donor.donor_info %} {{donor.donor_info}} {%else%} Nothing serious {% endif %}</div>
-
-
-                </p>
+                    </tr>
+                    <tr>
+                        <td>Donor Gender:</td>
+                        <td>{{donor.donor_gender}}</td>
+                    </tr>
+                    <tr>
+                        <td>Donor height: </td>
+                        <td>{{donor.donor_height}}</td>
+                    </tr>
+                    <tr>
+                        <td>Donor weight: </td>
+                        <td>{{donor.donor_weight}}</td>
+                    </tr>
+                    <tr>
+                        <td>Donor dieseas: </td>
+                        <td>{%if donor.donor_diseases %} {{donor.donor_diseases}} {% else%} not having any diseases {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Donor addiction: </td>
+                        <td> {%if donor.donor_addiction%}{{donor.donor_addiction}}{%else%} don't have any addiction{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Any Other Concerns: </td>
+                        <td> {% if donor.donor_info %} {{donor.donor_info}} {%else%} Nothing serious {% endif %}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card-footer d-flex justify-content-end">
                 {% if ChangedState == True %}
                 <form action="/Hospital/CancelRequest/" method="POST">
                     {% csrf_token %}
@@ -76,49 +120,17 @@
                 <form action="/Hospital/SendRequest/" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="id" value="{{donor.donor_id}}">
-                    <input type="submit" class="btn text-center btn-primary" value="Send request">
+                    <input type="submit" class="btn text-center" id="rebtn" value="Send request">
                 </form>
                 {% endif %}
-
             </div>
 
 
         </div>
         {% endif %} {% endfor %}
-    </div>
-    <!--footer-->
-    <footer class="pt-5 pb-2 mt-5" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );">
-        <div class="container text-white">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <div class="logo-part">
-                        <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
-                font-size: 45px;"> Save-Lifes</a>
-                        <p>7637 Laurel Dr. King Of Prussia, PA 19406 Donated tissues save or dramatically enhance the quality of life for the people who receive them. As an organ and tissue donor, you can enhance the lives of up to 75 people. Corneas, the
-                            middle ear, skin, heart valves, bone, veins, cartilage, tendons, and ligaments can be stored in tissue banks and used to restore sight, cover burns, repair hearts, replace veins, and mend damaged connective tissue and cartilage
-                            in recipients.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-center">
-                    <h3 class="text mb-4">Contact Us: <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!" class="text-white">Email1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Email2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Email3</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 
-    </footer>
+    </div>
+
 
 
 </body>

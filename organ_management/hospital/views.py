@@ -146,7 +146,6 @@ def add_donor(request):
                     hospital_email=hospital_email,
                     )
         don.save()
-    
     msg_donor="Donor added successfully!"
     return render(request, 'hospitalHome.html',{'msg_donor':msg_donor})
 
@@ -192,7 +191,7 @@ def PotentialDonorList(request):
                         obj=Donor.objects.get(donor_id=j.donor_id)
                         temp.append(obj)
 
-            paginator = Paginator(temp,5)
+            paginator = Paginator(temp,4)
             page = request.GET.get('page', 1)
             try:
                 tempp = paginator.page(page)
@@ -233,16 +232,8 @@ def SearchDonor(request):
             query= request.GET.get('q')
             submitbutton= request.GET.get('submit')
 
-            if query=="":
-                if allreadyaccepted.exists():
-                    temp=[]
-                    for i in allreadyaccepted:
-                        for j in don:
-                            if i.donor.donor_id != j.donor_id:
-                                obj=Donor.objects.get(donor_id=j.donor_id)
-                                temp.append(obj)
-                    return render(request,'potentialDonor.html',{'other_donors':temp,'hos':hos})     
-                return render(request,'potentialDonor.html',{'other_donors':don,'hos':hos})
+            if query=="" or request.GET.get('page')!=None:
+                return PotentialDonorList(request)
 
             if query is not None:
                 lookups= Q(donor_organ__icontains=query)
@@ -273,9 +264,6 @@ def SearchDonor(request):
                 final_result=[]
                 for i in distance:
                     final_result.append(i.donor)
-
-
-
                 context={'results': final_result,
                         'submitbutton': submitbutton,
                         'hos':hos}

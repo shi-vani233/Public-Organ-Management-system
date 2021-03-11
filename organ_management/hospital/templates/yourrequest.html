@@ -23,7 +23,7 @@
 
 <body>
     <!--navbar-->
-   <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
         <a class="navbar-brand" href="#" style="font-size: 35px;">Save-Lifes</a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -35,8 +35,8 @@
             </div>
         </div>
     </nav>
-    <h2 class="mb-5 text-center display-4">Your Requests</h2>
-    {% for req in allreq %}
+    <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Your Requests :-</h2>
+    {% if allreq %} {% for req in allreq %}
     <div class="card my-2 text-dark " style="background:rgb(209, 230, 231) ;width: 70%; margin: auto;border-radius: 40px;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
         <div class="card-body">
             <div class="row">
@@ -76,7 +76,12 @@
         </div>
 
     </div>
-    {% endfor %}
+    {% endfor %} {% else %}
+    <div class="mb-5 text-center scale-in-center" style="font-size: 20px;">
+        <i class="fa fa-bookmark" style="font-size:50px"></i><br>You haven't send any Requests Latey!
+    </div>
+    {% endif %}
+
 </body>
 
 

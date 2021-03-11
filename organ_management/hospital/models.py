@@ -28,6 +28,8 @@ class Donor(models.Model):
     models.ForeignKey(Hospital,on_delete=models.CASCADE)
     class Meta:
         unique_together = ('donor_id','hospital_email')
+    def __str__(self):
+        return str(self.donor_added_time) 
 
 class OrganRequest(models.Model):
     req_id=models.AutoField(primary_key=True)
