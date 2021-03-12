@@ -376,6 +376,7 @@ def ViewTrends(request):
     getemail=request.POST.get('email','')
     print(getemail)
     hos = Hospital.objects.get(hospital_email=getemail)
+    don = Pledge.objects.filter(pledge_hospital=hos)
     print(hos)
     trend = Transplant.objects.filter(hospital=hos)
     if trend.exists():
@@ -399,8 +400,8 @@ def ViewTrends(request):
         buf.seek(0)
         string=base64.b64encode(buf.read())
         uri=urllib.parse.quote(string)
-        return render(request, 'viewtrends.html', {'trend': trend,'hos':hos,'data':uri})
-    return render(request, 'viewtrends.html',{'hos':hos})
+        return render(request, 'viewtrends.html', {'trend': trend,'hos':hos,'data':uri,'don':don})
+    return render(request, 'viewtrends.html',{'hos':hos, 'don':don})
 
 
 def DonationList(request):
