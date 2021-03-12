@@ -158,6 +158,16 @@ def DonorList(request):
             temp_list=i.donor_diseases.strip("']['").split(',')
             print(type(temp_list))
         # print("..............................")
+        if don.exists():
+            paginator = Paginator(don,5)
+            page = request.GET.get('page', 1)
+            try:
+                don = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+            return render(request, 'donorList.html',{'don' : don})
         return render(request, 'donorList.html', {'don':don})
 
 def PotentialDonorList(request):
@@ -369,31 +379,47 @@ def PledgedDonorsList(request):
         loggedin_user=request.user.username
         current_hospital = Hospital.objects.get(hospital_email=loggedin_user)
         donor = Pledge.objects.filter(pledge_hospital=current_hospital)
+        if donor.exists():
+            paginator = Paginator(donor,5)
+            page = request.GET.get('page', 1)
+            try:
+                donn = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+            return render(request, 'pledgeddonordetails.html',{'donor' : donn})
         return render(request, 'pledgeddonordetails.html',{'donor' : donor})
    
 
 def ViewTrends(request):
-    getemail=request.POST.get('email','')
+    if request.method == 'GET':
+        getemail=request.GET.get('email','')
+    elif request.method == 'POST':
+        getemail=request.POST.get('email','')
     print(getemail)
     hos = Hospital.objects.get(hospital_email=getemail)
     don = Pledge.objects.filter(pledge_hospital=hos)
-    print(hos)
+    if don.exists():
+            paginator = Paginator(don ,5)
+            page = request.GET.get('page', 1)
+            try:
+                don = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
     trend = Transplant.objects.filter(hospital=hos)
     if trend.exists():
         left = [1,2,3,4,5,6,7,8] 
- 
         for i in trend:
             height = [i.kidney,i.liver,i.lung,i.heart,i.pancreas,i.skin,i.eye,i.intestine] 
-  
         tick_label = ['kidney','liver','lung','heart','pancreas','skin','eye','intestine'] 
         plt.bar(left, height, tick_label = tick_label, width = 0.5,color="aqua") 
         plt.ylim([0,20])
         plt.xlabel('Organ') 
-
         plt.ylabel('No. of transplants') 
-
         plt.title('Records') 
-
         fig=plt.gcf()
         buf=io.BytesIO()
         fig.savefig(buf,format='png')

@@ -100,6 +100,19 @@
         }
     }
     
+    .fa-envelope:hover {
+        animation: refresh 1s cubic-bezier(.36, .07, .57, .99) infinite;
+    }
+    
+    @keyframes refresh {
+        from {
+            transform: scale(1.5) rotate(0);
+        }
+        to {
+            transform: scale(1.5) rotate(360deg);
+        }
+    }
+    
     .fa-address-card:hover {
         animation: refresh 1s cubic-bezier(.36, .07, .57, .99) infinite;
     }
@@ -112,38 +125,39 @@
             transform: scale(1.5) rotate(360deg);
         }
     }
-  .list-type4 {
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        .list-type4 ol {
-            counter-reset: li;
-            list-style: none;
-            *list-style: decimal;
-            font-size: 15px;
-            font-family: 'Raleway', sans-serif;
-            padding: 0;
-            width: 100%;
-            /*margin-bottom: 4em;*/
-        }
-        
-        .list-type4 .row {
-            padding: .4em .4em .4em 2em;
-            *padding: .4em;
-            margin: .5em 0;
-            background: rgb(147, 240, 212);
-            background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
-            color: black;
-            text-decoration: none;
-            box-shadow: inset 0.5em 0 rgb(94, 164, 204);
-            -webkit-transition: box-shadow 1s;
-            transition: box-shadow 1s;
-        }
-        
-        .list-type4 .row:hover {
-            box-shadow: inset 3em 0 #10325f;
-        }
+    
+    .list-type4 {
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .list-type4 ol {
+        counter-reset: li;
+        list-style: none;
+        *list-style: decimal;
+        font-size: 15px;
+        font-family: 'Raleway', sans-serif;
+        padding: 0;
+        width: 100%;
+        /*margin-bottom: 4em;*/
+    }
+    
+    .list-type4 .row {
+        padding: .4em .4em .4em 2em;
+        *padding: .4em;
+        margin: .5em 0;
+        background: rgb(147, 240, 212);
+        background: linear-gradient(to top left, rgb(160, 213, 243), rgb(220, 236, 235));
+        color: black;
+        text-decoration: none;
+        box-shadow: inset 0.5em 0 rgb(94, 164, 204);
+        -webkit-transition: box-shadow 1s;
+        transition: box-shadow 1s;
+    }
+    
+    .list-type4 .row:hover {
+        box-shadow: inset 3em 0 #10325f;
+    }
 </style>
 
 <body>
@@ -163,7 +177,7 @@
     </nav>
 
     <div class="container py-5">
-       <h2 class="text-center display-4 pt-5 mb-5" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 3px rgb(4, 153, 153);">-:{{hos.hospital_name}}:-</h2>
+        <h2 class="text-center display-4 pt-5 mb-5" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 3px rgb(4, 153, 153);">-:{{hos.hospital_name}}:-</h2>
         <div class="card my-2 text-dark" style="background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));margin: auto;border-radius: 20px;width: 60%;  box-shadow: 2px 2px 5px .1px rgb(201, 200, 200);border:none">
 
             <div class="card-body text-white">
@@ -178,6 +192,9 @@
                         <i class='fas fa-phone-alt' style="margin-right: 20px;"></i> {{hos.hospital_mobile_no}}
                     </p>
                     <p>
+                        <i class='fas fa-envelope' style="margin-right: 20px;"></i> {{hos.hospital_email}}
+                    </p>
+                    <p>
                         <i class='fas fa-address-card' style="margin-right: 20px;"></i> {{hos.hospital_address}}, {{hos.zip_code}}
                     </p>
                 </div>
@@ -187,10 +204,10 @@
 
         <h2 class="text-center display-4 pt-5 mb-5" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 3px rgb(4, 153, 153);">-:Transplant Trends:-</h2>
         <div class="d-flex justify-content-center"> <img src="data:image/png;base64,{{data}}" alt=""></div>
-
+        {% if don %}
         <h2 class="text-center display-4 pt-5 mb-5" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 3px rgb(4, 153, 153);">-:List Of Donor Pledge:-</h2>
         <!--div class="d-flex justify-content-center"-->
-        
+
         <div class="list" style="background-color:#10325f; color:white; padding: .4em .4em .4em 2em;">
             <div class="row">
                 <div class="col">
@@ -212,8 +229,8 @@
         </div>
 
 
-            {% for i in don%}
-            <div class="list-type4">
+        {% for i in don%}
+        <div class="list-type4">
             <ol>
                 <li>
                     <div class="row">
@@ -236,28 +253,34 @@
                 </li>
             </ol>
         </div>
-        {% endfor %}
+        {% endfor %} {% endif %}
         <!--/div-->
-         <!--pagination for donor Pledge list-->
+        <!--pagination for donor Pledge list-->
         {% if don.has_other_pages %}
-        <ul class="pagination">
+        <ul class="pagination d-flex justify-content-center mt-5">
             {% if don.has_previous %}
-            <li class="page-item mr-2 "> <a class="page-link" href="?page={{ don.previous_page_number }}"> Previous</a> </li>
+            <li class="page-item mr-2 "> <a class="page-link" href="?page={{ don.previous_page_number }}&email={{hos.hospital_email}}"> Previous</a> </li>
             {% endif %} {% for i in don.paginator.page_range %} {% if don.number == i %}
             <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
 
             {% else %}
-            <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}&email={{hos.hospital_email}}">{{ i }}</a></li>
             {% endif %} {% endfor %} {% if don.has_next %}
-            <li class="page-item mr-2"><a class="page-link" href="?page={{ don.next_page_number }}">Next</a></li>
+            <li class="page-item mr-2"><a class="page-link" href="?page={{ don.next_page_number }}&email={{hos.hospital_email}}">Next</a></li>
             {% endif %}
         </ul>
         {% endif %}
 
 
     </div>
-
-     <!--footer-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
     <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );  ">
         <div class="container text-white">
             <div class="row">
@@ -265,13 +288,10 @@
                     <div class="logo-part">
                         <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
                         font-size: 45px;"> TOMO</a>
-                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases 
-                        for organ transplant recipients, and to help save the lives of accident victims. With a growing population and advances in 
-                        medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. 
-                        Still many people are losing their lives every day in emergency situations because we are suffering from lack of blood & organ in blood and organ Banks, and
-                        they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an easy and fast way to search for
-                        blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and
-                        facilitates the search process for recipients and make it easier than before.
+                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases for organ transplant recipients, and to help save the lives of accident victims. With
+                            a growing population and advances in medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. Still many people are losing their lives every day in emergency situations
+                            because we are suffering from lack of blood & organ in blood and organ Banks, and they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an
+                            easy and fast way to search for blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and facilitates the search process for recipients and make it easier than before.
 
                         </p>
                     </div>
@@ -281,13 +301,13 @@
                     </h3>
                     <ul class="list-unstyled">
                         <li class="text-white">
-                           patelshivani2303@gmail.com
+                            patelshivani2303@gmail.com
                         </li>
                         <li class="text-white">
                             devanshisheth511@gmail.com
                         </li>
                         <li class="text-white">
-                           paramben10@gmail.com
+                            paramben10@gmail.com
                         </li>
                     </ul>
                 </div>
@@ -296,7 +316,7 @@
 
     </footer>
 
-   
+
 </body>
 
 </html>

@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 PATH ="C:\Program Files (x86)\chromedriver.exe"
 driver=webdriver.Chrome(PATH)
-driver.get("http://127.0.0.1:8000/Blood_Donation/Volunteer/")
+driver.get("http://127.0.0.1:8000/Blood_Donation/VolunteerList/")
 print(driver.title)
 print("all the volunteers having blood group A+")
 search=driver.find_element_by_name("q")

@@ -91,6 +91,80 @@
     div#don-card:hover {
         box-shadow: 2px 2px 10px .5px rgb(92, 92, 92);
     }
+    
+    p#ani2 {
+        animation: heartbeat 1.5s ease-in-out infinite both;
+    }
+    
+    @-webkit-keyframes heartbeat {
+        from {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        10% {
+            -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        17% {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        33% {
+            -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        45% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
+    
+    @keyframes heartbeat {
+        from {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        10% {
+            -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        17% {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        33% {
+            -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        45% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
 </style>
 
 <body>
@@ -153,7 +227,8 @@
                 {{result.donor_added_time}}
             </div>
         </div>
-        {% endif %} {% endfor %}{% endfor %} {% else %} No search results for this query {% endif %} {% endif %} {% if other_donors %}
+        {% endif %} {% endfor %}{% endfor %} {% else %}
+        <p id="ani2" class="d-flex justify-content-center font-italic" style="font-size: 25px;color: rgb(14, 133, 180);text-shadow:1px 1px rgb(12, 12, 12);">No result matched!</p> {% endif %} {% endif %} {% if other_donors %}
         <h2 class="mb-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Donors :-</h2>
         {% endif %} {% for item in other_donors %} {% for i in hos %} {% if item.hospital_email == i.hospital_email %}
         <div class="card my-4 biLeft" id="don-card">
@@ -206,7 +281,12 @@
     <br>
     <br>
     <br>
-   <!--footer-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
     <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );  ">
         <div class="container text-white">
             <div class="row">
@@ -214,13 +294,10 @@
                     <div class="logo-part">
                         <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
                         font-size: 45px;"> TOMO</a>
-                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases 
-                        for organ transplant recipients, and to help save the lives of accident victims. With a growing population and advances in 
-                        medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. 
-                        Still many people are losing their lives every day in emergency situations because we are suffering from lack of blood & organ in blood and organ Banks, and
-                        they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an easy and fast way to search for
-                        blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and
-                        facilitates the search process for recipients and make it easier than before.
+                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases for organ transplant recipients, and to help save the lives of accident victims. With
+                            a growing population and advances in medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. Still many people are losing their lives every day in emergency situations
+                            because we are suffering from lack of blood & organ in blood and organ Banks, and they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an
+                            easy and fast way to search for blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and facilitates the search process for recipients and make it easier than before.
 
                         </p>
                     </div>
@@ -230,13 +307,13 @@
                     </h3>
                     <ul class="list-unstyled">
                         <li class="text-white">
-                           patelshivani2303@gmail.com
+                            patelshivani2303@gmail.com
                         </li>
                         <li class="text-white">
                             devanshisheth511@gmail.com
                         </li>
                         <li class="text-white">
-                           paramben10@gmail.com
+                            paramben10@gmail.com
                         </li>
                     </ul>
                 </div>

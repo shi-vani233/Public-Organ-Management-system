@@ -20,6 +20,81 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 </head>
+<style>
+    p#ani2 {
+        animation: heartbeat 1.5s ease-in-out infinite both;
+    }
+    
+    @-webkit-keyframes heartbeat {
+        from {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        10% {
+            -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        17% {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        33% {
+            -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        45% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
+    
+    @keyframes heartbeat {
+        from {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        10% {
+            -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        17% {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        33% {
+            -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        45% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
+</style>
 
 <body>
     <!--navbar-->
@@ -39,68 +114,76 @@
     </nav>
     <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Your Requests :-</h2>
     {% if allreq %} {% for req in allreq %}
-    <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
-            <div class="card-header" style="   background: rgb(2, 109, 109);
+    <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%;height: 30%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
+        <div class="card-header" style="   background: rgb(2, 109, 109);
             background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
           color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none; margin-bottom:5px; 
             ">
-                <div class="row">
-                    <div class="col">
-                        <h1>{{req.reciever.hospital_name}}</h1>
-                    </div>
-                    <div class="col d-flex justify-content-end">
-                        {% if req.pending == True %}
-                            <p style="font-size:20px;"> Pending </p>
-                        {% endif %}
-                    </div>
+            <div class="row">
+                <div class="col">
+                    <h2>{{req.reciever.hospital_name}}</h2>
                 </div>
-                <div>
-                    <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.reciever.hospital_address}},{{req.reciever.hospital_city}}
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-10">
-                        {% if req.accepted == True %}
-                            <p class="card-text" style="font-weight: 500;">CONGRATULATIONS!!! Your request for <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_organ}}"</span> of Donor <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_name}}"</span> has been accepted. <br>
-                            For Futher Details please contact this hospital at {{req.reciever.hospital_mobile_no}} or email at {{req.reciever.hospital_email}}</p>
-                        {% elif req.declined == True %}
-                            <p class="card-text" style="font-weight: 500;">We are Terribly sorry, Your Request for <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_organ}}"</span> of Donor <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_name}}"</span> has not been accepted.</p>
-                        {% else%}
-                            <p class="card-text" style="font-weight: 500;" p >
-                                For Donor: {{req.donor.donor_name}}<br>
-                                Organ: {{req.donor.donor_organ}}
-                            </p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-       
-             <div class="card-footer">
-                <div class="row">
-                    <div class="col">
-                        {{req.organ_request_time}}
-                    </div>
+                <div class="col d-flex justify-content-end">
                     {% if req.pending == True %}
-                        <div class="col d-flex justify-content-end">
-                            <form action="/Hospital/CancelRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.donor.donor_id}}">
-                                <input type="submit" class="btn text-center btn-danger" value="Cancel request">
-                            </form>
-                        </div>
+                    <p style="font-size:20px;"> Pending </p>
                     {% endif %}
                 </div>
             </div>
+            <div>
+                <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.reciever.hospital_address}},{{req.reciever.hospital_city}}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-10">
+                    {% if req.accepted == True %}
+                    <p class="card-text" style="font-weight: 500;">CONGRATULATIONS!!! Your request for <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_organ}}"</span> of Donor <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_name}}"</span> has been accepted. <br>                        For Futher Details please contact this hospital at {{req.reciever.hospital_mobile_no}} or email at {{req.reciever.hospital_email}}</p>
+                    {% elif req.declined == True %}
+                    <p class="card-text" style="font-weight: 500;">We are Terribly sorry, Your Request for <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_organ}}"</span> of Donor <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_name}}"</span> has not been accepted.</p>
+                    {% else%}
+                    <p class="card-text" style="font-weight: 500;" p>
+                        For Donor: {{req.donor.donor_name}}<br> Organ: {{req.donor.donor_organ}}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="row">
+                <div class="col">
+                    {{req.organ_request_time}}
+                </div>
+                {% if req.pending == True %}
+                <div class="col d-flex justify-content-end">
+                    <form action="/Hospital/CancelRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{req.donor.donor_id}}">
+                        <input type="submit" class="btn text-center btn-danger" value="Cancel request">
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+        </div>
 
     </div>
-    {% endfor %} {% else %}
-    <div class="mb-5 text-center scale-in-center" style="font-size: 20px;">
-        <i class="fa fa-bookmark" style="font-size:50px"></i><br>You haven't send any Requests Lately
+    <br> {% endfor %} {% else %}
+    <div id="ani1" class="mb-5 text-center scale-in-center font-italic" style="font-size: 20px;color: rgb(14, 133, 180);text-shadow:1px 1px rgb(12, 12, 12);">
+        <p id="ani2"> <i class="fa fa-bookmark" style="font-size:50px"></i><br>You haven't send any Requests Lately</p>
     </div>
     {% endif %}
-
-     <!--footer-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
     <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );  ">
         <div class="container text-white">
             <div class="row">
@@ -108,13 +191,10 @@
                     <div class="logo-part">
                         <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
                         font-size: 45px;"> TOMO</a>
-                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases 
-                        for organ transplant recipients, and to help save the lives of accident victims. With a growing population and advances in 
-                        medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. 
-                        Still many people are losing their lives every day in emergency situations because we are suffering from lack of blood & organ in blood and organ Banks, and
-                        they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an easy and fast way to search for
-                        blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and
-                        facilitates the search process for recipients and make it easier than before.
+                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases for organ transplant recipients, and to help save the lives of accident victims. With
+                            a growing population and advances in medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. Still many people are losing their lives every day in emergency situations
+                            because we are suffering from lack of blood & organ in blood and organ Banks, and they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an
+                            easy and fast way to search for blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and facilitates the search process for recipients and make it easier than before.
 
                         </p>
                     </div>
@@ -124,13 +204,13 @@
                     </h3>
                     <ul class="list-unstyled">
                         <li class="text-white">
-                           patelshivani2303@gmail.com
+                            patelshivani2303@gmail.com
                         </li>
                         <li class="text-white">
                             devanshisheth511@gmail.com
                         </li>
                         <li class="text-white">
-                           paramben10@gmail.com
+                            paramben10@gmail.com
                         </li>
                     </ul>
                 </div>

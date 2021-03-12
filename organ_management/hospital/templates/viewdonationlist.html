@@ -52,6 +52,80 @@
         .list-type4 .row:hover {
             box-shadow: inset 3em 0 #10325f;
         }
+        
+        p#ani2 {
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+        
+        @-webkit-keyframes heartbeat {
+            from {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-transform-origin: center center;
+                transform-origin: center center;
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            10% {
+                -webkit-transform: scale(0.91);
+                transform: scale(0.91);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            17% {
+                -webkit-transform: scale(0.98);
+                transform: scale(0.98);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            33% {
+                -webkit-transform: scale(0.87);
+                transform: scale(0.87);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            45% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+        }
+        
+        @keyframes heartbeat {
+            from {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-transform-origin: center center;
+                transform-origin: center center;
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            10% {
+                -webkit-transform: scale(0.91);
+                transform: scale(0.91);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            17% {
+                -webkit-transform: scale(0.98);
+                transform: scale(0.98);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+            33% {
+                -webkit-transform: scale(0.87);
+                transform: scale(0.87);
+                -webkit-animation-timing-function: ease-in;
+                animation-timing-function: ease-in;
+            }
+            45% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                -webkit-animation-timing-function: ease-out;
+                animation-timing-function: ease-out;
+            }
+        }
     </style>
 
 </head>
@@ -60,7 +134,7 @@
 
     <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) ); ">
-       <a class="navbar-brand" href="#" style="font-size: 35px;">TOMO <br>
+        <a class="navbar-brand" href="#" style="font-size: 35px;">TOMO <br>
           <span style="font-size:18px; font-family:'Times New Roman', serif;">  Tissue & Organ Management Organization <span>
         </a>
         <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,7 +205,8 @@
                 </li>
             </ol>
         </div>
-        {% endfor %} {% else %} No search results for this query {% endif %} {% endif %}
+        {% endfor %} {% else %}
+        <p id="ani2" class="d-flex justify-content-center font-italic" style="font-size: 25px;color: rgb(14, 133, 180);text-shadow:1px 1px rgb(12, 12, 12);">No result matched!</p> {% endif %} {% endif %}
 
 
 
@@ -175,10 +250,32 @@
                 </li>
             </ol>
         </div>
-        {% endfor %}  {% endif %}
-    </div>
+        {% endfor %} {% endif %} {% if don.has_other_pages %}
+        <ul class="pagination d-flex justify-content-center mt-5">
+            {% if don.has_previous %}
+            <li class="page-item mr-2 "> <a class="page-link" href="?page={{ don.previous_page_number }}"> Previous</a> </li>
+            {% endif %} {% for i in don.paginator.page_range %} {% if don.number == i %}
+            <li class="active page-item mr-2"><a class="page-link">{{ i }}  <span class="sr-only">(current)</span></a></li>
 
-     <!--footer-->
+            {% else %}
+            <li class="page-item mr-2"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %} {% endfor %} {% if don.has_next %}
+            <li class="page-item mr-2"><a class="page-link" href="?page={{ don.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
     <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );  ">
         <div class="container text-white">
             <div class="row">
@@ -186,13 +283,10 @@
                     <div class="logo-part">
                         <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
                         font-size: 45px;"> TOMO</a>
-                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases 
-                        for organ transplant recipients, and to help save the lives of accident victims. With a growing population and advances in 
-                        medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. 
-                        Still many people are losing their lives every day in emergency situations because we are suffering from lack of blood & organ in blood and organ Banks, and
-                        they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an easy and fast way to search for
-                        blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and
-                        facilitates the search process for recipients and make it easier than before.
+                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases for organ transplant recipients, and to help save the lives of accident victims. With
+                            a growing population and advances in medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. Still many people are losing their lives every day in emergency situations
+                            because we are suffering from lack of blood & organ in blood and organ Banks, and they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an
+                            easy and fast way to search for blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and facilitates the search process for recipients and make it easier than before.
 
                         </p>
                     </div>
@@ -202,13 +296,13 @@
                     </h3>
                     <ul class="list-unstyled">
                         <li class="text-white">
-                           patelshivani2303@gmail.com
+                            patelshivani2303@gmail.com
                         </li>
                         <li class="text-white">
                             devanshisheth511@gmail.com
                         </li>
                         <li class="text-white">
-                           paramben10@gmail.com
+                            paramben10@gmail.com
                         </li>
                     </ul>
                 </div>

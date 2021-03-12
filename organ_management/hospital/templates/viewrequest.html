@@ -20,6 +20,81 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 </head>
+<style>
+    p#ani2 {
+        animation: heartbeat 1.5s ease-in-out infinite both;
+    }
+    
+    @-webkit-keyframes heartbeat {
+        from {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        10% {
+            -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        17% {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        33% {
+            -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        45% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
+    
+    @keyframes heartbeat {
+        from {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transform-origin: center center;
+            transform-origin: center center;
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        10% {
+            -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        17% {
+            -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+        33% {
+            -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+        }
+        45% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
+</style>
 
 <body>
     <!--navbar-->
@@ -32,7 +107,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav" style="font-size: 20px;">
-                <a class="nav-item nav-link active" href="/Hospital/ViewRequest/">Requests</a>
+
                 <a class="nav-item nav-link " href="/Hospital/hospitalHome/" active>Hospital Home</a>
                 <a class="nav-item nav-link" href="/Hospital/logout/">Log Out</a>
             </div>
@@ -41,50 +116,49 @@
 
     <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Pending Requests :-</h2>
     {% if allreq%} {% else %}
-    <div class="mb-5 text-center scale-in-center" style="font-size: 20px;">
-        <i class="fas fa-folder-open" style="font-size:50px"></i><br>No Requests are Pending!
+    <div id="ani1" class="mb-5 text-center scale-in-center font-italic" style="font-size: 20px;color: rgb(14, 133, 180);text-shadow:1px 1px rgb(12, 12, 12);">
+        <p id="ani2"> <i class="fas fa-folder-open" style="font-size:50px"></i><br>No Requests are Pending!</p>
     </div>
     {% endif%} {% for req in allreq %}
     <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
-            <div class="card-header" style="   background: rgb(2, 109, 109);
+        <div class="card-header" style="   background: rgb(2, 109, 109);
             background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
           color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none; margin-bottom:5px; 
             ">
-                <h1>{{req.sender.hospital_name}}</h1>
-                <div>
-                    <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.sender.hospital_address}},{{req.sender.hospital_city}}
+            <h1>{{req.sender.hospital_name}}</h1>
+            <div>
+                <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.sender.hospital_address}},{{req.sender.hospital_city}}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="card-text" style="font-weight: 500;" p>
+                        For Donor: {{req.donor.donor_name}}<br> Organ: {{req.donor.donor_organ}}
+                    </p>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-8">
-                        <p class="card-text" style="font-weight: 500;" p >
-                        For Donor: {{req.donor.donor_name}}<br>
-                        Organ: {{req.donor.donor_organ}}
-                        </p>
-                    </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="row">
+                <div class="col">
+                    Send you request at : {{req.organ_request_time}}
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <form action="/Hospital/AcceptRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{req.req_id}}">
+                        <input style="margin-right:5px;" type="submit" class="btn text-center btn-success" value="Accept">
+                    </form>
+                    <form action="/Hospital/DeclineRequest/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{req.req_id}}">
+                        <input type="submit" class="btn text-center btn-danger" value="Decline">
+                    </form>
                 </div>
             </div>
-       
-             <div class="card-footer">
-                <div class="row">
-                    <div class="col">
-                        Send you request at : {{req.organ_request_time}}
-                    </div>
-                    <div class="col d-flex justify-content-end">
-                        <form action="/Hospital/AcceptRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.req_id}}">
-                                <input style="margin-right:5px;" type="submit" class="btn text-center btn-success" value="Accept">
-                        </form>
-                        <form action="/Hospital/DeclineRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.req_id}}">
-                                <input type="submit" class="btn text-center btn-danger" value="Decline">
-                        </form>
-                    </div>
-                </div>
-            </div>
+        </div>
 
     </div>
     {% endfor %}
@@ -92,55 +166,49 @@
     <br>
     <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Accepted Requests :-</h2>
     {% if acceptedreq%} {% else %}
-    <div class="mb-5 text-center scale-in-center" style="font-size: 20px;">
-        <i class="fa fa-comment" style="font-size:50px"></i><br>no accepted request!
+    <div id="ani1" class="mb-5 text-center scale-in-center font-italic" style="font-size: 20px;color: rgb(14, 133, 180);text-shadow:1px 1px rgb(12, 12, 12);">
+        <p id="ani2"> <i class="fa fa-comment" style="font-size:50px"></i><br>no accepted request!</p>
     </div>
+
     {% endif%} {% for req in acceptedreq %}
     <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
-            <div class="card-header" style="   background: rgb(2, 109, 109);
+        <div class="card-header" style="   background: rgb(2, 109, 109);
             background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
           color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none; margin-bottom:5px; 
             ">
-                <h1>{{req.sender.hospital_name}}</h1>
-                <div>
-                    <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.sender.hospital_address}},{{req.sender.hospital_city}}
+            <h1>{{req.sender.hospital_name}}</h1>
+            <div>
+                <!--p style="margin-bottom: 2px;font-weight:500;">{{req.sender.hospital_name}}</p-->{{req.sender.hospital_address}},{{req.sender.hospital_city}}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="card-text" style="font-weight: 500;" p>
+                        For Donor: {{req.donor.donor_name}}<br> Organ: {{req.donor.donor_organ}}
+                    </p>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-8">
-                        <p class="card-text" style="font-weight: 500;" p >
-                        For Donor: {{req.donor.donor_name}}<br>
-                        Organ: {{req.donor.donor_organ}}
-                        </p>
-                    </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="row">
+                <div class="col">
+                    At : {{req.organ_request_time}}
                 </div>
+
             </div>
-       
-             <div class="card-footer">
-                <div class="row">
-                    <div class="col">
-                        Send you request at : {{req.organ_request_time}}
-                    </div>
-                    <div class="col d-flex justify-content-end">
-                        <form action="/Hospital/AcceptRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.req_id}}">
-                                <input style="margin-right:5px;" type="submit" class="btn text-center btn-success" value="Accept">
-                        </form>
-                        <form action="/Hospital/DeclineRequest/" method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="id" value="{{req.req_id}}">
-                                <input type="submit" class="btn text-center btn-danger" value="Decline">
-                        </form>
-                    </div>
-                </div>
-            </div>
+        </div>
 
     </div>
     {% endfor %}
-
-     <!--footer-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--footer-->
     <footer class="pt-5 pb-2" style="background:rgb(1, 140, 255); background: linear-gradient(to top left, #10325f, rgb(1, 140, 255) );  ">
         <div class="container text-white">
             <div class="row">
@@ -148,13 +216,10 @@
                     <div class="logo-part">
                         <a class="w-50 logo-footer" style="  font-family: 'Lobster', cursive;
                         font-size: 45px;"> TOMO</a>
-                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases 
-                        for organ transplant recipients, and to help save the lives of accident victims. With a growing population and advances in 
-                        medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. 
-                        Still many people are losing their lives every day in emergency situations because we are suffering from lack of blood & organ in blood and organ Banks, and
-                        they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an easy and fast way to search for
-                        blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and
-                        facilitates the search process for recipients and make it easier than before.
+                        <p>Every day blood and organ are required in hospitals and emergency treatment facilities for patients with Cancer, Thalassemia and other diseases for organ transplant recipients, and to help save the lives of accident victims. With
+                            a growing population and advances in medical treatments and procedures requiring blood transfusions, the demand for blood and organ continue to increase. Still many people are losing their lives every day in emergency situations
+                            because we are suffering from lack of blood & organ in blood and organ Banks, and they do not receive the blood and organ timely. so Our website acts as an essential role in saving the lives of human beings by providing an
+                            easy and fast way to search for blood and organs in emergency situations. It bridges the gap between blood or organ donors and recipient and facilitates the search process for recipients and make it easier than before.
 
                         </p>
                     </div>
@@ -164,13 +229,13 @@
                     </h3>
                     <ul class="list-unstyled">
                         <li class="text-white">
-                           patelshivani2303@gmail.com
+                            patelshivani2303@gmail.com
                         </li>
                         <li class="text-white">
                             devanshisheth511@gmail.com
                         </li>
                         <li class="text-white">
-                           paramben10@gmail.com
+                            paramben10@gmail.com
                         </li>
                     </ul>
                 </div>
