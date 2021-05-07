@@ -2,7 +2,7 @@
 
 <head>
     <title>
-        Save-Lifes
+        TOMO
     </title>
 
     {% load static %}
@@ -114,7 +114,7 @@
     </nav>
     <h2 class="my-5 text-center display-4" style="font-family:'Times New Roman', Times, serif; text-shadow:2px 2px rgb(4, 153, 153);">-: Your Requests :-</h2>
     {% if allreq %} {% for req in allreq %}
-    <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%;height: 30%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
+    <div class="card my-2 text-dark scale-in-center" style="background-color:rgb(217, 238, 250) ;width: 65%;height: 33.5%; margin: auto;border-radius: 20px;  box-shadow: 2px 5px 5px .5px rgb(143, 143, 143);border:none">
         <div class="card-header" style="   background: rgb(2, 109, 109);
             background: linear-gradient(to top left, rgb(62, 233, 241), rgb(2, 109, 109));
           color: white;border-top-left-radius: 20px;border-top-right-radius: 20px;border:none; margin-bottom:5px; 
@@ -141,7 +141,7 @@
                     {% elif req.declined == True %}
                     <p class="card-text" style="font-weight: 500;">We are Terribly sorry, Your Request for <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_organ}}"</span> of Donor <span style="font-style:bold; font-weight:800;">"{{req.donor.donor_name}}"</span> has not been accepted.</p>
                     {% else%}
-                    <p class="card-text" style="font-weight: 500;" p>
+                    <p class="card-text" style="font-weight: 500;">
                         For Donor: {{req.donor.donor_name}}<br> Organ: {{req.donor.donor_organ}}
                     </p>
                     {% endif %}
